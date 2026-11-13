@@ -4,11 +4,12 @@ from __future__ import annotations
 import datetime as dt
 
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 
 from . import demo, earnings, filings, market
 from .filings import FilingError
-from .theme import bar, color
+from .theme import AMBER, GREEN, RED, bar, color
 
 TAG = {"held": "● HELD", "idea": "◆ IDEA", "watchlist": "○ WATCH"}
 
@@ -74,7 +75,7 @@ def render_calendar(table: pd.DataFrame, ideas: dict) -> None:
     cal, err = load_calendar(start, end)
     sample = False
     if err:
-        st.warning(f"NSE didn't answer ({err}). Showing **sample data** so you can see the layout.")
+        st.warning(f"NSE didn't answer ({str(err)[:90]}…). Showing **sample data** so you can see the layout.")
         cal, sample = earnings.calendar_rows(demo.EARNINGS_CALENDAR), True
     mine = _stocks(table, ideas)
     cal = cal.assign(Yours=cal["Symbol"].map(lambda s: TAG.get(mine.get(s, ""), "")))
@@ -189,7 +190,7 @@ def render_feed(table: pd.DataFrame, ideas: dict) -> None:
                                  "(up to 60, newest first), which takes a while in results season.")
     df, sample, err = _feed(today - dt.timedelta(days=days), today)
     if sample:
-        st.warning(f"NSE didn't answer ({err}). Showing **sample data** so you can see the layout.")
+        st.warning(f"NSE didn't answer ({str(err)[:90]}…). Showing **sample data** so you can see the layout.")
     mine = _stocks(table, ideas)
     df = df.assign(Yours=df["Symbol"].map(lambda s: TAG.get(mine.get(s, ""), "")))
     if only_mine:
@@ -244,9 +245,93 @@ def render_feed(table: pd.DataFrame, ideas: dict) -> None:
                 unsafe_allow_html=True)
 
 
+# ---------------------------------------------------------------- scorecard
+@st.cache_data(ttl=24 * 3600, show_spinner=False)
+def load_filing_times(symbol: str) -> tuple[list, str]:
+    try:
+        times = earnings.fetch_filing_times(symbol)
+        if times:
+            return times, "NSE filing times"
+    except FilingError:
+        pass
+    times = earnings.yahoo_earnings_dates(market.yahoo_symbol(symbol))
+    return times, "Yahoo earnings dates" if times else "none found"
+
+
+def render_scorecard(table: pd.DataFrame, ideas: dict) -> None:
+    from .terminal import equity_list, yahoo_history
+
+    mine = list(_stocks(table, ideas))
+    eq, _ = equity_list()
+    opts = sorted(set(eq["symbol"]) | set(mine))
+    if "sc_pick" not in st.session_state:
+        st.session_state.sc_pick = mine[:10]
+    picked = st.multiselect("Stocks", opts, key="sc_pick", placeholder="Add stocks, e.g. TCS")
+    if not picked:
+        st.info("Pick some stocks to see how they moved after results.")
+        return
+    ys = {s: market.yahoo_symbol(s) for s in picked}
+    hist, herr = yahoo_history(tuple(ys.values()), "5y")
+    sample = not hist
+    if sample:
+        st.warning(f"Couldn't get price history ({herr or 'no data'}). Showing **sample data** so you can see "
+                   "the layout.")
+    cards, rows = {}, []
+    for n, s in enumerate(picked):
+        if sample:
+            prices, times, src = demo.price_history(n + 1), demo.sample_result_times(), "sample"
+        else:
+            prices = hist.get(ys[s], pd.DataFrame())
+            times, src = load_filing_times(s)
+        df, summ = earnings.scorecard(prices, times)
+        cards[s] = df
+        if not summ:
+            rows.append({"Stock": s, "Results": 0, "Dates from": src})
+            continue
+        rows.append({"Stock": s, "Results": summ["results"], "Rose after": f"{summ['up']}/{summ['results']}",
+                     "Avg 1-day %": summ["avg_d1"], "Avg size of move %": summ["avg_abs_d1"],
+                     "Best 1-day %": summ["best_d1"], "Worst 1-day %": summ["worst_d1"],
+                     "Avg 5-day %": summ["avg_d5"], "Follow-through %": summ["follow_through"], "Dates from": src})
+    out = pd.DataFrame(rows)
+    pct = [c_ for c_ in ("Avg 1-day %", "Best 1-day %", "Worst 1-day %", "Avg 5-day %", "Follow-through %")
+           if c_ in out]
+    st.dataframe(out.style.format({k: "{:+.1f}" for k in pct} | {"Avg size of move %": "{:.1f}"}, na_rep="–")
+                 .map(color, subset=pct), use_container_width=True, hide_index=True)
+    st.caption("1-day: last close before the news could trade → close of the first session after it. 5-day: to the "
+               "5th session. Avg size of move ignores direction: how much the stock usually swings on results. "
+               "Follow-through: positive means the first day's move usually kept going over the week; negative "
+               "means it usually reversed. Past reactions don't predict the next one.")
+
+    one = st.selectbox("Quarter by quarter", [s for s in picked if not cards[s].empty] or picked, key="sc_one")
+    df = cards.get(one, pd.DataFrame())
+    if df.empty:
+        st.info(f"No past results dates found for {one}.")
+        return
+    d = df.sort_values("filed").assign(label=lambda x: x["filed"].dt.strftime("%b %Y"))
+    fig = go.Figure()
+    fig.add_bar(x=d["label"], y=d["d1"], name="1-day %", marker_color=[GREEN if v > 0 else RED for v in d["d1"]])
+    fig.add_scatter(x=d["label"], y=d["d5"], name="5-day %", mode="markers+lines",
+                    line=dict(color=AMBER, width=1), marker=dict(size=8))
+    fig.update_layout(height=300, legend=dict(orientation="h", y=1.1), yaxis_title="%")
+    st.plotly_chart(fig, use_container_width=True)
+    show = d[["filed", "reaction_day", "base", "gap", "d1", "d5", "d20"]].rename(columns={
+        "filed": "Results filed", "reaction_day": "Reaction day", "base": "Close before", "gap": "Gap at open %",
+        "d1": "1-day %", "d5": "5-day %", "d20": "20-day %"}).sort_values("Results filed", ascending=False)
+    pc = ["Gap at open %", "1-day %", "5-day %", "20-day %"]
+    st.dataframe(show.style.format({"Results filed": "{:%d %b %Y %H:%M}", "Reaction day": "{:%d %b %Y}",
+                                    "Close before": "₹{:,.2f}", **{k: "{:+.1f}" for k in pc}}, na_rep="–")
+                 .map(color, subset=pc), use_container_width=True, hide_index=True)
+    st.markdown("<div class='td-src'>Results times: NSE financial-results filings (falls back to Yahoo earnings "
+                "dates). Prices: Yahoo Finance daily closes, not adjusted for dividends.</div>",
+                unsafe_allow_html=True)
+
+
 def render(token: str | None, table: pd.DataFrame, ideas: dict) -> None:
     st.markdown("## Results out")
     render_feed(table, ideas)
     st.divider()
     st.markdown("## Results calendar")
     render_calendar(table, ideas)
+    st.divider()
+    st.markdown("## Earnings scorecard · how the price moved after past results")
+    render_scorecard(table, ideas)

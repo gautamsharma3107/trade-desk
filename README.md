@@ -6,6 +6,12 @@ A private, Bloomberg-style terminal for an Upstox account: black and amber, dens
 - **P&L:** realised profit and loss for this financial year (switch to calendar year or last FY) across every segment: delivery (long- and short-term), intraday, futures, options, commodity and currency, with charges per segment, net P&L, unrealised P&L on open holdings, month-by-month chart, best/worst stocks and a CSV of every closed trade. Comes from Upstox's P&L report, which updates end of day.
 - **Markets:** a stock list (Nifty 50, your holdings, the daily ideas, or your own list) with LTP, change, day range, volume, 52-week range, 1M/1Y returns, a sector heatmap and top gainers/losers.
 - **Company:** search any NSE stock. Price chart with 50/200-day averages, valuation (market cap, P/E, P/B, ROE, ROCE, dividend yield), **what it sells and to whom, what it buys and from whom**, **who owns it** (promoters, FIIs, DIIs, government, public by quarter, plus named large holders), quarterly results as filed with NSE, links to annual reports, BRSR and SEBI filings, and a business description.
+- **Earnings:** **results out** (every quarterly result filed on NSE, with a STRONG / GOOD / MIXED / WEAK / POOR verdict from growth vs a year ago, margins and analyst estimates), the **results calendar** (who reports this week, next week or in 30 days, with last year's numbers and estimates), and an **earnings scorecard** (how each stock moved after its last 8 results). When one of your stocks reports, a banner at the top of every page says so with its verdict.
+- **News:** NSE announcements (sorted into results, orders, dividends, acquisitions, ratings, legal…), bulk and block deals with the client's name, and insider trades with net promoter buying, for your stocks, one stock or the whole market.
+- **Flows:** FII and DII cash buying and selling, F&O positioning by participant (FII index futures long %), and option chains for the indices and F&O stocks with PCR, max pain, OI support/resistance and the move the straddle prices in.
+- **Screener:** filter Nifty 50 to Nifty 500, your stocks or a typed list by sales and profit growth, consecutive growth quarters, margins, P/E, P/B, ROE, ROCE, dividend yield, and promoter/FII/DII holding changes, with presets and a quality score.
+- **Journal:** win rate, average win and loss, payoff, profit per trade, streaks, days held for winners vs losers, patterns worth a look, and whether each daily idea worked.
+- **Tax:** this year's short- and long-term capital gains, intraday and F&O income, set-off of losses, estimated tax with cess, advance tax dates, and tax-loss harvesting suggestions.
 - **Charges:** what you've paid this financial year (brokerage, STT, GST, stamp duty, exchange, DP, SEBI), straight from Upstox. It also shows MTF interest on open positions and has a calculator for delivery, intraday and MTF round trips, including the breakeven sell price.
 - **Sell check:** flags each holding as HOLD, REVIEW or SELL? using your stop-loss and target, its 20- and 50-day averages, MTF interest drag and the daily research notes.
 - **Daily ideas:** earnings-based buy ideas, stocks to avoid and results to watch, read from `data/ideas.json`. A scheduled research job updates that file every weekday morning.
@@ -21,6 +27,10 @@ Only the Trade tab can place or cancel orders, and only after a review-and-confi
 | Prices when not logged in, 52-week range, history | Yahoo Finance (`yfinance`) | Up to ~15 min delayed |
 | Ratios, quarterly results, shareholding pattern, named holders | Screener.in public pages (from exchange filings) | Quarterly; cached 6 hours |
 | Full NSE stock list | NSE's daily `EQUITY_L.csv` | Daily |
+| Results calendar, filed results, announcements, bulk/block deals, insider trades, FII/DII, index members | NSE public APIs (`event-calendar`, `corporates-financial-results`, `results-comparision`, `corporate-announcements`, `historical/bulk-deals`, `corporates-pit`, `fiidiiTradeReact`, `equity-stockIndices`) | Cached 15 min to 24 h |
+| Participant open interest | NSE archive `fao_participant_oi_DDMMYYYY.csv` | After market close |
+| Option chain | Upstox option-chain API when logged in, else NSE `option-chain-v3` | Live / ~3 min |
+| Analyst estimates, past earnings dates | Yahoo Finance | Daily |
 | Shareholding (promoter vs public), quarterly results, annual reports, BRSR | NSE corporate filings APIs | As filed; cached 6 hours |
 | What a company sells/buys and to/from whom | `data/companies.json` (hand-written, 27 companies); for any other stock, a button has Claude read its annual report, BRSR, investor presentations and rating reports (needs `ANTHROPIC_API_KEY`) | Hand-written: edit the file. Researched: kept on the app server until it restarts; download the JSON to add it to the file |
 | Realised P&L and charges | Upstox P&L report API | End of day (T+1) |
@@ -126,9 +136,15 @@ Rates come from <https://upstox.com/brokerage-charges/> (checked 12 Nov 2026) an
 
 The "Charges you've paid" section uses Upstox's own `trade/profit-loss/charges` API, so it is exact. The calculator gives estimates. Your contract note is the final word.
 
+## Your stocks and watchlist
+
+The Earnings, News and Screener tabs flag "your stocks": your holdings (HELD), today's daily ideas (IDEA), and anything in `data/watchlist.txt` or the Markets tab's custom list (WATCH). Edit `data/watchlist.txt` (one NSE symbol per line) to add more.
+
 ## Daily ideas file
 
 `data/ideas.json` has `date`, `market_summary`, `buy_ideas[]` (symbol, name, approx_price, target, target_source, thesis, risks, sources), `avoid[]`, `watch_today[]`, `portfolio_notes{SYMBOL: note}` and `disclaimer`. When the file is pushed, Streamlit Cloud picks up the change on its own.
+
+After updating it, run `python tools/archive_ideas.py` and commit `data/ideas_history/<date>.json` too: the Journal tab uses that history to check how each idea did. Optionally, append the day's FII/DII figures to `data/fii_dii.csv` (columns `Date, Who, Buy, Sell, Net`) to keep a longer flows history than the app can on its own.
 
 ## Tests
 

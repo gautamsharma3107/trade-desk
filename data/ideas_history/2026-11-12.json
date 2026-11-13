@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-12",
+  "market_summary": "Nifty closed at 25,255 on 11 Nov, up 0.84%. Foreign investors bought ₹12,563 cr that day. India VIX is 17.5, so expect normal swings. Q2 FY27 results season is still running.",
+  "buy_ideas": [
+    {
+      "symbol": "MINDACORP",
+      "name": "Minda Corporation",
+      "approx_price": 715,
+      "target": 900,
+      "target_source": "Emkay",
+      "thesis": "Revenue up 43% and profit up 69% year on year. Revenue beat estimates by 10.7% and margins improved despite higher raw material costs. Growth from EV parts and digital displays.",
+      "risks": "Auto demand could slow. Mid-cap, so it swings more.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "APOLLOHOSP",
+      "name": "Apollo Hospitals",
+      "approx_price": 8600,
+      "target": 10400,
+      "target_source": "Motilal Oswal",
+      "thesis": "Revenue up 21% and profit up 32%, both above estimates. 1,800 new beds coming; three loss-making hospitals expected to break even by March.",
+      "risks": "Valuation is already high, and new hospitals take time to fill.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "WABAG",
+      "name": "Va Tech Wabag",
+      "approx_price": 2080,
+      "target": 2430,
+      "target_source": "Axis",
+      "thesis": "Profit up 23% and a record ₹20,207 cr order book.",
+      "risks": "Project delays and late customer payments.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "BHARTIARTL",
+      "name": "Bharti Airtel",
+      "approx_price": 2110,
+      "target": 2400,
+      "target_source": "ICICI Direct",
+      "thesis": "Profit up 31% and revenue per user about ₹271 after tariff hikes. Steady, lower-upside hold.",
+      "risks": "Profit missed some analyst estimates; network costs are rising.",
+      "sources": ["https://lapaasvoice.com/bharti-airtel-q2-fy27-net-profit-rises-31-to-%E2%82%B98888-crore-but-misses-estimates/"]
+    },
+    {
+      "symbol": "FLUOROCHEM",
+      "name": "Gujarat Fluorochemicals",
+      "approx_price": 4825,
+      "target": 5380,
+      "target_source": "ICICI Securities",
+      "thesis": "Revenue up 45% and profit up 36%.",
+      "risks": "Upside depends on new plants starting on time.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    }
+  ],
+  "avoid": [
+    {"symbol": "KALYANKJIL", "reason": "Hit upper circuit after results, but ₹73.5 cr of profit was a one-time gain and margins slipped. Don't chase."},
+    {"symbol": "CUPID", "reason": "Up 263% this year and on the exchange's ASM surveillance list."},
+    {"symbol": "LEMONTREE", "reason": "Jumped about 7%, but profit excluding one-offs was flat."}
+  ],
+  "watch_today": ["HAL", "BDL", "NMDC", "IRCTC", "RVNL", "PAGEIND", "AMBER", "ALKEM"],
+  "portfolio_notes": {
+    "BHARTIARTL": "Results already out (early Nov): strong growth but a slight estimate miss. Fine to hold with a stop; lower upside than fresh earnings beats.",
+    "KALYANKJIL": "Post-results jump driven partly by a one-time gain. Avoid re-entering on momentum."
+  },
+  "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate; check the live quote before trading."
+}

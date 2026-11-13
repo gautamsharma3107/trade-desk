@@ -95,3 +95,115 @@ RESULTS_CMP = {  # ₹ crore, converted to NSE's ₹ lakh above
                   ("31-MAR-2026", 40925, 7033, 16.9), ("30-JUN-2026", 42279, 6921, 16.7),
                   ("30-SEP-2026", 43010, 6380, 15.4)]),
 }
+
+
+def price_history(seed: int, start: str = "2023-11-01", end: str = "2026-11-13", last: float = 1000.0):
+    """A made-up daily OHLC series (weekdays) for sample charts when Yahoo can't be reached."""
+    import numpy as np
+    import pandas as pd
+
+    idx = pd.bdate_range(start, end)
+    rng = np.random.default_rng(seed)
+    rets = rng.normal(0.0004, 0.014, len(idx))
+    for d in sample_result_times():  # bigger moves on results days
+        pos = idx.searchsorted(d.normalize() + pd.Timedelta(days=1))
+        if pos < len(idx):
+            rets[pos] += rng.normal(0, 0.05)
+    close = last * np.exp(np.cumsum(rets) - np.cumsum(rets)[-1])
+    opens = close / np.exp(rets) * (1 + rets * 0.6)
+    return pd.DataFrame({"Open": opens, "High": np.maximum(opens, close) * 1.006,
+                         "Low": np.minimum(opens, close) * 0.994, "Close": close, "Volume": 1e6}, index=idx)
+
+
+def sample_result_times():
+    import pandas as pd
+
+    return [pd.Timestamp(f"{d} 16:30") for d in
+            ("2026-11-12", "2026-08-11", "2026-05-20", "2026-02-12", "2025-11-13", "2025-08-12", "2025-05-21",
+             "2025-02-13", "2024-11-12")]
+
+# NSE-shaped rows for the News tab's sample view.
+ANNOUNCEMENTS = [
+    {"symbol": "HINDALCO", "sm_name": "Hindalco Industries Limited", "desc": "Financial Result Updates",
+     "attchmntText": "Unaudited financial results for the quarter ended September 30, 2026",
+     "an_dt": "13-Nov-2026 16:42:10", "attchmntFile": ""},
+    {"symbol": "SBIN", "sm_name": "State Bank of India", "desc": "Credit Rating",
+     "attchmntText": "CRISIL has reaffirmed AAA/Stable on the bank's bonds", "an_dt": "13-Nov-2026 11:05:00",
+     "attchmntFile": ""},
+    {"symbol": "MINDACORP", "sm_name": "Minda Corporation Limited", "desc": "Analysts/Institutional Investor Meet/Con. Call Updates",
+     "attchmntText": "Schedule of analyst meet on 18 Nov 2026", "an_dt": "12-Nov-2026 19:20:00", "attchmntFile": ""},
+    {"symbol": "TCS", "sm_name": "Tata Consultancy Services Limited", "desc": "Awarding of order / Receipt of order",
+     "attchmntText": "Multi-year contract with a European retailer", "an_dt": "12-Nov-2026 09:12:00",
+     "attchmntFile": ""},
+]
+BULK_DEALS = [
+    {"BD_DT_DATE": "13-Nov-2026", "BD_SYMBOL": "MINDACORP", "BD_SCRIP_NAME": "Minda Corporation Limited",
+     "BD_CLIENT_NAME": "SAMPLE MUTUAL FUND", "BD_BUY_SELL": "BUY", "BD_QTY_TRD": "1500000", "BD_TP_WATP": "712.40",
+     "BD_REMARKS": "-"},
+    {"BD_DT_DATE": "12-Nov-2026", "BD_SYMBOL": "ABCSMALL", "BD_SCRIP_NAME": "Abc Small Caps Ltd",
+     "BD_CLIENT_NAME": "SAMPLE TRADING LLP", "BD_BUY_SELL": "SELL", "BD_QTY_TRD": "800000", "BD_TP_WATP": "54.10",
+     "BD_REMARKS": "-"},
+]
+INSIDER = [
+    {"symbol": "MINDACORP", "company": "Minda Corporation Limited", "acqName": "Sample Promoter Holdings",
+     "personCategory": "Promoter Group", "tdpTransactionType": "Buy", "acqMode": "Market Purchase",
+     "secAcq": "250000", "secVal": "178000000", "befAcqSharesPer": "64.10", "afterAcqSharesPer": "64.20",
+     "acqfromDt": "10-Nov-2026", "acqtoDt": "11-Nov-2026", "intimDt": "12-Nov-2026"},
+    {"symbol": "INFY", "company": "Infosys Limited", "acqName": "Sample Employee",
+     "personCategory": "Key Managerial Personnel", "tdpTransactionType": "Sell", "acqMode": "Market Sale",
+     "secAcq": "5000", "secVal": "8000000", "befAcqSharesPer": "0.01", "afterAcqSharesPer": "0.00",
+     "acqfromDt": "07-Nov-2026", "acqtoDt": "07-Nov-2026", "intimDt": "10-Nov-2026"},
+]
+
+# Flows tab samples (NSE shapes).
+FII_DII = [
+    {"category": "DII **", "date": "12-Nov-2026", "buyValue": "14210.55", "sellValue": "20541.73", "netValue": "-6331.18"},
+    {"category": "FII/FPI *", "date": "12-Nov-2026", "buyValue": "21730.10", "sellValue": "13899.02", "netValue": "7831.08"},
+]
+PARTICIPANT_OI = """Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 12, 2026
+Client Type,Future Index Long,Future Index Short,Future Stock Long,Future Stock Short\t,Option Index Call Long,Option Index Put Long,Option Index Call Short,Option Index Put Short,Option Stock Call Long,Option Stock Put Long,Option Stock Call Short,Option Stock Put Short,Total Long Contracts\t,Total Short Contracts\t
+Client,210000,95000,2400000,410000,2900000,2300000,2600000,2700000,700000,300000,450000,280000,10810000,6535000
+DII,70000,160000,190000,2600000,12,0,0,0,0,0,0,0,260012,2760000
+FII,95000,240000,1950000,1700000,780000,820000,610000,560000,170000,90000,120000,60000,3905000,3290000
+Pro,80000,60000,560000,390000,1520000,1310000,1990000,1170000,310000,140000,410000,190000,3920000,4210000
+TOTAL,455000,555000,5100000,5100000,5200012,4430000,5200000,4430000,1180000,530000,980000,530000,18895012,16795000
+"""
+
+
+def option_chain(spot: float = 25300.0, step: float = 50.0, n: int = 20) -> list[dict]:
+    """Upstox-shaped option chain rows around a spot price."""
+    import math
+
+    rows = []
+    atm = round(spot / step) * step
+    for i in range(-n, n + 1):
+        k = atm + i * step
+        dist = (k - spot) / spot
+        call = max(spot - k, 0) + spot * 0.006 * math.exp(-abs(dist) * 40)
+        put = max(k - spot, 0) + spot * 0.006 * math.exp(-abs(dist) * 40)
+        c_oi = 4e6 * math.exp(-((i - 4) / 6) ** 2) + (3e6 if k % 500 == 0 and i > 0 else 0)
+        p_oi = 4e6 * math.exp(-((i + 4) / 6) ** 2) + (3e6 if k % 500 == 0 and i < 0 else 0)
+        rows.append({"strike_price": k, "underlying_spot_price": spot,
+                     "call_options": {"market_data": {"ltp": round(call, 2), "oi": c_oi, "prev_oi": c_oi * 0.9,
+                                                      "volume": c_oi * 3}, "option_greeks": {"iv": 11 + abs(i) * 0.2}},
+                     "put_options": {"market_data": {"ltp": round(put, 2), "oi": p_oi, "prev_oi": p_oi * 1.05,
+                                                     "volume": p_oi * 3}, "option_greeks": {"iv": 12 + abs(i) * 0.25}}})
+    return rows
+
+
+def screen_rows(symbols: list[str]) -> list[dict]:
+    """Made-up screener numbers, for the Screener tab's sample view."""
+    import random
+
+    out = []
+    for s in symbols:
+        r = random.Random(s)
+        prof = r.uniform(-20, 60)
+        out.append({"Symbol": s, "Mcap (₹ cr)": r.uniform(5e3, 15e5), "Price": r.uniform(100, 5000),
+                    "P/E": r.uniform(8, 70), "P/B": r.uniform(1, 12), "ROE %": r.uniform(5, 35),
+                    "ROCE %": r.uniform(6, 40), "Div yield %": r.uniform(0, 4), "Sales YoY %": r.uniform(-5, 35),
+                    "Profit YoY %": prof, "Profit growth qtrs (of 4)": r.randint(0, 4), "Sales QoQ %": r.uniform(-8, 12),
+                    "OPM chg (pts)": r.uniform(-4, 4), "Promoter %": r.uniform(30, 75),
+                    "Promoter chg QoQ": r.choice([0, 0, 0, 0.3, -0.4, 1.2]), "Promoter chg 1Y": r.uniform(-2, 2),
+                    "FII chg QoQ": r.uniform(-1.5, 1.5), "DII chg QoQ": r.uniform(-1.5, 1.5)})
+    return out

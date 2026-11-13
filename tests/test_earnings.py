@@ -87,3 +87,40 @@ def test_verdict_loss_swing_and_no_data():
     v = earnings.verdict(res)
     assert any("Swung to a profit" in r for r in v["reasons"]) and v["score"] >= 2
     assert earnings.verdict(pd.DataFrame())["level"] == "NO DATA"
+
+
+def _px(days, closes, opens=None):
+    idx = pd.to_datetime(days)
+    return pd.DataFrame({"Open": opens or closes, "Close": closes}, index=idx)
+
+
+def test_reaction_after_hours_uses_same_day_close_as_base():
+    p = _px(["2026-11-12", "2026-11-13", "2026-11-16"], [100, 110, 120], [100, 105, 118])
+    r = earnings.reaction(p, pd.Timestamp("2026-11-12 16:40"))
+    assert r["base"] == 100 and r["reaction_day"] == pd.Timestamp("2026-11-13")
+    assert round(r["d1"], 6) == 10 and round(r["gap"], 6) == 5 and "d5" not in r
+
+
+def test_reaction_during_market_uses_previous_close():
+    p = _px(["2026-11-11", "2026-11-12", "2026-11-13"], [100, 95, 97])
+    r = earnings.reaction(p, pd.Timestamp("2026-11-12 13:05"))
+    assert r["base"] == 100 and round(r["d1"], 6) == -5
+
+
+def test_reaction_on_weekend_filing():
+    p = _px(["2026-11-13", "2026-11-16"], [100, 104])
+    r = earnings.reaction(p, pd.Timestamp("2026-11-14 11:00"))
+    assert r["base"] == 100 and r["reaction_day"] == pd.Timestamp("2026-11-16")
+
+
+def test_filing_times_one_per_quarter_earliest():
+    raw = [{"broadCastDate": "13-Nov-2026 16:42:10", "toDate": "30-Sep-2026"},
+           {"broadCastDate": "13-Nov-2026 16:40:00", "toDate": "30-Sep-2026"},
+           {"broadCastDate": "12-Aug-2026 17:00:00", "toDate": "30-Jun-2026"}]
+    assert earnings.filing_times(raw) == [pd.Timestamp("2026-11-13 16:40"), pd.Timestamp("2026-08-12 17:00")]
+
+
+def test_scorecard_summary():
+    df, s = earnings.scorecard(demo.price_history(1), demo.sample_result_times())
+    assert len(df) == 8 and s["results"] == 8 and 0 <= s["up"] <= 8
+    assert s["avg_abs_d1"] >= abs(s["avg_d1"])

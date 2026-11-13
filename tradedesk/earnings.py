@@ -292,3 +292,92 @@ def verdict(results: pd.DataFrame, estimate: dict | None = None) -> dict:
     out["level"] = next((lbl for floor, lbl in LEVELS if score >= floor), "POOR")
     out["reasons"] = reasons
     return out
+
+
+# ---------------------------------------------------------------- scorecard: how the price reacted
+MARKET_OPEN, MARKET_CLOSE = dt.time(9, 15), dt.time(15, 30)
+
+
+def filing_times(raw: list[dict]) -> list[pd.Timestamp]:
+    """One timestamp per reported quarter (the first filing for it), newest first."""
+    seen: dict = {}
+    for r in raw or []:
+        when = _date(r.get("broadCastDate") or r.get("broadcastDate") or r.get("an_dt"))
+        q = _date(r.get("toDate")) if r.get("toDate") else when.normalize() if pd.notna(when) else pd.NaT
+        if pd.isna(when):
+            continue
+        key = quarter_end_before(when) if pd.isna(q) else q
+        if key not in seen or when < seen[key]:
+            seen[key] = when
+    return sorted(seen.values(), reverse=True)
+
+
+def fetch_filing_times(symbol: str, years: int = 3, client: NSEClient | None = None) -> list[pd.Timestamp]:
+    c = client or NSEClient()
+    end = dt.date.today()
+    data = c.get("corporates-financial-results", index="equities", symbol=symbol, period="Quarterly",
+                 from_date=f"{end - dt.timedelta(days=365 * years):%d-%m-%Y}", to_date=f"{end:%d-%m-%Y}")
+    return filing_times(data.get("data", []) if isinstance(data, dict) else data)
+
+
+def yahoo_earnings_dates(yahoo_symbol: str, limit: int = 12) -> list[pd.Timestamp]:
+    """Fallback: Yahoo's past earnings dates (times in IST, tz dropped)."""
+    try:
+        import yfinance as yf
+        df = yf.Ticker(yahoo_symbol).get_earnings_dates(limit=limit)
+    except Exception:
+        return []
+    if df is None or df.empty:
+        return []
+    idx = df.index.tz_convert("Asia/Kolkata").tz_localize(None) if df.index.tz is not None else df.index
+    now = pd.Timestamp.now()
+    return sorted([t for t in idx if t <= now], reverse=True)
+
+
+def reaction(prices: pd.DataFrame, filed: pd.Timestamp) -> dict | None:
+    """Price move around one results filing.
+
+    Base is the last close before the news could trade: the same day's close if
+    filed after 3:30 PM, else the previous trading day's close. The reaction day
+    is the first session that could trade on it. A filing at exactly midnight (no
+    time known) is treated as after-hours, which can only widen the window.
+    """
+    if prices is None or prices.empty or "Close" not in prices:
+        return None
+    px = prices.dropna(subset=["Close"])
+    days = px.index.normalize() if isinstance(px.index, pd.DatetimeIndex) else pd.to_datetime(px.index).normalize()
+    day, t = filed.normalize(), filed.time()
+    during_or_before = t != dt.time(0, 0) and t < MARKET_CLOSE
+    base_mask = days < day if during_or_before else days <= day
+    react_mask = days >= day if during_or_before else days > day
+    if not base_mask.any() or not react_mask.any():
+        return None
+    b = int(base_mask.nonzero()[0][-1])
+    r = int(react_mask.nonzero()[0][0])
+    base = float(px["Close"].iloc[b])
+    if not base:
+        return None
+    out = {"filed": filed, "reaction_day": px.index[r], "base": base,
+           "d1": (float(px["Close"].iloc[r]) / base - 1) * 100}
+    if "Open" in px and pd.notna(px["Open"].iloc[r]):
+        out["gap"] = (float(px["Open"].iloc[r]) / base - 1) * 100
+    if r + 4 < len(px):
+        out["d5"] = (float(px["Close"].iloc[r + 4]) / base - 1) * 100
+    if r + 19 < len(px):
+        out["d20"] = (float(px["Close"].iloc[r + 19]) / base - 1) * 100
+    return out
+
+
+def scorecard(prices: pd.DataFrame, filed: list[pd.Timestamp], n: int = 8) -> tuple[pd.DataFrame, dict]:
+    """Reaction to each of the last n results, plus a summary of how the stock usually reacts."""
+    rows = [x for x in (reaction(prices, f) for f in filed) if x][:n]
+    df = pd.DataFrame(rows, columns=["filed", "reaction_day", "base", "gap", "d1", "d5", "d20"])
+    if df.empty:
+        return df, {}
+    d1 = df["d1"]
+    summ = {"results": len(df), "up": int((d1 > 0).sum()), "avg_d1": float(d1.mean()),
+            "avg_abs_d1": float(d1.abs().mean()), "best_d1": float(d1.max()), "worst_d1": float(d1.min()),
+            "avg_d5": float(df["d5"].mean()) if df["d5"].notna().any() else None,
+            "follow_through": float(((df["d5"] - df["d1"]) * df["d1"].apply(lambda v: 1 if v >= 0 else -1))
+                                    .mean()) if df["d5"].notna().any() else None}
+    return df, summ
