@@ -1,14 +1,30 @@
 # Trade Desk
 
-A private daily dashboard for an Upstox account. It has five tabs:
+A private, Bloomberg-style terminal for an Upstox account: black and amber, dense tables, a live index strip (Nifty, Sensex, Bank Nifty, VIX, USD/INR, Brent, gold, US markets) across the top. Tabs:
 
 - **Portfolio:** delivery holdings, MTF positions and open positions, with live P&L and anything closed today.
+- **P&L:** realised profit and loss for this financial year (switch to calendar year or last FY) across every segment: delivery (long- and short-term), intraday, futures, options, commodity and currency, with charges per segment, net P&L, unrealised P&L on open holdings, month-by-month chart, best/worst stocks and a CSV of every closed trade. Comes from Upstox's P&L report, which updates end of day.
+- **Markets:** a stock list (Nifty 50, your holdings, the daily ideas, or your own list) with LTP, change, day range, volume, 52-week range, 1M/1Y returns, a sector heatmap and top gainers/losers.
+- **Company:** search any NSE stock. Price chart with 50/200-day averages, valuation (market cap, P/E, P/B, ROE, ROCE, dividend yield), **what it sells and to whom, what it buys and from whom**, **who owns it** (promoters, FIIs, DIIs, government, public by quarter, plus named large holders), quarterly results and a business description.
 - **Charges:** what you've paid this financial year (brokerage, STT, GST, stamp duty, exchange, DP, SEBI), straight from Upstox. It also shows MTF interest on open positions and has a calculator for delivery, intraday and MTF round trips, including the breakeven sell price.
 - **Sell check:** flags each holding as HOLD, REVIEW or SELL? using your stop-loss and target, its 20- and 50-day averages, MTF interest drag and the daily research notes.
 - **Daily ideas:** earnings-based buy ideas, stocks to avoid and results to watch, read from `data/ideas.json`. A scheduled research job updates that file every weekday morning.
 - **Trade:** buy or sell a stock through Upstox. It starts in **paper mode** (simulated, nothing is sent). Live orders are off until you turn them on (see below).
 
 Only the Trade tab can place or cancel orders, and only after a review-and-confirm step. Ideas are research, not advice. Check the live price and your own risk before trading.
+
+## Where the data comes from
+
+| What | Source | Freshness |
+|---|---|---|
+| Prices when logged in | Upstox market-quote API | Live |
+| Prices when not logged in, 52-week range, history | Yahoo Finance (`yfinance`) | Up to ~15 min delayed |
+| Ratios, quarterly results, shareholding pattern, named holders | Screener.in public pages (from exchange filings) | Quarterly; cached 6 hours |
+| Full NSE stock list | NSE's daily `EQUITY_L.csv` | Daily |
+| What a company sells/buys and to/from whom | `data/companies.json` in this repo (summarised from annual reports) | Edit by hand; about 27 companies so far |
+| Realised P&L and charges | Upstox P&L report API | End of day (T+1) |
+
+Each page shows its source and fetch time, and a failing source shows a note instead of breaking the page. Nifty 50 members are in `data/nifty50.csv` (as of mid-2026).
 
 ## 1. Get an Upstox API key (one time)
 
@@ -106,5 +122,5 @@ The "Charges you've paid" section uses Upstox's own `trade/profit-loss/charges` 
 ## Tests
 
 ```bash
-pip install pytest && python -m pytest -q
+pip install pytest && python -m pytest -q   # includes parsers for Screener/NSE data and the P&L maths
 ```
