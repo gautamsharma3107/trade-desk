@@ -106,3 +106,50 @@ class Upstox:
         data = self._get(f"/v3/historical-candle/{key}/days/1/{to:%Y-%m-%d}/{frm:%Y-%m-%d}")["data"]
         # Newest first from the API; return oldest first.
         return list(reversed(data.get("candles") or []))
+
+    # ---------------------------------------------------------------- market data and P&L reports (read-only)
+    def quotes(self, instrument_keys: list[str]) -> dict[str, dict]:
+        """Full market quotes, keyed by instrument key (e.g. 'NSE_EQ|INE002A01018'). Max 500 per call."""
+        out: dict[str, dict] = {}
+        keys = [k for k in dict.fromkeys(instrument_keys) if k]
+        for i in range(0, len(keys), 500):
+            data = self._get("/v2/market-quote/quotes", instrument_key=",".join(keys[i:i + 500]))["data"] or {}
+            for name, q in data.items():
+                out[q.get("instrument_token") or name.replace(":", "|")] = q
+        return out
+
+    def pnl_meta(self, segment: str, fy: str, from_date: str | None = None, to_date: str | None = None) -> dict:
+        params = {"segment": segment, "financial_year": fy}
+        if from_date and to_date:
+            params.update(from_date=from_date, to_date=to_date)
+        return self._get("/v2/trade/profit-loss/metadata", **params)["data"] or {}
+
+    def pnl_trades(self, segment: str, fy: str, from_date: str | None = None, to_date: str | None = None) -> list[dict]:
+        """Every realised trade (buy matched to sell) for one segment, all pages. Dates are dd-mm-yyyy."""
+        params = {"segment": segment, "financial_year": fy}
+        if from_date and to_date:
+            params.update(from_date=from_date, to_date=to_date)
+        meta = self.pnl_meta(segment, fy, from_date, to_date)
+        count = int(meta.get("trades_count") or 0)
+        size = int(meta.get("page_size_limit") or 500) or 500
+        rows: list[dict] = []
+        page = 1
+        while len(rows) < count and page <= 200:
+            batch = self._get("/v2/trade/profit-loss/data", page_number=page, page_size=size, **params)["data"] or []
+            if not batch:
+                break
+            rows.extend(batch)
+            page += 1
+        return rows
+
+    def charges_for(self, segment: str, fy: str, from_date: str | None = None, to_date: str | None = None) -> dict:
+        params = {"segment": segment, "financial_year": fy}
+        if from_date and to_date:
+            params.update(from_date=from_date, to_date=to_date)
+        return (self._get("/v2/trade/profit-loss/charges", **params)["data"] or {}).get("charges_breakdown") or {}
+
+    def search_equity(self, query: str, exchange: str = "NSE", records: int = 10) -> list[dict]:
+        """Upstox instrument search, equities only."""
+        return self._get("/v2/instruments/search", query=query[:50], exchanges=exchange, segments="EQ",
+                         records=records)["data"] or []
+

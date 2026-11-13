@@ -1,0 +1,333 @@
+{
+  "_about": "What each company sells and to whom, and what it buys and from whom. Summarised from company annual reports and investor presentations (FY25-FY26). Indian companies rarely name customers or suppliers, so where a name isn't public the entry says so. Edit or extend freely; the Company tab reads this file.",
+  "_updated": "2026-11-13",
+  "TCS": {
+    "sells": [
+      {"what": "IT services: application development and maintenance, cloud, AI, data", "to": "Large enterprises worldwide; BFSI is the biggest vertical (about a third of revenue), then retail/consumer, communications, manufacturing, life sciences"},
+      {"what": "Consulting, BPO and products (TCS BaNCS for banks, ignio, TCS iON)", "to": "Banks, insurers, governments, universities"}
+    ],
+    "customers": "Revenue is about half North America, about a third Europe/UK, the rest India and other markets. Individual client names are mostly not disclosed; public wins include Marks & Spencer, Aviva, Bank of Ireland and BSNL (4G network build).",
+    "buys": [
+      {"what": "People (600,000+ employees): salaries are the main cost", "from": "Campus and lateral hiring in India"},
+      {"what": "Subcontractors for specialist or onsite work", "from": "Local staffing firms abroad"},
+      {"what": "Hardware, software licences, cloud capacity resold in deals", "from": "Microsoft, Google Cloud, AWS, Nvidia (AI partnerships), SAP, Oracle"}
+    ],
+    "notes": "Tata Sons is the promoter. Margin depends on wage hikes, rupee vs dollar and utilisation."
+  },
+  "INFY": {
+    "sells": [
+      {"what": "IT services, digital transformation, cloud (Infosys Cobalt), AI (Topaz), Finacle core banking software", "to": "Global enterprises; financial services is the largest vertical, then retail, communications, energy/utilities, manufacturing"}
+    ],
+    "customers": "About 60% of revenue from North America, about 30% Europe. Named large deals include Liberty Global, Danske Bank and Telstra. Most client names are not disclosed.",
+    "buys": [
+      {"what": "Employees and subcontractors", "from": "India hiring; contractors in US/Europe"},
+      {"what": "Third-party software, hardware and cloud bundled into deals", "from": "Microsoft, AWS, Google, ServiceNow, SAP and others"}
+    ],
+    "notes": "No promoter control in practice (founders hold about 14%); the rest is FIIs, DIIs and public."
+  },
+  "RELIANCE": {
+    "sells": [
+      {"what": "Oil-to-chemicals: petrol, diesel, jet fuel, polymers, polyester (Jamnagar refinery)", "to": "Exported to Europe, Africa, Asia and US; domestic fuel via Jio-bp pumps; plastics/textile makers in India"},
+      {"what": "Jio telecom and broadband (Reliance Jio Infocomm)", "to": "Over 450 million mobile subscribers, homes and enterprises in India"},
+      {"what": "Retail: grocery, fashion, electronics (Reliance Retail, JioMart, Ajio)", "to": "Indian consumers"},
+      {"what": "Oil and gas from KG-D6 basin; new energy (solar modules, batteries) being built", "to": "Gas buyers via government-set auctions; solar to utilities and rooftop"}
+    ],
+    "customers": "Mostly consumers (Jio, Retail) and fuel/chemical buyers worldwide. Retail and Jio have stakes held by global funds (KKR, Silver Lake, ADIA, Meta, Google).",
+    "buys": [
+      {"what": "Crude oil", "from": "Middle East producers (Saudi Aramco, Iraq, UAE), Russia, Latin America, US"},
+      {"what": "Telecom network equipment and spectrum", "from": "Samsung, Ericsson, Nokia; spectrum from Government of India auctions"},
+      {"what": "Goods for retail stores", "from": "FMCG brands, farmers and its own private labels"}
+    ],
+    "notes": "Ambani family is the promoter (about half the shares)."
+  },
+  "HDFCBANK": {
+    "sells": [
+      {"what": "Loans: home, personal, credit cards, vehicle, business and corporate loans", "to": "Retail customers, small businesses, large companies"},
+      {"what": "Deposits, payments, wealth and insurance distribution (fees)", "to": "About 9-10 crore customers"}
+    ],
+    "customers": "Retail loans are more than half the book after the 2023 merger with HDFC Ltd (home loans). No single large customer.",
+    "buys": [
+      {"what": "Money: customer deposits (its main raw material), bonds and borrowings", "from": "Savers, RBI, bond investors"},
+      {"what": "Technology and branches", "from": "IT vendors and landlords"}
+    ],
+    "notes": "No promoter. Largest holders are FIIs and domestic mutual funds and insurers (LIC, SBI MF and others)."
+  },
+  "ICICIBANK": {
+    "sells": [
+      {"what": "Retail, business and corporate loans; deposits; cards; payments", "to": "Retail customers, SMEs, corporates"},
+      {"what": "Insurance, asset management and broking through subsidiaries (ICICI Pru Life, ICICI Lombard, ICICI Pru AMC, ICICI Securities)", "to": "Retail investors and policyholders"}
+    ],
+    "customers": "Diversified; retail is over half of loans.",
+    "buys": [
+      {"what": "Deposits and borrowings", "from": "Savers and bond markets"},
+      {"what": "Technology", "from": "IT vendors (Infosys Finacle core banking among others)"}
+    ],
+    "notes": "No promoter. Mostly owned by FIIs and Indian funds."
+  },
+  "SBIN": {
+    "sells": [
+      {"what": "Loans across retail (home loans leader), agriculture, SME and corporate; deposits", "to": "About 50 crore customers, government bodies, PSUs, corporates"},
+      {"what": "Insurance, mutual funds, cards via subsidiaries (SBI Life, SBI MF, SBI Card, SBI General)", "to": "Retail customers"}
+    ],
+    "customers": "India's largest bank by assets; big share of government and PSU business.",
+    "buys": [
+      {"what": "Deposits (largest in India) and borrowings", "from": "Savers, government accounts, bond markets"},
+      {"what": "Technology and branch network", "from": "TCS (core banking) and other vendors"}
+    ],
+    "notes": "Government of India is the promoter (about 57%). LIC is also a large holder."
+  },
+  "ITC": {
+    "sells": [
+      {"what": "Cigarettes (Gold Flake, Classic, Navy Cut): most of the profit", "to": "Consumers through distributors and about 7 million shops"},
+      {"what": "FMCG foods and personal care (Aashirvaad, Sunfeast, Bingo, Yippee, Classmate, Savlon)", "to": "Consumers through general trade, modern trade and quick-commerce"},
+      {"what": "Agri business (leaf tobacco, wheat, spices exports) and paperboards/packaging", "to": "Global tobacco firms, food makers, FMCG and pharma packaging buyers"}
+    ],
+    "customers": "Mass consumers; agri exports to international buyers. Hotels were demerged into ITC Hotels in Jan 2025.",
+    "buys": [
+      {"what": "Leaf tobacco, wheat, potatoes and other farm produce", "from": "Farmers in Andhra Pradesh, Karnataka and elsewhere (e-Choupal network)"},
+      {"what": "Wood pulp and timber for paperboard", "from": "Farm forestry growers around its Bhadrachalam mill"}
+    ],
+    "notes": "No promoter. British American Tobacco holds about 23-25%; LIC and other Indian institutions hold large stakes."
+  },
+  "BHARTIARTL": {
+    "sells": [
+      {"what": "Mobile services (about 40 crore India customers), home broadband, DTH", "to": "Indian consumers"},
+      {"what": "Airtel Business: enterprise connectivity, data centres (Nxtra), cloud, IoT", "to": "Companies and government"},
+      {"what": "Airtel Africa mobile and money services", "to": "Consumers in 14 African countries"}
+    ],
+    "customers": "Mass consumers; enterprise clients not named.",
+    "buys": [
+      {"what": "Spectrum", "from": "Government of India auctions (paid over many years)"},
+      {"what": "Network equipment", "from": "Ericsson, Nokia, Samsung"},
+      {"what": "Tower space", "from": "Indus Towers (a subsidiary)"},
+      {"what": "Handsets for bundles and satellite link", "from": "OEMs; Eutelsat OneWeb and SpaceX Starlink partnerships"}
+    ],
+    "notes": "Promoters: Bharti Telecom (Sunil Mittal family) with Singtel."
+  },
+  "LT": {
+    "sells": [
+      {"what": "Engineering and construction (EPC): infrastructure, metro rail, power transmission, water, buildings, hydrocarbon projects", "to": "Indian central and state governments, PSUs, Middle East national oil companies (Saudi Aramco, ADNOC), private industry"},
+      {"what": "Defence equipment, heavy engineering, IT services (LTIMindtree, L&T Technology Services), finance (L&T Finance)", "to": "Indian Ministry of Defence, global corporates, retail borrowers"}
+    ],
+    "customers": "About 40% of the order book is international, mostly Middle East. Government and PSUs dominate the domestic book.",
+    "buys": [
+      {"what": "Steel, cement, equipment and subcontracted labour", "from": "Steel makers (Tata Steel, JSW, SAIL), cement makers, local subcontractors"}
+    ],
+    "notes": "No promoter. L&T Employee Welfare Foundation, LIC and mutual funds are the large holders."
+  },
+  "HINDUNILVR": {
+    "sells": [
+      {"what": "Home care (Surf Excel, Rin, Vim), beauty and personal care (Dove, Lux, Pond's, Lakme), foods (Brooke Bond, Kissan, Horlicks)", "to": "Indian consumers through about 9 million shops, modern trade and e-commerce"}
+    ],
+    "customers": "Mass consumers. Ice cream business is being demerged (Kwality Wall's).",
+    "buys": [
+      {"what": "Palm oil, crude oil derivatives (for detergents and packaging), tea, milk solids", "from": "Global commodity traders, Indian tea estates and dairies"},
+      {"what": "Contract manufacturing and royalty for brands", "from": "Contract manufacturers; Unilever plc (royalty for brand and technology)"}
+    ],
+    "notes": "Unilever plc is the promoter (about 62%)."
+  },
+  "MARUTI": {
+    "sells": [
+      {"what": "Passenger cars and SUVs (Swift, Baleno, Brezza, Ertiga, Grand Vitara, e-Vitara EV)", "to": "Indian buyers through about 4,000 dealer outlets (Arena, Nexa)"},
+      {"what": "Exports (about 3 lakh+ cars a year)", "to": "Africa, Latin America, Middle East, Japan (Fronx, Jimny)"},
+      {"what": "Spare parts and services", "to": "Car owners"}
+    ],
+    "customers": "Retail car buyers; dealers are independent businesses.",
+    "buys": [
+      {"what": "Components (steel sheets, engines parts, electronics, tyres)", "from": "Hundreds of suppliers, many joint ventures (e.g. Krishna Maruti, Bharat Seats, SKH Metals, Bosch, Denso); steel from JSW and Tata Steel"},
+      {"what": "Technology and royalty, some models", "from": "Suzuki Motor Corporation (parent); Suzuki Motor Gujarat plant now merged in"}
+    ],
+    "notes": "Suzuki Motor Corporation is the promoter (about 58%)."
+  },
+  "TMPV": {
+    "sells": [
+      {"what": "Jaguar Land Rover luxury cars (Range Rover, Defender)", "to": "Buyers in UK, US, China and Europe"},
+      {"what": "Tata passenger cars and EVs (Nexon, Punch, Harrier, Curvv)", "to": "Indian car buyers"}
+    ],
+    "customers": "Retail buyers. Tata Motors' commercial vehicle business was demerged into a separate listed company (TMCV) in 2025.",
+    "buys": [
+      {"what": "Components, batteries and steel", "from": "Global and Indian auto suppliers; battery cells from Agratas (Tata group) and Chinese cell makers; steel from Tata Steel"}
+    ],
+    "notes": "Tata Sons is the promoter. JLR had a major cyber-attack in Sept 2025 that halted production for weeks."
+  },
+  "SUNPHARMA": {
+    "sells": [
+      {"what": "Branded generics in India (largest pharma company by share)", "to": "Doctors' prescriptions sold through chemists"},
+      {"what": "Specialty drugs in the US (Ilumya, Cequa, Winlevi, Leqselvi) and generics", "to": "US wholesalers (McKesson, Cardinal Health, Cencora) and pharmacies"},
+      {"what": "Emerging markets and rest-of-world generics", "to": "Distributors in about 100 countries"}
+    ],
+    "customers": "US wholesalers are a large share of US sales (common for the industry).",
+    "buys": [
+      {"what": "Active ingredients and intermediates", "from": "Own API plants plus Chinese and Indian chemical makers"},
+      {"what": "Licensed molecules", "from": "Partner pharma companies (in-licensing deals)"}
+    ],
+    "notes": "Dilip Shanghvi family is the promoter (about 54%)."
+  },
+  "TATASTEEL": {
+    "sells": [
+      {"what": "Flat and long steel products", "to": "Auto makers, construction, engineering, consumer durables, railways; retail via Tata Tiscon/Tata Shaktee dealers"},
+      {"what": "Steel from Tata Steel Netherlands and UK", "to": "European auto and industrial buyers"}
+    ],
+    "customers": "Auto OEMs (Tata Motors, Maruti and others) are key flat-steel buyers.",
+    "buys": [
+      {"what": "Iron ore", "from": "Own captive mines in Jharkhand and Odisha"},
+      {"what": "Coking coal", "from": "Imports mainly from Australia; some captive Indian mines"},
+      {"what": "Scrap and electricity for UK electric arc furnace (Port Talbot transition)", "from": "UK scrap market and grid"}
+    ],
+    "notes": "Tata Sons is the promoter (about 33%)."
+  },
+  "HINDALCO": {
+    "sells": [
+      {"what": "Novelis rolled aluminium (cans, auto sheet, aerospace)", "to": "Beverage can makers (Ball, Crown), auto makers (Ford, JLR and others) in US, Europe, Asia"},
+      {"what": "Primary aluminium and value-added products in India", "to": "Power cables, packaging, construction, auto, exports"},
+      {"what": "Copper cathode, rods and DAP fertiliser", "to": "Cable and wire makers, electrical industry"}
+    ],
+    "customers": "Novelis earns most of the revenue; can makers are its biggest customers.",
+    "buys": [
+      {"what": "Bauxite and coal", "from": "Own mines in Odisha/Jharkhand and coal from Coal India and captive blocks"},
+      {"what": "Copper concentrate", "from": "Imports from Chile, Australia and others"},
+      {"what": "Aluminium scrap (for recycling)", "from": "Used-beverage-can collectors in US/Europe"}
+    ],
+    "notes": "Aditya Birla group is the promoter (about 35%)."
+  },
+  "ASIANPAINT": {
+    "sells": [
+      {"what": "Decorative paints (Royale, Apex, Tractor), waterproofing, home decor, bath and kitchen", "to": "Homeowners and painters through about 1.6 lakh dealers"},
+      {"what": "Industrial and auto coatings (JVs with PPG)", "to": "Auto makers and industry"}
+    ],
+    "customers": "Retail buyers through dealers. Competition from Birla Opus has risen.",
+    "buys": [
+      {"what": "Titanium dioxide, crude-based solvents and monomers, packaging", "from": "Global chemical suppliers (Chinese TiO2 makers, Kronos and others)"}
+    ],
+    "notes": "Promoter families (Dani, Choksi, Vakil) hold about 52%."
+  },
+  "TITAN": {
+    "sells": [
+      {"what": "Jewellery (Tanishq, Mia, Zoya, CaratLane): about 85-90% of revenue", "to": "Indian consumers through own and franchise stores"},
+      {"what": "Watches (Titan, Fastrack, Sonata), eyewear, fragrances", "to": "Consumers"}
+    ],
+    "customers": "Retail buyers. Gold prices drive sales value.",
+    "buys": [
+      {"what": "Gold (largely via gold metal loans from banks) and diamonds", "from": "Banks, bullion dealers, diamond suppliers"},
+      {"what": "Watch movements and components", "from": "Own plants plus suppliers in Asia"}
+    ],
+    "notes": "Tata group (Tata Sons) and Tamil Nadu Industrial Development Corp (TIDCO) are the promoters (about 53%)."
+  },
+  "ULTRACEMCO": {
+    "sells": [
+      {"what": "Cement (grey and white), ready-mix concrete, building products; India's largest cement maker", "to": "Home builders through dealers, infrastructure contractors, real estate developers"}
+    ],
+    "customers": "Retail homebuilders and government/private infrastructure projects. Bought India Cements and Kesoram cement units in 2024-25.",
+    "buys": [
+      {"what": "Limestone", "from": "Own captive mines"},
+      {"what": "Coal and petcoke for kilns and power", "from": "Imports (US, South Africa) and Coal India"},
+      {"what": "Fly ash and slag", "from": "Power plants (NTPC and others) and steel plants"}
+    ],
+    "notes": "Aditya Birla group (via Grasim) is the promoter (about 60%)."
+  },
+  "NTPC": {
+    "sells": [
+      {"what": "Electricity from coal, gas, hydro and renewables (NTPC Green Energy)", "to": "State power distribution companies under long-term contracts"}
+    ],
+    "customers": "State discoms (Uttar Pradesh, Maharashtra, Madhya Pradesh, Gujarat and others).",
+    "buys": [
+      {"what": "Coal", "from": "Coal India subsidiaries and its own captive mines"},
+      {"what": "Boilers, turbines and solar modules", "from": "BHEL, L&T and solar module makers"}
+    ],
+    "notes": "Government of India is the promoter (about 51%)."
+  },
+  "MINDACORP": {
+    "sells": [
+      {"what": "Auto components: vehicle access and security systems, wiring harnesses, instrument clusters and digital displays, EV parts (chargers, motor controllers)", "to": "Two-wheeler, passenger car and commercial vehicle makers (Bajaj Auto, TVS, Hero, Royal Enfield, M&M, Tata Motors are known customers)"},
+      {"what": "Aftermarket parts", "to": "Spare-parts dealers"}
+    ],
+    "customers": "Two-wheeler OEMs are the largest share.",
+    "buys": [
+      {"what": "Copper (wiring), plastics, electronic components, chips", "from": "Metal and polymer suppliers; electronics often imported from Asia"},
+      {"what": "Technology via joint ventures", "from": "Partners such as Stoneridge, Toyodenso, Furukawa, Sanco (China)"}
+    ],
+    "notes": "Ashok Minda family is the promoter (about 64%)."
+  },
+  "APOLLOHOSP": {
+    "sells": [
+      {"what": "Hospital care (about 70+ hospitals)", "to": "Patients: cash-paying, insured (via insurers/TPAs), government schemes, international medical tourists"},
+      {"what": "Pharmacy and digital health (Apollo HealthCo, Apollo 24/7)", "to": "Retail consumers"},
+      {"what": "Diagnostics and clinics", "to": "Patients and corporates"}
+    ],
+    "customers": "Insurers (Star Health, HDFC Ergo, ICICI Lombard and others) pay for a growing share.",
+    "buys": [
+      {"what": "Medicines and consumables", "from": "Pharma companies and distributors"},
+      {"what": "Medical equipment", "from": "GE Healthcare, Siemens Healthineers, Philips"},
+      {"what": "Doctors' and nurses' time", "from": "Salaried and fee-for-service doctors"}
+    ],
+    "notes": "Dr. Prathap Reddy family is the promoter (about 29%); FIIs hold a large share."
+  },
+  "WABAG": {
+    "sells": [
+      {"what": "Water and wastewater treatment plants, desalination plants (design, build, operate)", "to": "Municipal bodies and state governments in India, Middle East (Saudi Arabia), Africa, Southeast Asia; industrial clients"}
+    ],
+    "customers": "Mostly governments and municipal corporations, often funded by World Bank, JICA, ADB.",
+    "buys": [
+      {"what": "Pumps, membranes, pipes, civil works", "from": "Equipment vendors and civil subcontractors"}
+    ],
+    "notes": "Rajiv Mittal (promoter group) holds about 19%; the rest is institutions and public."
+  },
+  "EICHERMOT": {
+    "sells": [
+      {"what": "Royal Enfield motorcycles (Classic, Bullet, Hunter, Himalayan) and EVs (Flying Flea)", "to": "Riders in India and about 60 export markets"},
+      {"what": "Trucks and buses via VE Commercial Vehicles (JV with Volvo)", "to": "Fleet owners and transporters"}
+    ],
+    "customers": "Retail buyers via dealers.",
+    "buys": [
+      {"what": "Steel, aluminium, engines parts, electronics", "from": "Indian auto component suppliers"}
+    ],
+    "notes": "Siddhartha Lal family is the promoter (about 49%)."
+  },
+  "GRASIM": {
+    "sells": [
+      {"what": "Viscose staple fibre and chemicals (caustic soda)", "to": "Textile spinners; alumina, paper and chemical industries"},
+      {"what": "Paints (Birla Opus), B2B e-commerce (Birla Pivot)", "to": "Homeowners via dealers; builders"},
+      {"what": "Cement and financial services through UltraTech and Aditya Birla Capital", "to": "Consolidated subsidiaries"}
+    ],
+    "customers": "Mixed; it is mostly a holding company of Aditya Birla group businesses.",
+    "buys": [
+      {"what": "Wood pulp", "from": "Own and group pulp mills (Canada, Sweden) and imports"},
+      {"what": "Salt and power", "from": "Salt producers and captive power"}
+    ],
+    "notes": "Aditya Birla group is the promoter (about 43%)."
+  },
+  "COALINDIA": {
+    "sells": [
+      {"what": "Thermal and coking coal (about 75% of India's output)", "to": "Power utilities (NTPC, state gencos) under fuel supply agreements; steel, cement, sponge iron and others via e-auctions"}
+    ],
+    "customers": "Power sector takes about 80% of volumes.",
+    "buys": [
+      {"what": "Mining contractors, diesel, explosives, heavy earth-moving equipment", "from": "MDO contractors, oil companies, BEML, Komatsu, Caterpillar"}
+    ],
+    "notes": "Government of India is the promoter (about 63%)."
+  },
+  "BEL": {
+    "sells": [
+      {"what": "Defence electronics: radars, missile systems electronics, communications, electronic warfare, naval systems", "to": "Indian Army, Navy, Air Force (Ministry of Defence), DRDO projects"},
+      {"what": "EVMs, homeland security, civilian electronics, exports", "to": "Election Commission, governments, foreign militaries"}
+    ],
+    "customers": "Indian Ministry of Defence is by far the largest customer.",
+    "buys": [
+      {"what": "Electronic components, semiconductors, subsystems", "from": "Indian MSME vendors and foreign suppliers (Israel's IAI and others for co-developed systems)"}
+    ],
+    "notes": "Government of India is the promoter (about 51%)."
+  },
+  "INDIGO": {
+    "sells": [
+      {"what": "Air travel (about 60%+ of India's domestic market) and growing international routes", "to": "Leisure and business travellers"},
+      {"what": "Cargo and ancillary (seat selection, bags, food)", "to": "Shippers and passengers"}
+    ],
+    "customers": "Retail travellers via its own app/website and travel agents.",
+    "buys": [
+      {"what": "Aircraft (leased and owned)", "from": "Airbus (A320neo family, A321XLR, A350), ATR; lessors"},
+      {"what": "Jet fuel", "from": "Indian Oil, BPCL, HPCL"},
+      {"what": "Engines and maintenance", "from": "Pratt & Whitney, CFM International"}
+    ],
+    "notes": "Rahul Bhatia family is the promoter (about 41%); Gangwal family has been selling down."
+  }
+}
