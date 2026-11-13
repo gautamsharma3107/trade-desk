@@ -189,3 +189,21 @@ def option_chain(spot: float = 25300.0, step: float = 50.0, n: int = 20) -> list
                      "put_options": {"market_data": {"ltp": round(put, 2), "oi": p_oi, "prev_oi": p_oi * 1.05,
                                                      "volume": p_oi * 3}, "option_greeks": {"iv": 12 + abs(i) * 0.25}}})
     return rows
+
+
+def screen_rows(symbols: list[str]) -> list[dict]:
+    """Made-up screener numbers, for the Screener tab's sample view."""
+    import random
+
+    out = []
+    for s in symbols:
+        r = random.Random(s)
+        prof = r.uniform(-20, 60)
+        out.append({"Symbol": s, "Mcap (₹ cr)": r.uniform(5e3, 15e5), "Price": r.uniform(100, 5000),
+                    "P/E": r.uniform(8, 70), "P/B": r.uniform(1, 12), "ROE %": r.uniform(5, 35),
+                    "ROCE %": r.uniform(6, 40), "Div yield %": r.uniform(0, 4), "Sales YoY %": r.uniform(-5, 35),
+                    "Profit YoY %": prof, "Profit growth qtrs (of 4)": r.randint(0, 4), "Sales QoQ %": r.uniform(-8, 12),
+                    "OPM chg (pts)": r.uniform(-4, 4), "Promoter %": r.uniform(30, 75),
+                    "Promoter chg QoQ": r.choice([0, 0, 0, 0.3, -0.4, 1.2]), "Promoter chg 1Y": r.uniform(-2, 2),
+                    "FII chg QoQ": r.uniform(-1.5, 1.5), "DII chg QoQ": r.uniform(-1.5, 1.5)})
+    return out
