@@ -1,0 +1,528 @@
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+2026-11-13 20:41:54.411 Could not bind IPv6 wildcard address :::8599; falling back to 0.0.0.0:8599.
+2026-11-13 20:41:54.444 Uvicorn server started on 0.0.0.0:8599
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8599
+  Network URL: http://192.0.2.2:8599
+  External URL: http://136.114.177.226:8599
+
+Cookie fetch from fc.yahoo.com failed (ConnectionError), continuing without it
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker '^NSEI' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker '^BSESN' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'NIFTY_MIDCAP_100.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker '^IXIC' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$NIFTY_MIDCAP_100.NS: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$^IXIC: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker '^GSPC' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker '^CNXIT' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker '^NSEBANK' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker '^INDIAVIX' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$^GSPC: possibly delisted; no price data found  (period=5d)
+$^CNXIT: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$^NSEBANK: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$^INDIAVIX: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'INR=X' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'BZ=F' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'GC=F' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$INR=X: possibly delisted; no price data found  (period=5d)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$BZ=F: possibly delisted; no price data found  (period=5d)
+$GC=F: possibly delisted; no price data found  (period=5d)
+
+11 Failed downloads:
+['^NSEI', '^BSESN']: ConnectionError('Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.')
+['NIFTY_MIDCAP_100.NS', '^IXIC', '^GSPC', '^CNXIT', '^NSEBANK', '^INDIAVIX', 'INR=X', 'BZ=F', 'GC=F']: possibly delisted; no price data found  (period=5d)
+2026-11-13 20:42:04.353 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:04.394 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:04.573 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:04.599 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:04.617 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:04.632 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TRENT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'AXISBANK.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'TATASTEEL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'CIPLA.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$TRENT.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$AXISBANK.NS: possibly delisted; no price data found  (period=1y)
+$TATASTEEL.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$CIPLA.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'COALINDIA.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TATACONSUM.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ASIANPAINT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'APOLLOHOSP.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$COALINDIA.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$TATACONSUM.NS: possibly delisted; no price data found  (period=1y)
+$ASIANPAINT.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$APOLLOHOSP.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'INDIGO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'SBILIFE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'JSWSTEEL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ICICIBANK.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$INDIGO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SBILIFE.NS: possibly delisted; no price data found  (period=1y)
+$JSWSTEEL.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ICICIBANK.NS: possibly delisted; no price data found  (period=1y)
+Failed to get ticker 'BAJAJFINSV.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'RELIANCE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TECHM.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ONGC.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$BAJAJFINSV.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$RELIANCE.NS: possibly delisted; no price data found  (period=1y)
+$TECHM.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ONGC.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'SUNPHARMA.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'TMPV.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'GRASIM.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'WIPRO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SUNPHARMA.NS: possibly delisted; no price data found  (period=1y)
+$TMPV.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$GRASIM.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$WIPRO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'BAJFINANCE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'BHARTIARTL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'INFY.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'HDFCBANK.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$BAJFINANCE.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$BHARTIARTL.NS: possibly delisted; no price data found  (period=1y)
+$INFY.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HDFCBANK.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'DRREDDY.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'HDFCLIFE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'KOTAKBANK.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ADANIPORTS.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$DRREDDY.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HDFCLIFE.NS: possibly delisted; no price data found  (period=1y)
+$KOTAKBANK.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ADANIPORTS.NS: possibly delisted; no price data found  (period=1y)
+Failed to get ticker 'HINDALCO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'HINDUNILVR.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'M&M.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ULTRACEMCO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HINDALCO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HINDUNILVR.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$M&M.NS: possibly delisted; no price data found  (period=1y)
+$ULTRACEMCO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'BAJAJ-AUTO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'SHRIRAMFIN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'ETERNAL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ITC.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$BAJAJ-AUTO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SHRIRAMFIN.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ETERNAL.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ITC.NS: possibly delisted; no price data found  (period=1y)
+Failed to get ticker 'POWERGRID.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ADANIENT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'LT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'MAXHEALTH.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$POWERGRID.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ADANIENT.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$LT.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$MAXHEALTH.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'JIOFIN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'NESTLEIND.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'MARUTI.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TITAN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$JIOFIN.NS: possibly delisted; no price data found  (period=1y)
+$NESTLEIND.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$MARUTI.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$TITAN.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'EICHERMOT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'NTPC.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'SBIN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'BEL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$EICHERMOT.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$NTPC.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SBIN.NS: possibly delisted; no price data found  (period=1y)
+$BEL.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TCS.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'HCLTECH.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$TCS.NS: possibly delisted; no price data found  (period=1y)
+$HCLTECH.NS: possibly delisted; no price data found  (period=1y)
+
+50 Failed downloads:
+['TRENT.NS', 'AXISBANK.NS', 'TATASTEEL.NS', 'CIPLA.NS', 'COALINDIA.NS', 'TATACONSUM.NS', 'ASIANPAINT.NS', 'APOLLOHOSP.NS', 'INDIGO.NS', 'SBILIFE.NS', 'JSWSTEEL.NS', 'ICICIBANK.NS', 'BAJAJFINSV.NS', 'RELIANCE.NS', 'TECHM.NS', 'ONGC.NS', 'SUNPHARMA.NS', 'TMPV.NS', 'GRASIM.NS', 'WIPRO.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'INFY.NS', 'HDFCBANK.NS', 'DRREDDY.NS', 'HDFCLIFE.NS', 'KOTAKBANK.NS', 'ADANIPORTS.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'M&M.NS', 'ULTRACEMCO.NS', 'BAJAJ-AUTO.NS', 'SHRIRAMFIN.NS', 'ETERNAL.NS', 'ITC.NS', 'POWERGRID.NS', 'ADANIENT.NS', 'LT.NS', 'MAXHEALTH.NS', 'JIOFIN.NS', 'NESTLEIND.NS', 'MARUTI.NS', 'TITAN.NS', 'EICHERMOT.NS', 'NTPC.NS', 'SBIN.NS', 'BEL.NS', 'TCS.NS', 'HCLTECH.NS']: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TCS.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$TCS.NS: possibly delisted; no price data found  (period=5y)
+
+1 Failed download:
+['TCS.NS']: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+2026-11-13 20:42:23.811 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:23.815 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:23.851 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:24.124 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'MINDACORP.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'EICHERMOT.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'SBIN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'GRASIM.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$MINDACORP.NS: possibly delisted; no price data found  (period=5y)
+$EICHERMOT.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SBIN.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$GRASIM.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'ITC.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'BHARTIARTL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'APOLLOHOSP.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TCS.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$ITC.NS: possibly delisted; no price data found  (period=5y)
+$BHARTIARTL.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$APOLLOHOSP.NS: possibly delisted; no price data found  (period=5y)
+$TCS.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'HINDALCO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Failed to get ticker 'WABAG.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HINDALCO.NS: possibly delisted; no price data found  (period=5y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$WABAG.NS: possibly delisted; no price data found  (period=5y)
+
+10 Failed downloads:
+['MINDACORP.NS', 'EICHERMOT.NS', 'SBIN.NS', 'GRASIM.NS', 'ITC.NS', 'BHARTIARTL.NS', 'APOLLOHOSP.NS', 'TCS.NS', 'HINDALCO.NS', 'WABAG.NS']: possibly delisted; no price data found  (period=5y)
+2026-11-13 20:42:27.559 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:27.579 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:27.584 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:27.744 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.005 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.307 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.320 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.697 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.854 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:28.859 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:29.039 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:29.103 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:29.116 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'SBIN.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'MINDACORP.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'HINDCOPPER.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$SBIN.NS: possibly delisted; no price data found  (period=1y)
+Failed to get ticker 'BHARTIARTL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$MINDACORP.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HINDCOPPER.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'APOLLOHOSP.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$BHARTIARTL.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'KALYANKJIL.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'CUPID.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$APOLLOHOSP.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'PAGEIND.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$KALYANKJIL.NS: possibly delisted; no price data found  (period=1y)
+$CUPID.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'TRITURBINE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$PAGEIND.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'FLUOROCHEM.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'HINDALCO.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$TRITURBINE.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'LEMONTREE.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$FLUOROCHEM.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$HINDALCO.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+Failed to get ticker 'WABAG.NS' reason: Failed to perform, curl: (7) CONNECT tunnel failed, response 403. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$LEMONTREE.NS: possibly delisted; no price data found  (period=1y)
+Cookie/crumb fetch failed (ConnectionError), continuing without crumb
+$WABAG.NS: possibly delisted; no price data found  (period=1y)
+
+13 Failed downloads:
+['SBIN.NS', 'MINDACORP.NS', 'HINDCOPPER.NS', 'BHARTIARTL.NS', 'APOLLOHOSP.NS', 'KALYANKJIL.NS', 'CUPID.NS', 'PAGEIND.NS', 'TRITURBINE.NS', 'FLUOROCHEM.NS', 'HINDALCO.NS', 'LEMONTREE.NS', 'WABAG.NS']: possibly delisted; no price data found  (period=1y)
+2026-11-13 20:42:33.709 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.732 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.775 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.817 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.824 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.833 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.885 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.928 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-13 20:42:33.970 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
