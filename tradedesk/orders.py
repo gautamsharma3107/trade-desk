@@ -233,6 +233,140 @@ class Trader:
                                  "price": t.ref_price(None)}]}
         return _json(self.s.post(f"{BASE}/v2/charges/margin", json=body, timeout=TIMEOUT))["data"]
 
+    # ---- GTT rules (live only; they go to api.upstox.com, not the HFT order host)
+    def place_gtt(self, g: GttTicket) -> list[str]:
+        if self.sandbox:
+            raise UpstoxError("Upstox's sandbox doesn't support GTT orders.")
+        body = _json(self.s.post(f"{BASE}/v3/order/gtt/place", json=g.payload(), timeout=TIMEOUT))
+        ids = (body.get("data") or {}).get("gtt_order_ids") or []
+        if not ids:
+            raise UpstoxError(f"Upstox accepted the request but returned no GTT id: {body}")
+        return ids
+
+    def gtt_orders(self) -> list[dict]:
+        return self._get("/v3/order/gtt")["data"] or []
+
+    def cancel_gtt(self, gtt_order_id: str) -> dict:
+        return _json(self.s.delete(f"{BASE}/v3/order/gtt/cancel", json={"gtt_order_id": gtt_order_id},
+                                   timeout=TIMEOUT)).get("data") or {}
+
 
 def chart_key(instrument_key: str) -> str:
     return quote(instrument_key, safe="")
+
+
+# ---------------------------------------------------------------- GTT (automatic rules)
+# Good-till-triggered orders rest on Upstox's servers (up to a year) and fire when the price
+# crosses the trigger, even when this app is closed. Upstox does not offer GTT in the sandbox.
+TRIGGER_TYPES = ("BELOW", "ABOVE", "IMMEDIATE")
+
+
+@dataclass
+class GttTicket:
+    instrument_key: str
+    symbol: str
+    side: str = "BUY"
+    qty: int = 1
+    product: str = "D"
+    trigger_type: str = "BELOW"   # entry fires when price goes BELOW / ABOVE the entry price, or IMMEDIATE
+    entry_price: float = 0.0
+    target: float = 0.0           # 0 = no target leg
+    stoploss: float = 0.0         # 0 = no stop-loss leg
+    trailing_gap: float = 0.0     # 0 = fixed stop-loss
+
+    @property
+    def kind(self) -> str:
+        return "MULTIPLE" if (self.target or self.stoploss) else "SINGLE"
+
+    def payload(self) -> dict:
+        """Body for POST /v3/order/gtt/place."""
+        rules = [{"strategy": "ENTRY", "trigger_type": self.trigger_type,
+                  "trigger_price": round(float(self.entry_price), 2)}]
+        if self.target:
+            rules.append({"strategy": "TARGET", "trigger_type": "IMMEDIATE",
+                          "trigger_price": round(float(self.target), 2)})
+        if self.stoploss:
+            sl = {"strategy": "STOPLOSS", "trigger_type": "IMMEDIATE",
+                  "trigger_price": round(float(self.stoploss), 2)}
+            if self.trailing_gap:
+                sl["trailing_gap"] = round(float(self.trailing_gap), 2)
+            rules.append(sl)
+        return {"type": self.kind, "quantity": int(self.qty), "product": self.product, "rules": rules,
+                "instrument_token": self.instrument_key, "transaction_type": self.side}
+
+    def summary(self) -> str:
+        product = {v: k for k, v in PRODUCTS.items()}.get(self.product, self.product)
+        when = ("right away" if self.trigger_type == "IMMEDIATE" else
+                f"when the price goes {self.trigger_type.lower()} ₹{self.entry_price:,.2f}")
+        s = f"{self.side} {self.qty} × {self.symbol} {when}, {product}"
+        exit_side = "sell" if self.side == "BUY" else "buy back"
+        legs = []
+        if self.target:
+            legs.append(f"{exit_side} at a target of ₹{self.target:,.2f}")
+        if self.stoploss:
+            trail = f" (trailing by ₹{self.trailing_gap:,.2f})" if self.trailing_gap else ""
+            legs.append(f"{exit_side} at a stop-loss of ₹{self.stoploss:,.2f}{trail}")
+        return s + ("; then " + " or ".join(legs) + ", whichever comes first" if legs else "")
+
+
+def check_gtt(g: GttTicket, ltp: float | None = None, held_qty: int | None = None,
+              max_value: float = DEFAULT_MAX_ORDER_VALUE) -> Check:
+    c = Check()
+    if "|" not in (g.instrument_key or ""):
+        c.errors.append("Pick a stock first.")
+    if g.side not in SIDES:
+        c.errors.append(f"Side must be BUY or SELL, not {g.side!r}.")
+    if g.product not in PRODUCTS.values():
+        c.errors.append(f"Unknown product {g.product!r}.")
+    if g.trigger_type not in TRIGGER_TYPES:
+        c.errors.append(f"Unknown trigger {g.trigger_type!r}.")
+    if int(g.qty) != g.qty or g.qty <= 0:
+        c.errors.append("Quantity must be a whole number above zero.")
+    if g.entry_price <= 0:
+        c.errors.append("Enter an entry price above zero.")
+    if g.target < 0 or g.stoploss < 0 or g.trailing_gap < 0:
+        c.errors.append("Prices can't be negative.")
+    up = g.side == "BUY"   # a BUY profits when price rises
+    if g.target and g.entry_price > 0 and ((g.target <= g.entry_price) if up else (g.target >= g.entry_price)):
+        c.errors.append(f"The target must be {'above' if up else 'below'} the entry price for a {g.side}.")
+    if g.stoploss and g.entry_price > 0 and ((g.stoploss >= g.entry_price) if up else (g.stoploss <= g.entry_price)):
+        c.errors.append(f"The stop-loss must be {'below' if up else 'above'} the entry price for a {g.side}.")
+    if g.trailing_gap and not g.stoploss:
+        c.errors.append("A trailing gap needs a stop-loss.")
+    if g.trailing_gap and g.stoploss and g.trailing_gap >= abs(g.entry_price - g.stoploss):
+        c.errors.append("The trailing gap must be smaller than the distance from entry to stop-loss.")
+
+    value = (g.entry_price if g.trigger_type != "IMMEDIATE" else (ltp or g.entry_price)) * int(g.qty)
+    if max_value and value > max_value:
+        c.errors.append(f"Order value ₹{value:,.0f} is above your per-order limit of ₹{max_value:,.0f}. "
+                        "Lower the quantity, or raise MAX_ORDER_VALUE in the app secrets.")
+    if g.side == "SELL" and g.product in ("D", "MTF"):
+        if g.target or g.stoploss:
+            c.errors.append("To sell shares you hold, use a single rule: turn off the target and stop-loss "
+                            "(those would buy the shares back).")
+        if not held_qty:
+            c.errors.append(f"You don't hold {g.symbol} as {'delivery' if g.product == 'D' else 'MTF'}, "
+                            "so there is nothing to sell.")
+        elif g.qty > held_qty:
+            c.errors.append(f"You hold {held_qty} {g.symbol}; you can't sell {g.qty}.")
+
+    if ltp and g.entry_price > 0 and g.trigger_type != "IMMEDIATE":
+        if (g.trigger_type == "BELOW" and ltp <= g.entry_price) or (g.trigger_type == "ABOVE" and ltp >= g.entry_price):
+            c.warnings.append(f"The last price ₹{ltp:,.2f} is already {g.trigger_type.lower()} your entry "
+                              f"₹{g.entry_price:,.2f}, so this will likely trigger straight away.")
+    if g.trigger_type == "IMMEDIATE":
+        c.warnings.append("IMMEDIATE entry: the buy/sell goes out at once; the rule then only manages the exit.")
+    if g.product == "I":
+        c.warnings.append("Intraday GTT: if it fills, Upstox squares it off before the close the same day.")
+    if g.side == "BUY" and not g.stoploss:
+        c.warnings.append("No stop-loss leg: nothing will sell automatically if the price falls after you buy.")
+    c.warnings.append("Upstox fires the triggered order as a market order, so the fill can differ a little "
+                      "from the trigger price.")
+    return c
+
+
+def simulate_gtt(g: GttTicket, now: dt.datetime | None = None) -> dict:
+    now = now or dt.datetime.now(dt.timezone(dt.timedelta(hours=5, minutes=30)))
+    return {"gtt_order_id": f"PAPER-GTT-{now:%H%M%S%f}", "created": now.strftime("%Y-%m-%d %H:%M:%S"),
+            "trading_symbol": g.symbol, "rule": g.summary(), "status": "active (paper)", "ticket": asdict(g)}
+

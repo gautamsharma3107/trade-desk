@@ -9,7 +9,7 @@ A private, Bloomberg-style terminal for an Upstox account: black and amber, dens
 - **Charges:** what you've paid this financial year (brokerage, STT, GST, stamp duty, exchange, DP, SEBI), straight from Upstox. It also shows MTF interest on open positions and has a calculator for delivery, intraday and MTF round trips, including the breakeven sell price.
 - **Sell check:** flags each holding as HOLD, REVIEW or SELL? using your stop-loss and target, its 20- and 50-day averages, MTF interest drag and the daily research notes.
 - **Daily ideas:** earnings-based buy ideas, stocks to avoid and results to watch, read from `data/ideas.json`. A scheduled research job updates that file every weekday morning.
-- **Trade:** buy or sell a stock through Upstox. It starts in **paper mode** (simulated, nothing is sent). Live orders are off until you turn them on (see below).
+- **Trade:** buy or sell a stock through Upstox, either now or with an automatic rule (GTT) that fires when the price hits your level. It starts in **paper mode** (simulated, nothing is sent). Live orders are off until you turn them on (see below).
 
 Only the Trade tab can place or cancel orders, and only after a review-and-confirm step. Ideas are research, not advice. Check the live price and your own risk before trading.
 
@@ -75,6 +75,16 @@ Safety checks:
 - Changing anything after review, or switching mode, cancels the review. A placed order can't be sent twice by a refresh.
 
 The order book (live mode) shows today's orders with their status and lets you cancel an open one.
+
+### Automatic rules (GTT)
+
+Pick **Automatic rule (GTT)** on the Trade tab to set an order that waits on Upstox's servers and fires by itself when the price crosses your level, even when this site is closed. A rule lasts up to a year, until it fires, or until you cancel it.
+
+- **Entry:** buy (or sell) when the price goes BELOW a level (buy the dip), ABOVE a level (breakout), or IMMEDIATE (enter now).
+- **Target and stop-loss (optional):** once the entry fills, Upstox sells at whichever comes first. The stop-loss can trail the price by a fixed rupee gap.
+- **Selling shares you hold:** use a single rule (no target or stop-loss), e.g. "sell 10 ITC if it falls below ₹400".
+
+The same checks apply (per-order value cap, can't sell more than you hold, target and stop-loss on the right sides of the entry), with the same review, tick and PIN. Triggered orders go out as market orders, so fills can differ a little from the trigger. The rules list shows your active rules and lets you cancel one. Upstox's sandbox has no GTT, so try rules in Paper mode first.
 
 To turn live trading on, add to the app secrets:
 
