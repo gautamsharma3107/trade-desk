@@ -51,3 +51,47 @@ PNL_TRADES = {
     ],
 }
 PNL_CHARGES = {"EQ": 612.4, "FO": 388.9}
+
+# NSE event-calendar rows, shown on the Earnings tab only when NSE can't be reached.
+EARNINGS_CALENDAR = [
+    {"symbol": "HINDALCO", "company": "Hindalco Industries Limited", "purpose": "Financial Results",
+     "bm_desc": "To consider and approve the unaudited financial results for the quarter ended September 30, 2026",
+     "date": "14-Nov-2026"},
+    {"symbol": "SBIN", "company": "State Bank of India", "purpose": "Financial Results/Dividend",
+     "bm_desc": "Quarterly results", "date": "17-Nov-2026"},
+    {"symbol": "MINDACORP", "company": "Minda Corporation Limited", "purpose": "Financial Results",
+     "bm_desc": "Quarterly results", "date": "18-Nov-2026"},
+    {"symbol": "EICHERMOT", "company": "Eicher Motors Limited", "purpose": "Financial Results",
+     "bm_desc": "Quarterly results", "date": "19-Nov-2026"},
+    {"symbol": "ABC", "company": "Sample Ltd", "purpose": "Fund Raising", "bm_desc": "Raise funds via QIP",
+     "date": "19-Nov-2026"},
+]
+
+# NSE financial-results filings and results comparisons, for the results feed's sample view.
+RESULTS_FILED = [
+    {"symbol": "HINDALCO", "companyName": "Hindalco Industries Limited", "broadCastDate": "13-Nov-2026 16:42:10",
+     "toDate": "30-Sep-2026", "consolidated": "Consolidated", "audited": "Un-Audited"},
+    {"symbol": "APOLLOHOSP", "companyName": "Apollo Hospitals Enterprise Limited",
+     "broadCastDate": "12-Nov-2026 15:58:31", "toDate": "30-Sep-2026", "consolidated": "Consolidated",
+     "audited": "Un-Audited"},
+    {"symbol": "INFY", "companyName": "Infosys Limited", "broadCastDate": "12-Nov-2026 18:05:00",
+     "toDate": "30-Sep-2026", "consolidated": "Consolidated", "audited": "Un-Audited"},
+]
+
+
+def _cmp(rows):
+    return {"resCmpData": [{"re_to_dt": d, "re_net_sale": str(s * 100), "re_net_profit": str(p * 100),
+                            "re_basic_eps": str(e), "re_res_type": "U"} for d, s, p, e in rows]}
+
+
+RESULTS_CMP = {  # ₹ crore, converted to NSE's ₹ lakh above
+    "HINDALCO": _cmp([("30-SEP-2025", 58203, 4741, 21.3), ("31-DEC-2025", 58390, 3735, 16.8),
+                      ("31-MAR-2026", 64890, 5283, 23.8), ("30-JUN-2026", 61202, 4004, 18.0),
+                      ("30-SEP-2026", 66320, 7533, 33.9)]),
+    "APOLLOHOSP": _cmp([("30-SEP-2025", 5589, 379, 26.4), ("31-DEC-2025", 5527, 372, 25.9),
+                        ("31-MAR-2026", 5592, 390, 27.1), ("30-JUN-2026", 5842, 433, 30.1),
+                        ("30-SEP-2026", 6763, 500, 34.8)]),
+    "INFY": _cmp([("30-SEP-2025", 40986, 6506, 15.7), ("31-DEC-2025", 41764, 6806, 16.4),
+                  ("31-MAR-2026", 40925, 7033, 16.9), ("30-JUN-2026", 42279, 6921, 16.7),
+                  ("30-SEP-2026", 43010, 6380, 15.4)]),
+}
