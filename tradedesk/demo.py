@@ -121,3 +121,36 @@ def sample_result_times():
     return [pd.Timestamp(f"{d} 16:30") for d in
             ("2026-11-12", "2026-08-11", "2026-05-20", "2026-02-12", "2025-11-13", "2025-08-12", "2025-05-21",
              "2025-02-13", "2024-11-12")]
+
+# NSE-shaped rows for the News tab's sample view.
+ANNOUNCEMENTS = [
+    {"symbol": "HINDALCO", "sm_name": "Hindalco Industries Limited", "desc": "Financial Result Updates",
+     "attchmntText": "Unaudited financial results for the quarter ended September 30, 2026",
+     "an_dt": "13-Nov-2026 16:42:10", "attchmntFile": ""},
+    {"symbol": "SBIN", "sm_name": "State Bank of India", "desc": "Credit Rating",
+     "attchmntText": "CRISIL has reaffirmed AAA/Stable on the bank's bonds", "an_dt": "13-Nov-2026 11:05:00",
+     "attchmntFile": ""},
+    {"symbol": "MINDACORP", "sm_name": "Minda Corporation Limited", "desc": "Analysts/Institutional Investor Meet/Con. Call Updates",
+     "attchmntText": "Schedule of analyst meet on 18 Nov 2026", "an_dt": "12-Nov-2026 19:20:00", "attchmntFile": ""},
+    {"symbol": "TCS", "sm_name": "Tata Consultancy Services Limited", "desc": "Awarding of order / Receipt of order",
+     "attchmntText": "Multi-year contract with a European retailer", "an_dt": "12-Nov-2026 09:12:00",
+     "attchmntFile": ""},
+]
+BULK_DEALS = [
+    {"BD_DT_DATE": "13-Nov-2026", "BD_SYMBOL": "MINDACORP", "BD_SCRIP_NAME": "Minda Corporation Limited",
+     "BD_CLIENT_NAME": "SAMPLE MUTUAL FUND", "BD_BUY_SELL": "BUY", "BD_QTY_TRD": "1500000", "BD_TP_WATP": "712.40",
+     "BD_REMARKS": "-"},
+    {"BD_DT_DATE": "12-Nov-2026", "BD_SYMBOL": "ABCSMALL", "BD_SCRIP_NAME": "Abc Small Caps Ltd",
+     "BD_CLIENT_NAME": "SAMPLE TRADING LLP", "BD_BUY_SELL": "SELL", "BD_QTY_TRD": "800000", "BD_TP_WATP": "54.10",
+     "BD_REMARKS": "-"},
+]
+INSIDER = [
+    {"symbol": "MINDACORP", "company": "Minda Corporation Limited", "acqName": "Sample Promoter Holdings",
+     "personCategory": "Promoter Group", "tdpTransactionType": "Buy", "acqMode": "Market Purchase",
+     "secAcq": "250000", "secVal": "178000000", "befAcqSharesPer": "64.10", "afterAcqSharesPer": "64.20",
+     "acqfromDt": "10-Nov-2026", "acqtoDt": "11-Nov-2026", "intimDt": "12-Nov-2026"},
+    {"symbol": "INFY", "company": "Infosys Limited", "acqName": "Sample Employee",
+     "personCategory": "Key Managerial Personnel", "tdpTransactionType": "Sell", "acqMode": "Market Sale",
+     "secAcq": "5000", "secVal": "8000000", "befAcqSharesPer": "0.01", "afterAcqSharesPer": "0.00",
+     "acqfromDt": "07-Nov-2026", "acqtoDt": "07-Nov-2026", "intimDt": "10-Nov-2026"},
+]

@@ -13,7 +13,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from tradedesk import demo, earnings_page, terminal, theme, trade_page
+from tradedesk import demo, earnings_page, news_page, terminal, theme, trade_page
 from tradedesk.charges import PRODUCTS, RATES, RATES_CHECKED_ON, round_trip, mtf_interest
 from tradedesk.portfolio import build_table, closed_today, review
 from tradedesk.upstox import Upstox, UpstoxError, exchange_code, financial_year, login_url, token_expiry
@@ -157,8 +157,8 @@ ideas = load_ideas()
 
 terminal.header(token)
 earnings_page.alert_banner(table, ideas)
-tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_charges, tab_sell, tab_ideas, tab_trade = st.tabs(
-    ["Portfolio", "P&L", "Markets", "Company", "Earnings", "Charges", "Sell check", "Daily ideas", "Trade"])
+tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_news, tab_charges, tab_sell, tab_ideas, tab_trade = st.tabs(
+    ["Portfolio", "P&L", "Markets", "Company", "Earnings", "News", "Charges", "Sell check", "Daily ideas", "Trade"])
 
 with tab_pnl:
     terminal.render_pnl(token, table, demo_mode)
@@ -168,6 +168,8 @@ with tab_co:
     terminal.render_company(token, table, secret("ANTHROPIC_API_KEY"))
 with tab_earn:
     earnings_page.render(token, table, ideas)
+with tab_news:
+    news_page.render(table, ideas)
 
 # ---------------------------------------------------------------- Portfolio
 with tab_port:
