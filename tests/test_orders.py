@@ -106,3 +106,74 @@ def test_ltp_keyed_by_instrument():
     with mock.patch.object(tr.s, "get", return_value=_resp(
             {"status": "success", "data": {"NSE_EQ:RELIANCE": {"last_price": 1501.5, "instrument_token": KEY}}})):
         assert tr.ltp([KEY]) == {KEY: 1501.5}
+
+
+# ---------------------------------------------------------------- GTT
+from tradedesk.orders import GttTicket, check_gtt, simulate_gtt  # noqa: E402
+
+
+def gtt(**kw):
+    base = dict(instrument_key=KEY, symbol="RELIANCE", side="BUY", qty=2, product="D",
+                trigger_type="BELOW", entry_price=1400.0, target=1550.0, stoploss=1330.0)
+    base.update(kw)
+    return GttTicket(**base)
+
+
+def test_gtt_payload_bracket():
+    p = gtt(trailing_gap=5).payload()
+    assert p["type"] == "MULTIPLE" and p["transaction_type"] == "BUY" and p["quantity"] == 2
+    assert p["rules"] == [
+        {"strategy": "ENTRY", "trigger_type": "BELOW", "trigger_price": 1400.0},
+        {"strategy": "TARGET", "trigger_type": "IMMEDIATE", "trigger_price": 1550.0},
+        {"strategy": "STOPLOSS", "trigger_type": "IMMEDIATE", "trigger_price": 1330.0, "trailing_gap": 5.0},
+    ]
+
+
+def test_gtt_payload_single():
+    p = gtt(target=0, stoploss=0).payload()
+    assert p["type"] == "SINGLE" and len(p["rules"]) == 1
+
+
+def test_gtt_checks():
+    assert check_gtt(gtt(), ltp=1450).ok
+    assert not check_gtt(gtt(target=1390), ltp=1450).ok           # target below entry on a BUY
+    assert not check_gtt(gtt(stoploss=1410), ltp=1450).ok         # stop above entry on a BUY
+    assert not check_gtt(gtt(qty=50), ltp=1450).ok                # over ₹50k cap
+    assert not check_gtt(gtt(stoploss=0, trailing_gap=3), ltp=1450).ok
+    assert not check_gtt(gtt(trailing_gap=80), ltp=1450).ok       # gap >= entry-stop distance
+    # selling a holding: single rule only, and only what you hold
+    sell = dict(side="SELL", trigger_type="BELOW", target=0, stoploss=0)
+    assert check_gtt(gtt(**sell), ltp=1450, held_qty=5).ok
+    assert not check_gtt(gtt(**sell), ltp=1450, held_qty=0).ok
+    assert not check_gtt(gtt(side="SELL", target=1300, stoploss=1450), ltp=1450, held_qty=5).ok
+    # intraday short bracket is fine
+    assert check_gtt(gtt(side="SELL", product="I", trigger_type="ABOVE", target=1300, stoploss=1450),
+                     ltp=1350).ok
+
+
+def test_gtt_warns_when_already_past_trigger():
+    w = " ".join(check_gtt(gtt(), ltp=1390).warnings)
+    assert "trigger straight away" in w
+
+
+def test_gtt_summary():
+    s = gtt().summary()
+    assert "BUY 2 × RELIANCE when the price goes below ₹1,400.00" in s and "target of ₹1,550.00" in s
+
+
+def test_gtt_calls():
+    tr = Trader("tok")
+    with mock.patch.object(tr.s, "post", return_value=_resp(
+            {"status": "success", "data": {"gtt_order_ids": ["GTT-1"]}})) as post:
+        assert tr.place_gtt(gtt()) == ["GTT-1"]
+    assert post.call_args.args[0] == "https://api.upstox.com/v3/order/gtt/place"
+    with mock.patch.object(tr.s, "delete", return_value=_resp({"status": "success", "data": {}})) as d:
+        tr.cancel_gtt("GTT-1")
+    assert d.call_args.args[0] == "https://api.upstox.com/v3/order/gtt/cancel"
+    assert d.call_args.kwargs["json"] == {"gtt_order_id": "GTT-1"}
+    with pytest.raises(orders.UpstoxError):
+        Trader("tok", sandbox=True).place_gtt(gtt())
+
+
+def test_simulate_gtt():
+    assert simulate_gtt(gtt())["gtt_order_id"].startswith("PAPER-GTT-")
