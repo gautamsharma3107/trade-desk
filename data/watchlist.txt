@@ -1,0 +1,6 @@
+# Stocks to watch for results, one NSE symbol per line. Your holdings and the
+# daily ideas are added automatically. Lines starting with # are ignored.
+TCS
+INFY
+HDFCBANK
+RELIANCE

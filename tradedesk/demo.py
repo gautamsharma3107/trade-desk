@@ -51,3 +51,18 @@ PNL_TRADES = {
     ],
 }
 PNL_CHARGES = {"EQ": 612.4, "FO": 388.9}
+
+# NSE event-calendar rows, shown on the Earnings tab only when NSE can't be reached.
+EARNINGS_CALENDAR = [
+    {"symbol": "HINDALCO", "company": "Hindalco Industries Limited", "purpose": "Financial Results",
+     "bm_desc": "To consider and approve the unaudited financial results for the quarter ended September 30, 2026",
+     "date": "14-Nov-2026"},
+    {"symbol": "SBIN", "company": "State Bank of India", "purpose": "Financial Results/Dividend",
+     "bm_desc": "Quarterly results", "date": "17-Nov-2026"},
+    {"symbol": "MINDACORP", "company": "Minda Corporation Limited", "purpose": "Financial Results",
+     "bm_desc": "Quarterly results", "date": "18-Nov-2026"},
+    {"symbol": "EICHERMOT", "company": "Eicher Motors Limited", "purpose": "Financial Results",
+     "bm_desc": "Quarterly results", "date": "19-Nov-2026"},
+    {"symbol": "ABC", "company": "Sample Ltd", "purpose": "Fund Raising", "bm_desc": "Raise funds via QIP",
+     "date": "19-Nov-2026"},
+]
