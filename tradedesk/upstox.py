@@ -153,3 +153,12 @@ class Upstox:
         return self._get("/v2/instruments/search", query=query[:50], exchanges=exchange, segments="EQ",
                          records=records)["data"] or []
 
+
+    def option_expiries(self, instrument_key: str) -> list[str]:
+        """Expiry dates (YYYY-MM-DD) of the option contracts on an index or stock."""
+        rows = self._get("/v2/option/contract", instrument_key=instrument_key)["data"] or []
+        return sorted({r["expiry"] for r in rows if r.get("expiry")})
+
+    def option_chain(self, instrument_key: str, expiry: str) -> list[dict]:
+        """Put/call option chain with OI, volume, LTP and greeks for one expiry (YYYY-MM-DD)."""
+        return self._get("/v2/option/chain", instrument_key=instrument_key, expiry_date=expiry)["data"] or []

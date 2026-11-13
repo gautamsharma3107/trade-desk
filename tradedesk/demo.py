@@ -154,3 +154,38 @@ INSIDER = [
      "secAcq": "5000", "secVal": "8000000", "befAcqSharesPer": "0.01", "afterAcqSharesPer": "0.00",
      "acqfromDt": "07-Nov-2026", "acqtoDt": "07-Nov-2026", "intimDt": "10-Nov-2026"},
 ]
+
+# Flows tab samples (NSE shapes).
+FII_DII = [
+    {"category": "DII **", "date": "12-Nov-2026", "buyValue": "14210.55", "sellValue": "20541.73", "netValue": "-6331.18"},
+    {"category": "FII/FPI *", "date": "12-Nov-2026", "buyValue": "21730.10", "sellValue": "13899.02", "netValue": "7831.08"},
+]
+PARTICIPANT_OI = """Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 12, 2026
+Client Type,Future Index Long,Future Index Short,Future Stock Long,Future Stock Short\t,Option Index Call Long,Option Index Put Long,Option Index Call Short,Option Index Put Short,Option Stock Call Long,Option Stock Put Long,Option Stock Call Short,Option Stock Put Short,Total Long Contracts\t,Total Short Contracts\t
+Client,210000,95000,2400000,410000,2900000,2300000,2600000,2700000,700000,300000,450000,280000,10810000,6535000
+DII,70000,160000,190000,2600000,12,0,0,0,0,0,0,0,260012,2760000
+FII,95000,240000,1950000,1700000,780000,820000,610000,560000,170000,90000,120000,60000,3905000,3290000
+Pro,80000,60000,560000,390000,1520000,1310000,1990000,1170000,310000,140000,410000,190000,3920000,4210000
+TOTAL,455000,555000,5100000,5100000,5200012,4430000,5200000,4430000,1180000,530000,980000,530000,18895012,16795000
+"""
+
+
+def option_chain(spot: float = 25300.0, step: float = 50.0, n: int = 20) -> list[dict]:
+    """Upstox-shaped option chain rows around a spot price."""
+    import math
+
+    rows = []
+    atm = round(spot / step) * step
+    for i in range(-n, n + 1):
+        k = atm + i * step
+        dist = (k - spot) / spot
+        call = max(spot - k, 0) + spot * 0.006 * math.exp(-abs(dist) * 40)
+        put = max(k - spot, 0) + spot * 0.006 * math.exp(-abs(dist) * 40)
+        c_oi = 4e6 * math.exp(-((i - 4) / 6) ** 2) + (3e6 if k % 500 == 0 and i > 0 else 0)
+        p_oi = 4e6 * math.exp(-((i + 4) / 6) ** 2) + (3e6 if k % 500 == 0 and i < 0 else 0)
+        rows.append({"strike_price": k, "underlying_spot_price": spot,
+                     "call_options": {"market_data": {"ltp": round(call, 2), "oi": c_oi, "prev_oi": c_oi * 0.9,
+                                                      "volume": c_oi * 3}, "option_greeks": {"iv": 11 + abs(i) * 0.2}},
+                     "put_options": {"market_data": {"ltp": round(put, 2), "oi": p_oi, "prev_oi": p_oi * 1.05,
+                                                     "volume": p_oi * 3}, "option_greeks": {"iv": 12 + abs(i) * 0.25}}})
+    return rows
