@@ -1,13 +1,14 @@
 # Trade Desk
 
-A private daily dashboard for an Upstox account. It has four tabs:
+A private daily dashboard for an Upstox account. It has five tabs:
 
 - **Portfolio:** delivery holdings, MTF positions and open positions, with live P&L and anything closed today.
 - **Charges:** what you've paid this financial year (brokerage, STT, GST, stamp duty, exchange, DP, SEBI), straight from Upstox. It also shows MTF interest on open positions and has a calculator for delivery, intraday and MTF round trips, including the breakeven sell price.
 - **Sell check:** flags each holding as HOLD, REVIEW or SELL? using your stop-loss and target, its 20- and 50-day averages, MTF interest drag and the daily research notes.
 - **Daily ideas:** earnings-based buy ideas, stocks to avoid and results to watch, read from `data/ideas.json`. A scheduled research job updates that file every weekday morning.
+- **Trade:** buy or sell a stock through Upstox. It starts in **paper mode** (simulated, nothing is sent). Live orders are off until you turn them on (see below).
 
-The app is **read-only**. It never places, changes or cancels orders. Ideas are research, not advice. Check the live price and your own risk before trading.
+Only the Trade tab can place or cancel orders, and only after a review-and-confirm step. Ideas are research, not advice. Check the live price and your own risk before trading.
 
 ## 1. Get an Upstox API key (one time)
 
@@ -36,6 +37,39 @@ The app is **read-only**. It never places, changes or cancels orders. Ideas are 
 ## 3. Daily use
 
 Open the app and click **Login with Upstox**. Upstox tokens expire at 3:30 AM IST, so you log in once each morning. The token stays in the app's memory only and is never saved to disk or to the repo.
+
+## Trading from the app
+
+The Trade tab has three modes:
+
+| Mode | What happens | Needs |
+|---|---|---|
+| Paper | Orders are simulated in the app. Nothing is sent to Upstox. | Nothing (the default) |
+| Sandbox | Orders go to Upstox's test system, not the exchange. | `UPSTOX_SANDBOX_TOKEN` from the Sandbox section of your Upstox developer apps page |
+| Live | Real orders on NSE/BSE through your account. | `LIVE_TRADING = true`, a `TRADE_PIN`, and an Upstox login that day |
+
+Every order goes through the same steps: pick a stock (search covers all NSE/BSE equities once you're logged in), choose buy or sell, delivery/intraday/MTF, LIMIT/MARKET/SL/SL-M, quantity and price. **Review order** runs the checks, then a confirm box shows the order in plain words and the exact request sent to Upstox. You tick "I've checked…" and, in live mode, type your trading PIN before **Place** is enabled.
+
+Safety checks:
+
+- An order above `MAX_ORDER_VALUE` (default ₹50,000) is blocked.
+- You can't sell more delivery or MTF shares than you hold.
+- Stop-loss price and trigger must be on the right side of each other.
+- Warnings for market orders, limits more than 5% from the last price, intraday auto square-off and MTF interest.
+- Changing anything after review, or switching mode, cancels the review. A placed order can't be sent twice by a refresh.
+
+The order book (live mode) shows today's orders with their status and lets you cancel an open one.
+
+To turn live trading on, add to the app secrets:
+
+```toml
+LIVE_TRADING = true
+TRADE_PIN = "a PIN only you know"   # typed in for every live order
+MAX_ORDER_VALUE = 50000             # optional, ₹ per order
+APP_PASSWORD = "..."                # strongly recommended so nobody else can open the app
+```
+
+Upstox's API terms apply to orders sent this way. Orders above the regular-algo rate limit (10 per second) are rejected by Upstox.
 
 ## Run locally
 
