@@ -95,3 +95,29 @@ RESULTS_CMP = {  # ₹ crore, converted to NSE's ₹ lakh above
                   ("31-MAR-2026", 40925, 7033, 16.9), ("30-JUN-2026", 42279, 6921, 16.7),
                   ("30-SEP-2026", 43010, 6380, 15.4)]),
 }
+
+
+def price_history(seed: int, start: str = "2023-11-01", end: str = "2026-11-13", last: float = 1000.0):
+    """A made-up daily OHLC series (weekdays) for sample charts when Yahoo can't be reached."""
+    import numpy as np
+    import pandas as pd
+
+    idx = pd.bdate_range(start, end)
+    rng = np.random.default_rng(seed)
+    rets = rng.normal(0.0004, 0.014, len(idx))
+    for d in sample_result_times():  # bigger moves on results days
+        pos = idx.searchsorted(d.normalize() + pd.Timedelta(days=1))
+        if pos < len(idx):
+            rets[pos] += rng.normal(0, 0.05)
+    close = last * np.exp(np.cumsum(rets) - np.cumsum(rets)[-1])
+    opens = close / np.exp(rets) * (1 + rets * 0.6)
+    return pd.DataFrame({"Open": opens, "High": np.maximum(opens, close) * 1.006,
+                         "Low": np.minimum(opens, close) * 0.994, "Close": close, "Volume": 1e6}, index=idx)
+
+
+def sample_result_times():
+    import pandas as pd
+
+    return [pd.Timestamp(f"{d} 16:30") for d in
+            ("2026-11-12", "2026-08-11", "2026-05-20", "2026-02-12", "2025-11-13", "2025-08-12", "2025-05-21",
+             "2025-02-13", "2024-11-12")]
