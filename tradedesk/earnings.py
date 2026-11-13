@@ -177,3 +177,118 @@ def parse_yahoo_calendar(cal: dict) -> dict:
 def week_bounds(today: dt.date, weeks_ahead: int = 0) -> tuple[dt.date, dt.date]:
     monday = today - dt.timedelta(days=today.weekday()) + dt.timedelta(weeks=weeks_ahead)
     return monday, monday + dt.timedelta(days=6)
+
+
+# ---------------------------------------------------------------- results feed and verdicts
+def filed_rows(raw: list[dict]) -> pd.DataFrame:
+    """NSE financial-results filings (or results announcements) -> one row per filing, newest first."""
+    rows = []
+    for r in raw or []:
+        sym = (r.get("symbol") or "").strip().upper()
+        when = _date(r.get("broadCastDate") or r.get("broadcastDate") or r.get("an_dt") or r.get("sort_date")
+                     or r.get("exchdisstime"))
+        if not sym or pd.isna(when):
+            continue
+        desc = r.get("desc") or ""
+        if desc and not is_results_meeting(desc) and "outcome of board meeting" not in desc.lower():
+            continue  # an announcement that isn't about results
+        rows.append({
+            "Filed": when, "Symbol": sym, "Company": (r.get("companyName") or r.get("sm_name") or "").strip(),
+            "Quarter": _date(r.get("toDate")) if r.get("toDate") else pd.NaT,
+            "Type": " · ".join(x for x in (r.get("consolidated") or "", r.get("audited") or "") if x),
+            "Link": r.get("xbrl") or r.get("attchmntFile") or r.get("attachment") or "",
+        })
+    df = pd.DataFrame(rows, columns=["Filed", "Symbol", "Company", "Quarter", "Type", "Link"])
+    if df.empty:
+        return df
+    # A company often files standalone and consolidated a minute apart; keep the latest filing per company.
+    return df.sort_values("Filed", ascending=False).drop_duplicates("Symbol").reset_index(drop=True)
+
+
+def fetch_filed(start: dt.date, end: dt.date, client: NSEClient | None = None) -> pd.DataFrame:
+    """Quarterly results filed on NSE between two dates."""
+    c = client or NSEClient()
+    span = {"from_date": f"{start:%d-%m-%Y}", "to_date": f"{end:%d-%m-%Y}"}
+    errors = []
+    for path, extra in (("corporates-financial-results", {"period": "Quarterly"}), ("corporate-announcements", {})):
+        try:
+            data = c.get(path, index="equities", **span, **extra)
+        except FilingError as e:
+            errors.append(str(e))
+            if "unreachable" in str(e):
+                break
+            continue
+        df = filed_rows(data.get("data", []) if isinstance(data, dict) else data)
+        if not df.empty:
+            return df
+    if errors:
+        raise FilingError("; ".join(errors))
+    return filed_rows([])
+
+
+def _growth(new, old) -> float | None:
+    if new is None or old is None or new != new or old != old or old == 0:
+        return None
+    return (new - old) / abs(old) * 100
+
+
+LEVELS = [(2, "STRONG"), (1, "GOOD"), (0, "MIXED"), (-1, "WEAK")]
+
+
+def verdict(results: pd.DataFrame, estimate: dict | None = None) -> dict:
+    """Score the latest reported quarter: growth vs a year ago and last quarter, margins, and vs estimates.
+
+    One point each way for: revenue growth (≥10% up / falling), profit growth (≥15% up / falling, or a swing
+    into or out of loss), net margin (≥1 point better / worse than a year ago), and EPS vs the consensus
+    estimate (≥5% beat / miss) when there is one. Total ≥2 STRONG, 1 GOOD, 0 MIXED, -1 WEAK, ≤-2 POOR.
+    """
+    if results is None or results.empty:
+        return {"level": "NO DATA", "score": None, "reasons": ["No reported numbers from NSE yet."]}
+    df = results.assign(_d=pd.to_datetime(results["Quarter ending"], format="%d-%b-%Y", errors="coerce"))
+    df = df.dropna(subset=["_d"]).sort_values("_d")
+    if df.empty:
+        return {"level": "NO DATA", "score": None, "reasons": ["No reported numbers from NSE yet."]}
+    cur = df.iloc[-1]
+    ya = df[(df["_d"] - (cur["_d"] - pd.DateOffset(years=1))).abs() <= pd.Timedelta(days=5)]
+    ya = ya.iloc[-1] if not ya.empty else None
+    lq = df.iloc[-2] if len(df) > 1 else None
+    rev, prof, mar, eps = (cur.get("Revenue (₹ cr)"), cur.get("Net profit (₹ cr)"), cur.get("Net margin %"),
+                           cur.get("EPS (₹)"))
+    out = {"quarter": f"{cur['_d']:%b %Y}", "revenue": rev, "profit": prof, "margin": mar, "eps": eps,
+           "rev_yoy": _growth(rev, ya.get("Revenue (₹ cr)")) if ya is not None else None,
+           "profit_yoy": _growth(prof, ya.get("Net profit (₹ cr)")) if ya is not None else None,
+           "rev_qoq": _growth(rev, lq.get("Revenue (₹ cr)")) if lq is not None else None,
+           "profit_qoq": _growth(prof, lq.get("Net profit (₹ cr)")) if lq is not None else None,
+           "margin_chg": (mar - ya.get("Net margin %")) if ya is not None and mar is not None
+           and ya.get("Net margin %") is not None else None}
+    score, reasons = 0, []
+    g = out["rev_yoy"]
+    if g is not None:
+        score += 1 if g >= 10 else -1 if g < 0 else 0
+        reasons.append(f"Revenue {g:+.1f}% vs a year ago")
+    p_old = ya.get("Net profit (₹ cr)") if ya is not None else None
+    if prof is not None and p_old is not None and (prof < 0) != (p_old < 0):
+        score += 1 if prof > 0 else -1
+        reasons.append("Swung to a profit from a loss a year ago" if prof > 0 else "Swung to a loss from a profit")
+    elif out["profit_yoy"] is not None:
+        g = out["profit_yoy"]
+        score += 1 if g >= 15 else -1 if g < 0 else 0
+        reasons.append(f"Net profit {g:+.1f}% vs a year ago")
+    if out["margin_chg"] is not None:
+        m = out["margin_chg"]
+        score += 1 if m >= 1 else -1 if m <= -1 else 0
+        reasons.append(f"Net margin {mar:.1f}% ({m:+.1f} pts vs a year ago)")
+    est = (estimate or {}).get("eps_est")
+    if est and eps is not None:
+        diff = (eps - est) / abs(est) * 100
+        score += 1 if diff >= 5 else -1 if diff <= -5 else 0
+        out["eps_vs_est"] = diff
+        reasons.append(f"EPS ₹{eps:,.2f} vs estimate ₹{est:,.2f} ({'beat' if diff >= 0 else 'miss'} {abs(diff):.0f}%)")
+    if out["profit_qoq"] is not None:
+        reasons.append(f"Net profit {out['profit_qoq']:+.1f}% vs last quarter")
+    if ya is None:
+        reasons.append("NSE didn't return the year-ago quarter, so growth can't be judged.")
+    out["score"] = score
+    out["level"] = next((lbl for floor, lbl in LEVELS if score >= floor), "POOR")
+    out["reasons"] = reasons
+    return out

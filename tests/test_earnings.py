@@ -50,3 +50,40 @@ def test_parse_yahoo_calendar_converts_revenue_to_crore():
     got = earnings.parse_yahoo_calendar({"Earnings Date": [dt.date(2026, 11, 14)], "Earnings Average": 6.1,
                                          "Revenue Average": 1.2e11})
     assert got["eps_est"] == 6.1 and got["revenue_est_cr"] == 12000
+
+
+def test_filed_rows_keeps_latest_filing_per_company():
+    raw = demo.RESULTS_FILED + [{"symbol": "INFY", "companyName": "Infosys Limited",
+                                 "broadCastDate": "12-Nov-2026 18:01:00", "toDate": "30-Sep-2026",
+                                 "consolidated": "Non-Consolidated", "audited": "Un-Audited"}]
+    df = earnings.filed_rows(raw)
+    assert list(df["Symbol"]) == ["HINDALCO", "INFY", "APOLLOHOSP"]
+    assert df.iloc[1]["Type"].startswith("Consolidated")
+    assert df.iloc[0]["Quarter"] == pd.Timestamp("2026-09-30")
+
+
+def test_filed_rows_skips_non_results_announcements():
+    raw = [{"symbol": "X", "desc": "Change in Director", "an_dt": "13-Nov-2026 10:00:00"},
+           {"symbol": "Y", "desc": "Financial Result Updates", "an_dt": "13-Nov-2026 10:00:00"}]
+    assert list(earnings.filed_rows(raw)["Symbol"]) == ["Y"]
+
+
+def test_verdict_strong_for_big_growth():
+    v = earnings.verdict(filings.results_frame(demo.RESULTS_CMP["HINDALCO"]))
+    assert v["quarter"] == "Sep 2026" and v["level"] == "STRONG"
+    assert round(v["profit_yoy"]) == 59 and round(v["rev_yoy"]) == 14
+
+
+def test_verdict_weak_when_profit_falls_and_estimate_missed():
+    v = earnings.verdict(filings.results_frame(demo.RESULTS_CMP["INFY"]), {"eps_est": 17.0})
+    assert v["profit_yoy"] < 0 and round(v["eps_vs_est"]) == -9
+    assert v["level"] in ("WEAK", "POOR")
+
+
+def test_verdict_loss_swing_and_no_data():
+    res = filings.results_frame({"resCmpData": [
+        {"re_to_dt": "30-SEP-2025", "re_net_sale": "1000", "re_net_profit": "-50"},
+        {"re_to_dt": "30-SEP-2026", "re_net_sale": "1200", "re_net_profit": "80"}]})
+    v = earnings.verdict(res)
+    assert any("Swung to a profit" in r for r in v["reasons"]) and v["score"] >= 2
+    assert earnings.verdict(pd.DataFrame())["level"] == "NO DATA"

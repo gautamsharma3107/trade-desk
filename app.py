@@ -156,6 +156,7 @@ table = build_table(acct["holdings"], acct["mtf"], acct["positions"])
 ideas = load_ideas()
 
 terminal.header(token)
+earnings_page.alert_banner(table, ideas)
 tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_charges, tab_sell, tab_ideas, tab_trade = st.tabs(
     ["Portfolio", "P&L", "Markets", "Company", "Earnings", "Charges", "Sell check", "Daily ideas", "Trade"])
 
