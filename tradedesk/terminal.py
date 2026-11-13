@@ -5,13 +5,16 @@ None in sample mode), the holdings table and the daily ideas.
 """
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
 
-from . import demo, market, pnl
+from . import demo, filings, market, pnl
 from .market import SourceError
 from .theme import AMBER, GREEN, MUTED, RED, bar, color, updown
 from .upstox import Upstox, UpstoxError
@@ -91,6 +94,21 @@ def yahoo_profile(ysym: str) -> tuple[dict, str | None]:
         return market.yahoo_profile(ysym), None
     except Exception as e:
         return {}, str(e)
+
+
+@st.cache_data(ttl=6 * 3600, show_spinner="Reading NSE filings…")
+def nse_filings(symbol: str) -> tuple[dict, list[str]]:
+    """Shareholding, results, annual reports and BRSR filings from NSE. Each part fails on its own."""
+    c, out, errs = filings.NSEClient(), {}, []
+    for key, fn in (("shareholding", c.shareholding), ("results", c.results),
+                    ("annual_reports", c.annual_reports), ("brsr", c.brsr)):
+        try:
+            out[key] = fn(symbol)
+        except filings.FilingError as e:
+            errs.append(f"{key}: {e}")
+            if "unreachable" in str(e):
+                break
+    return out, errs
 
 
 def keys_for(symbols: list[str], token: str | None) -> dict[str, str]:
@@ -291,19 +309,35 @@ def _ratio_tiles(sc: dict, info: dict, price: float | None) -> list[tuple[str, s
             ("ROE", _fmt(roe, "{:.1f}%")), ("ROCE", _fmt(roce, "{:.1f}%")), ("Div yield", _fmt(dy, "{:.2f}%"))]
 
 
-def _value_chain(symbol: str, notes: dict, about: str) -> None:
-    c = notes.get(symbol)
-    if not c:
-        st.info(f"No supply-chain notes for {symbol} yet. Add an entry to data/companies.json "
-                "(what it sells and to whom, what it buys and from whom). The business description is below.")
-        if about:
-            st.markdown(f"<div class='td-panel'>{about}</div>", unsafe_allow_html=True)
-        return
+RESEARCH_CACHE = Path.home() / ".trade-desk" / "value_chain.json"
+
+
+def _research_cache() -> dict:
+    try:
+        return json.loads(RESEARCH_CACHE.read_text())
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_research(symbol: str, data: dict) -> None:
+    cache = _research_cache()
+    cache[symbol] = data
+    try:
+        RESEARCH_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        RESEARCH_CACHE.write_text(json.dumps(cache, indent=1))
+    except OSError:
+        pass
+
+
+def _show_chain(c: dict, source_note: str) -> None:
+    if c.get("summary"):
+        st.markdown(f"<div class='td-panel'>{c['summary']}</div>", unsafe_allow_html=True)
     a, b = st.columns(2)
     with a:
         st.markdown("#### Sells → to whom")
-        st.dataframe(pd.DataFrame(c.get("sells", [])).rename(columns={"what": "Sells", "to": "To whom"}),
-                     use_container_width=True, hide_index=True)
+        sells = pd.DataFrame(c.get("sells", [])).rename(columns={"what": "Sells", "share": "Share of revenue",
+                                                                  "to": "To whom"})
+        st.dataframe(sells, use_container_width=True, hide_index=True)
         if c.get("customers"):
             st.markdown(f"<div class='td-panel'><span class='k'>Customers</span><br>{c['customers']}</div>",
                         unsafe_allow_html=True)
@@ -311,15 +345,69 @@ def _value_chain(symbol: str, notes: dict, about: str) -> None:
         st.markdown("#### Buys ← from whom")
         st.dataframe(pd.DataFrame(c.get("buys", [])).rename(columns={"what": "Buys", "from": "From whom"}),
                      use_container_width=True, hide_index=True)
-        if c.get("notes"):
-            st.markdown(f"<div class='td-panel'><span class='k'>Ownership note</span><br>{c['notes']}</div>",
-                        unsafe_allow_html=True)
-    st.markdown(f"<div class='td-src'>From annual reports and investor presentations, summarised in "
-                f"data/companies.json (updated {notes.get('_updated', '?')}). Verify before relying on it.</div>",
-                unsafe_allow_html=True)
+        for key, label in (("suppliers", "Suppliers"), ("related_parties", "Related parties"),
+                           ("notes", "Ownership note")):
+            if c.get(key):
+                st.markdown(f"<div class='td-panel'><span class='k'>{label}</span><br>{c[key]}</div>",
+                            unsafe_allow_html=True)
+    srcs = [x for x in c.get("sources") or [] if isinstance(x, dict) and x.get("url")]
+    if srcs:
+        st.markdown("**Sources:** " + " · ".join(f"[{x.get('title') or 'source'}]({x['url']})" for x in srcs))
+    st.markdown(f"<div class='td-src'>{source_note}</div>", unsafe_allow_html=True)
 
 
-def _shareholders(sc: dict, yp: dict) -> None:
+def _value_chain(symbol: str, name: str, notes: dict, about: str, docs: list[str], api_key: str) -> None:
+    c = notes.get(symbol)
+    if c:
+        _show_chain(c, f"Hand-written from annual reports and investor presentations (data/companies.json, "
+                       f"updated {notes.get('_updated', '?')}). Verify before relying on it.")
+        return
+    found = _research_cache().get(symbol)
+    if found:
+        _show_chain(found, f"Researched by Claude from the filings above ({found.get('as_of', 'latest')}, "
+                           f"generated {found.get('generated_on', '?')}). AI-summarised: check the sources.")
+        cols = st.columns(2)
+        cols[0].download_button("Download as JSON (to add to data/companies.json)",
+                                json.dumps({symbol: found}, indent=2), f"{symbol}_value_chain.json", "application/json")
+        if not api_key or not cols[1].button("Research again", key=f"rr_{symbol}"):
+            return
+    elif api_key:
+        st.info(f"No notes for {symbol} yet. Claude can read its annual report, BRSR, investor presentations "
+                "and credit-rating reports and fill this in (takes about a minute, uses your Anthropic API credit).")
+        if not st.button("Research sells & buys from filings", type="primary", key=f"r_{symbol}"):
+            if about:
+                st.markdown(f"<div class='td-panel'>{about}</div>", unsafe_allow_html=True)
+            return
+    else:
+        st.info(f"No notes for {symbol} yet. To fill this in for any stock, add ANTHROPIC_API_KEY to the app's "
+                "secrets: a button here will then have Claude read the company's filings. Until then, the business "
+                "description and the official filings are below.")
+        if about:
+            st.markdown(f"<div class='td-panel'>{about}</div>", unsafe_allow_html=True)
+        return
+    with st.spinner(f"Reading {symbol}'s filings…"):
+        try:
+            data = filings.research_value_chain(symbol, name, docs, api_key)
+        except filings.FilingError as e:
+            st.error(str(e))
+            return
+    data["generated_on"] = f"{market.now_ist():%d %b %Y}"
+    _save_research(symbol, data)
+    st.rerun()
+
+
+def _shareholders(sc: dict, yp: dict, nse: dict) -> None:
+    official = filings.shareholding_frame(nse.get("shareholding") or [])
+    if not official.empty:
+        last = official.iloc[-1]
+        st.markdown(f"#### Official filing (NSE) · as of {last['Quarter']}")
+        m = st.columns(3)
+        m[0].metric("Promoter & group", _fmt(last["Promoters %"], "{:.2f}%"))
+        m[1].metric("Public (incl. FIIs, DIIs, retail)", _fmt(last["Public %"], "{:.2f}%"))
+        m[2].metric("Filed", str(last["Filed"] or "–")[:11])
+        with st.expander("All NSE shareholding filings (full XBRL has every category and holders over 1%)"):
+            st.dataframe(official.iloc[::-1], use_container_width=True, hide_index=True,
+                         column_config={"XBRL": st.column_config.LinkColumn("XBRL filing", display_text="open")})
     long = market.shareholding_long(sc.get("shareholding", pd.DataFrame()))
     if not long.empty:
         quarters = list(dict.fromkeys(long["Quarter"]))
@@ -350,11 +438,14 @@ def _shareholders(sc: dict, yp: dict) -> None:
         if isinstance(h, pd.DataFrame) and not h.empty:
             with st.expander(title):
                 st.dataframe(h, use_container_width=True, hide_index=True)
-    if long.empty and named.empty:
+    if not long.empty or not named.empty:
+        st.caption("Category split (FIIs, DIIs, government, public) and named holders: Screener.in, compiled from "
+                   "the same quarterly exchange filings.")
+    if long.empty and named.empty and official.empty:
         st.info("Shareholding data couldn't be loaded right now.")
 
 
-def render_company(token: str | None, table: pd.DataFrame) -> None:
+def render_company(token: str | None, table: pd.DataFrame, anthropic_key: str = "") -> None:
     eq, _ = equity_list()
     names = dict(zip(eq["symbol"], eq["name"]))
     options = sorted(eq["symbol"])
@@ -402,19 +493,49 @@ def render_company(token: str | None, table: pd.DataFrame) -> None:
     elif herr:
         st.caption(f"Price history unavailable: {herr}")
 
-    t_chain, t_hold, t_fin, t_about = st.tabs(["Sells & buys", "Shareholders", "Quarterly results", "About"])
+    nse, nse_errs = nse_filings(sym)
+    reports = filings.annual_report_links(nse.get("annual_reports") or [])
+    brsr = filings.brsr_links(nse.get("brsr") or [])
+    docs = [f"Annual report {r['Year']}: {r['Link']}" for r in reports[:1]] + \
+        [f"BRSR {r['Year']}: {r['Link']}" for r in brsr[:1]]
+
+    t_chain, t_hold, t_fin, t_files, t_about = st.tabs(
+        ["Sells & buys", "Shareholders", "Quarterly results", "Filings", "About"])
     about = sc.get("about") or info.get("longBusinessSummary") or ""
     with t_chain:
-        _value_chain(sym, market.company_notes(), about)
+        _value_chain(sym, title, market.company_notes(), about, docs, anthropic_key)
     with t_hold:
-        _shareholders(sc, yp)
+        _shareholders(sc, yp, nse)
     with t_fin:
+        res = filings.results_frame(nse.get("results") or {})
+        if not res.empty:
+            st.markdown("#### As filed with NSE")
+            money = {c: "{:,.0f}" for c in res.columns if "₹ cr" in c}
+            st.dataframe(res.style.format({**money, "EPS (₹)": "{:.2f}", "Net margin %": "{:.1f}%"}, na_rep="–"),
+                         use_container_width=True, hide_index=True)
+            st.caption("Last five quarters from NSE's results filings, converted from ₹ lakh to ₹ crore.")
         q = sc.get("quarters", pd.DataFrame())
         if isinstance(q, pd.DataFrame) and not q.empty:
-            st.dataframe(q.iloc[:, -8:], use_container_width=True)
-            st.caption("₹ crore unless stated. Consolidated where available. Source: Screener.in (company filings).")
-        else:
+            with st.expander("Longer history (Screener.in)", expanded=res.empty):
+                st.dataframe(q.iloc[:, -12:], use_container_width=True)
+                st.caption("₹ crore. Consolidated where available.")
+        elif res.empty:
             st.info("Quarterly results couldn't be loaded right now.")
+    with t_files:
+        if reports:
+            st.markdown("#### Annual reports (NSE)")
+            st.dataframe(pd.DataFrame(reports), use_container_width=True, hide_index=True,
+                         column_config={"Link": st.column_config.LinkColumn("PDF", display_text="open")})
+        if brsr:
+            st.markdown("#### Business Responsibility & Sustainability Reports (NSE)")
+            st.caption("BRSR Section A lists products sold, markets served and customer types; Principle 1 gives "
+                       "how concentrated purchases and sales are.")
+            st.dataframe(pd.DataFrame(brsr), use_container_width=True, hide_index=True,
+                         column_config={"Link": st.column_config.LinkColumn("File", display_text="open")})
+        st.markdown("#### Official pages")
+        st.markdown("\n".join(f"- [{k}]({v})" for k, v in filings.official_links(sym, title).items()))
+        if nse_errs:
+            st.caption("NSE didn't answer for: " + "; ".join(nse_errs))
     with t_about:
         if about:
             st.markdown(f"<div class='td-panel'>{about}</div>", unsafe_allow_html=True)
@@ -424,7 +545,8 @@ def render_company(token: str | None, table: pd.DataFrame) -> None:
         if info.get("website"):
             st.markdown(f"Website: {info['website']}")
     errs = [e for e in (scerr, yperr) if e]
-    st.markdown(f"<div class='td-src'>Sources: {src} prices; Screener.in ratios, results and shareholding "
+    st.markdown(f"<div class='td-src'>Sources: {src} prices; NSE filings (shareholding, results, annual reports, BRSR); "
+                f"Screener.in ratios and category split "
                 f"({sc.get('url', 'unavailable')}); Yahoo Finance profile · fetched {market.now_ist():%d %b %H:%M} IST"
                 + (f"<br>Issues: {' | '.join(errs)}" if errs else "") + "</div>", unsafe_allow_html=True)
 

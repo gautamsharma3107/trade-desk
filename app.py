@@ -164,7 +164,7 @@ with tab_pnl:
 with tab_mkt:
     terminal.render_markets(token, table, ideas)
 with tab_co:
-    terminal.render_company(token, table)
+    terminal.render_company(token, table, secret("ANTHROPIC_API_KEY"))
 
 # ---------------------------------------------------------------- Portfolio
 with tab_port:

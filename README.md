@@ -5,7 +5,7 @@ A private, Bloomberg-style terminal for an Upstox account: black and amber, dens
 - **Portfolio:** delivery holdings, MTF positions and open positions, with live P&L and anything closed today.
 - **P&L:** realised profit and loss for this financial year (switch to calendar year or last FY) across every segment: delivery (long- and short-term), intraday, futures, options, commodity and currency, with charges per segment, net P&L, unrealised P&L on open holdings, month-by-month chart, best/worst stocks and a CSV of every closed trade. Comes from Upstox's P&L report, which updates end of day.
 - **Markets:** a stock list (Nifty 50, your holdings, the daily ideas, or your own list) with LTP, change, day range, volume, 52-week range, 1M/1Y returns, a sector heatmap and top gainers/losers.
-- **Company:** search any NSE stock. Price chart with 50/200-day averages, valuation (market cap, P/E, P/B, ROE, ROCE, dividend yield), **what it sells and to whom, what it buys and from whom**, **who owns it** (promoters, FIIs, DIIs, government, public by quarter, plus named large holders), quarterly results and a business description.
+- **Company:** search any NSE stock. Price chart with 50/200-day averages, valuation (market cap, P/E, P/B, ROE, ROCE, dividend yield), **what it sells and to whom, what it buys and from whom**, **who owns it** (promoters, FIIs, DIIs, government, public by quarter, plus named large holders), quarterly results as filed with NSE, links to annual reports, BRSR and SEBI filings, and a business description.
 - **Charges:** what you've paid this financial year (brokerage, STT, GST, stamp duty, exchange, DP, SEBI), straight from Upstox. It also shows MTF interest on open positions and has a calculator for delivery, intraday and MTF round trips, including the breakeven sell price.
 - **Sell check:** flags each holding as HOLD, REVIEW or SELL? using your stop-loss and target, its 20- and 50-day averages, MTF interest drag and the daily research notes.
 - **Daily ideas:** earnings-based buy ideas, stocks to avoid and results to watch, read from `data/ideas.json`. A scheduled research job updates that file every weekday morning.
@@ -21,7 +21,8 @@ Only the Trade tab can place or cancel orders, and only after a review-and-confi
 | Prices when not logged in, 52-week range, history | Yahoo Finance (`yfinance`) | Up to ~15 min delayed |
 | Ratios, quarterly results, shareholding pattern, named holders | Screener.in public pages (from exchange filings) | Quarterly; cached 6 hours |
 | Full NSE stock list | NSE's daily `EQUITY_L.csv` | Daily |
-| What a company sells/buys and to/from whom | `data/companies.json` in this repo (summarised from annual reports) | Edit by hand; about 27 companies so far |
+| Shareholding (promoter vs public), quarterly results, annual reports, BRSR | NSE corporate filings APIs | As filed; cached 6 hours |
+| What a company sells/buys and to/from whom | `data/companies.json` (hand-written, 27 companies); for any other stock, a button has Claude read its annual report, BRSR, investor presentations and rating reports (needs `ANTHROPIC_API_KEY`) | Hand-written: edit the file. Researched: kept on the app server until it restarts; download the JSON to add it to the file |
 | Realised P&L and charges | Upstox P&L report API | End of day (T+1) |
 
 Each page shows its source and fetch time, and a failing source shows a note instead of breaking the page. Nifty 50 members are in `data/nifty50.csv` (as of mid-2026).
