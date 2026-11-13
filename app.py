@@ -13,7 +13,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from tradedesk import demo, earnings_page, flows_page, journal_page, news_page, screener_page, terminal, theme, trade_page
+from tradedesk import demo, earnings_page, flows_page, journal_page, news_page, screener_page, tax_page, terminal, theme, trade_page
 from tradedesk.charges import PRODUCTS, RATES, RATES_CHECKED_ON, round_trip, mtf_interest
 from tradedesk.portfolio import build_table, closed_today, review
 from tradedesk.upstox import Upstox, UpstoxError, exchange_code, financial_year, login_url, token_expiry
@@ -157,9 +157,10 @@ ideas = load_ideas()
 
 terminal.header(token)
 earnings_page.alert_banner(table, ideas)
-(tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_news, tab_flows, tab_scr, tab_jr, tab_charges, tab_sell,
- tab_ideas, tab_trade) = st.tabs(["Portfolio", "P&L", "Markets", "Company", "Earnings", "News", "Flows", "Screener",
-                                  "Journal", "Charges", "Sell check", "Daily ideas", "Trade"])
+(tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_news, tab_flows, tab_scr, tab_jr, tab_tax, tab_charges,
+ tab_sell, tab_ideas, tab_trade) = st.tabs(["Portfolio", "P&L", "Markets", "Company", "Earnings", "News", "Flows",
+                                            "Screener", "Journal", "Tax", "Charges", "Sell check", "Daily ideas",
+                                            "Trade"])
 
 with tab_pnl:
     terminal.render_pnl(token, table, demo_mode)
@@ -177,6 +178,8 @@ with tab_scr:
     screener_page.render(table, ideas)
 with tab_jr:
     journal_page.render(token, table, ideas, demo_mode)
+with tab_tax:
+    tax_page.render(token, table, demo_mode)
 
 # ---------------------------------------------------------------- Portfolio
 with tab_port:
