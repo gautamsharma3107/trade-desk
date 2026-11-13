@@ -1,4 +1,4 @@
-"""Trade Desk: a daily view of an Upstox portfolio, charges, sell checks and research ideas.
+"""Trade Desk: a daily view of an Upstox portfolio, charges, sell checks and research ideas, plus a Trade tab.
 
 Run locally:  streamlit run app.py
 """
@@ -13,7 +13,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from tradedesk import demo
+from tradedesk import demo, trade_page
 from tradedesk.charges import PRODUCTS, RATES, RATES_CHECKED_ON, round_trip, mtf_interest
 from tradedesk.portfolio import build_table, closed_today, review
 from tradedesk.upstox import Upstox, UpstoxError, exchange_code, financial_year, login_url, token_expiry
@@ -104,7 +104,7 @@ with st.sidebar:
     demo_mode = not token
     if demo_mode:
         st.warning("Showing **sample data**. Log in to see your account.")
-    st.caption("Read-only: this app never places or changes orders.")
+    st.caption("Orders are placed only from the Trade tab, after you confirm them.")
 
 
 # ---------------------------------------------------------------- data
@@ -154,7 +154,8 @@ for err in acct["errors"]:
 table = build_table(acct["holdings"], acct["mtf"], acct["positions"])
 ideas = load_ideas()
 
-tab_port, tab_charges, tab_sell, tab_ideas = st.tabs(["Portfolio", "Charges", "Sell check", "Daily ideas"])
+tab_port, tab_charges, tab_sell, tab_ideas, tab_trade = st.tabs(
+    ["Portfolio", "Charges", "Sell check", "Daily ideas", "Trade"])
 
 # ---------------------------------------------------------------- Portfolio
 with tab_port:
@@ -332,3 +333,7 @@ with tab_ideas:
         if ideas.get("watch_today"):
             st.subheader("Results to watch")
             st.write(", ".join(ideas["watch_today"]))
+
+# ---------------------------------------------------------------- Trade
+with tab_trade:
+    trade_page.render(token, table, secret, acct.get("funds"))
