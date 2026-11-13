@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-12",
-  "market_summary": "Nifty closed at 25,255 on 11 Nov, up 0.84%. Foreign investors bought ₹12,563 cr that day. India VIX is 17.5, so expect normal swings. Q2 FY27 results season is still running.",
+  "date": "2026-11-13",
+  "market_summary": "Nifty closed at 25,299 on 12 Nov, up 0.2% and at a six-month high; realty and banks led while IT lagged. Foreign investors bought ₹7,831 cr and domestic funds sold ₹6,331 cr that day. India VIX fell 5.3% to 16.6, so swings should be calmer; note Citi now expects two RBI rate hikes (Dec and Feb).",
   "buy_ideas": [
     {
       "symbol": "MINDACORP",
@@ -8,9 +8,19 @@
       "approx_price": 715,
       "target": 900,
       "target_source": "Emkay",
-      "thesis": "Revenue up 43% and profit up 69% year on year. Revenue beat estimates by 10.7% and margins improved despite higher raw material costs. Growth from EV parts and digital displays.",
+      "thesis": "Q2 revenue up 43% and profit up 69% year on year. Revenue beat estimates by 10.7%. Growth from EV parts and digital displays. About 26% upside to target.",
       "risks": "Auto demand could slow. Mid-cap, so it swings more.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "HINDALCO",
+      "name": "Hindalco Industries",
+      "approx_price": 958,
+      "target": 1184,
+      "target_source": "Nuvama (upgraded to Buy)",
+      "thesis": "Q2 profit up 59% to ₹7,533 cr and EBITDA up 42% to ₹13,757 cr. Copper had its best-ever quarter and Novelis recovered. Nuvama raised FY27-28 EBITDA estimates 4-5%; 26% of FY28 aluminium already hedged at $3,168/t.",
+      "risks": "Price is the 6 Nov close and may have moved. Management says India aluminium costs rise about 5% in Q3. Tied to global metal prices.",
+      "sources": ["https://www.tradingview.com/news/moodys:376bf4385d033:0-hindalco-shares-jump-22-in-a-year-should-you-buy-or-sell-after-q2-results-2026-what-brokerages-say-price-targets/"]
     },
     {
       "symbol": "APOLLOHOSP",
@@ -18,50 +28,45 @@
       "approx_price": 8600,
       "target": 10400,
       "target_source": "Motilal Oswal",
-      "thesis": "Revenue up 21% and profit up 32%, both above estimates. 1,800 new beds coming; three loss-making hospitals expected to break even by March.",
+      "thesis": "Q2 revenue up 21% and profit up 32%, both above estimates. About 21% upside to target.",
       "risks": "Valuation is already high, and new hospitals take time to fill.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "SBIN",
+      "name": "State Bank of India",
+      "approx_price": 1061,
+      "target": 1325,
+      "target_source": "CLSA (Outperform); Goldman Sachs Buy at 1,130",
+      "thesis": "Two brokers reiterated buys after results. Management guides 14-15% loan growth. CLSA target is about 25% above the ₹1,061 price.",
+      "risks": "Loan growth guidance trails system credit growth (18-19%). Rate hikes would squeeze some segments. Goldman's target gives only about 6% upside.",
+      "sources": ["https://businessupturn.com/finance/stock-market/brokerages/stocks-to-watch-on-brokerages-november-12-2026-tata-power-sbi-grse-bharat-electronics-nse/"]
     },
     {
       "symbol": "WABAG",
       "name": "Va Tech Wabag",
       "approx_price": 2080,
       "target": 2430,
-      "target_source": "Axis",
-      "thesis": "Profit up 23% and a record ₹20,207 cr order book.",
+      "target_source": "Axis Direct",
+      "thesis": "Q2 revenue up 22% and profit up 23%; record ₹20,207 cr order book.",
       "risks": "Project delays and late customer payments.",
-      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
-    },
-    {
-      "symbol": "BHARTIARTL",
-      "name": "Bharti Airtel",
-      "approx_price": 2110,
-      "target": 2400,
-      "target_source": "ICICI Direct",
-      "thesis": "Profit up 31% and revenue per user about ₹271 after tariff hikes. Steady, lower-upside hold.",
-      "risks": "Profit missed some analyst estimates; network costs are rising.",
-      "sources": ["https://lapaasvoice.com/bharti-airtel-q2-fy27-net-profit-rises-31-to-%E2%82%B98888-crore-but-misses-estimates/"]
-    },
-    {
-      "symbol": "FLUOROCHEM",
-      "name": "Gujarat Fluorochemicals",
-      "approx_price": 4825,
-      "target": 5380,
-      "target_source": "ICICI Securities",
-      "thesis": "Revenue up 45% and profit up 36%.",
-      "risks": "Upside depends on new plants starting on time.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
     }
   ],
   "avoid": [
-    {"symbol": "KALYANKJIL", "reason": "Hit upper circuit after results, but ₹73.5 cr of profit was a one-time gain and margins slipped. Don't chase."},
-    {"symbol": "CUPID", "reason": "Up 263% this year and on the exchange's ASM surveillance list."},
-    {"symbol": "LEMONTREE", "reason": "Jumped about 7%, but profit excluding one-offs was flat."}
+    {"symbol": "TRITURBINE", "reason": "Results missed: Q2 EBITDA fell 45% and came in 30% below street estimates. UBS still says Buy at ₹840, but wait for execution to recover."},
+    {"symbol": "PAGEIND", "reason": "Fell 12.9% to ₹31,850 on 12 Nov after results. Don't catch the fall until the reason is clear."},
+    {"symbol": "KALYANKJIL", "reason": "Reported profit up 64%, but adjusted for a ₹73.5 cr one-time gain it is up 28%. Brokers raised targets, but don't chase the spike."},
+    {"symbol": "CUPID", "reason": "Huge run this year and on the exchange's ASM surveillance list."},
+    {"symbol": "HINDCOPPER", "reason": "Jumped over 6% on 12 Nov after profit rose about 2.8x; no broker target found yet and copper prices drive it. Wait for a pullback."}
   ],
-  "watch_today": ["HAL", "BDL", "NMDC", "IRCTC", "RVNL", "PAGEIND", "AMBER", "ALKEM"],
+  "watch_today": ["GRASIM", "EICHERMOT", "ABB", "TMPV", "RVNL", "GODREJIND", "NATCOPHARM", "JUBLPHARMA", "INOXWIND", "DEEPAKFERT", "FACT", "BELRISE", "GILLETTE", "ZFCVINDIA"],
   "portfolio_notes": {
-    "BHARTIARTL": "Results already out (early Nov): strong growth but a slight estimate miss. Fine to hold with a stop; lower upside than fresh earnings beats.",
-    "KALYANKJIL": "Post-results jump driven partly by a one-time gain. Avoid re-entering on momentum."
+    "BHARTIARTL": "Dropped from buy ideas: profit up 31% but it slightly missed estimates. ICICI Direct still targets ₹2,400. Fine to hold with a stop.",
+    "FLUOROCHEM": "Dropped from today's list only for space. Revenue up 45% and profit up 36%; ICICI Securities target ₹5,380 still stands.",
+    "KALYANKJIL": "Citi raised its target to ₹880 and BoB Capital upgraded to Buy at ₹786, but adjusted profit growth is only 28%. Hold if owned; don't add on momentum.",
+    "LEMONTREE": "Removed from avoid: CLSA rates it Outperform with a ₹163 target after a record quarter.",
+    "RVNL": "Reports results today (13 Nov). Check the numbers before trading."
   },
   "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate; check the live quote before trading."
 }
