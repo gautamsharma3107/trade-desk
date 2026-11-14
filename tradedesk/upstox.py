@@ -38,6 +38,28 @@ def exchange_code(code: str, api_key: str, api_secret: str, redirect_uri: str) -
     return body
 
 
+def is_auth_failure(message: str) -> bool:
+    """True when Upstox rejected the access token itself (so the user has to log in again)."""
+    m = message.lower()
+    return "http 401" in m or "unauthorized" in m or "udapi100050" in m
+
+
+def login_problem(message: str) -> str:
+    """Turn an Upstox login error into a plain-language next step."""
+    m = message.lower()
+    if "udapi100057" in m or "invalid auth code" in m:
+        return ("That Upstox login link has expired or was already used. Login codes work only once and only for "
+                "a few minutes. Click **Login with Upstox** again. If this keeps happening straight after "
+                "logging in, the Redirect URL in Streamlit Secrets and in your Upstox developer app don't match.")
+    if "redirect" in m:
+        return ("Upstox says the Redirect URL doesn't match. UPSTOX_REDIRECT_URI in Streamlit Secrets must be "
+                "exactly the Redirect URL in your Upstox developer app, then log in again.")
+    if "client_id" in m or "client_secret" in m or "udapi100016" in m or "invalid credentials" in m:
+        return ("Upstox didn't accept the API key or secret. Copy them again from your Upstox developer app "
+                "into Streamlit Secrets, then log in again.")
+    return "Upstox login didn't work. Click **Login with Upstox** to try again."
+
+
 def token_expiry(now: dt.datetime | None = None) -> dt.datetime:
     """Upstox tokens expire at 3:30 AM IST the next day."""
     ist = dt.timezone(dt.timedelta(hours=5, minutes=30))
