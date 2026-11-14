@@ -65,6 +65,8 @@ Each page shows its source and fetch time, and a failing source shows a note ins
 
 Open the app and click **Login with Upstox**. Upstox tokens expire at 3:30 AM IST, so you log in once each morning. The token stays in the app's memory only and is never saved to disk or to the repo.
 
+**"Invalid Auth code" (UDAPI100057)?** The code Upstox hands back after login works once, for a few minutes. The app now uses it once and then clears it from the address bar, so reloading the page or opening an old tab just asks you to log in again. If it still appears straight after a fresh login, the Redirect URL doesn't match: the sidebar shows the one the app sends, and it must be identical (same `https://`, no trailing `/`, no spaces) to the Redirect URL in your Upstox developer app and to `UPSTOX_REDIRECT_URI` in Streamlit Secrets.
+
 ## Trading from the app
 
 The Trade tab has three modes:
