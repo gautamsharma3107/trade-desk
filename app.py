@@ -112,7 +112,7 @@ handle_login_redirect()
 token = current_token()
 
 with st.sidebar:
-    st.title("📈 Trade Desk")
+    st.title("Trade Desk")
     if token:
         exp = token_store()["expires"]
         st.success(f"Connected to Upstox until {exp:%d %b, %I:%M %p} IST")
@@ -127,7 +127,7 @@ with st.sidebar:
                 with st.expander("Details from Upstox"):
                     st.code(detail, language=None)
         if API_KEY and REDIRECT:
-            st.link_button("Login with Upstox", login_url(API_KEY, REDIRECT), type="primary",
+            st.link_button("Log in with Upstox", login_url(API_KEY, REDIRECT), type="primary",
                            use_container_width=True)
         else:
             st.info("Add your Upstox API key to the app secrets to enable login (see README).")
@@ -141,9 +141,7 @@ with st.sidebar:
                 st.session_state.pop("login_error", None)
                 st.rerun()
     demo_mode = not token
-    if demo_mode:
-        st.warning("Showing **sample data**. Log in to see your account.")
-    st.caption("Orders are placed only from the Trade tab, after you confirm them.")
+    st.caption("Orders are placed only from the Trade page, after you confirm them.")
 
 
 # ---------------------------------------------------------------- data
@@ -198,60 +196,71 @@ for err in acct["errors"]:
 table = build_table(acct["holdings"], acct["mtf"], acct["positions"])
 ideas = load_ideas()
 
-terminal.header(token)
-earnings_page.alert_banner(table, ideas)
-(tab_port, tab_pnl, tab_mkt, tab_co, tab_earn, tab_news, tab_flows, tab_scr, tab_jr, tab_tax, tab_charges,
- tab_sell, tab_ideas, tab_trade) = st.tabs(["Portfolio", "P&L", "Markets", "Company", "Earnings", "News", "Flows",
-                                            "Screener", "Journal", "Tax", "Charges", "Sell check", "Daily ideas",
-                                            "Trade"])
 
-with tab_pnl:
-    terminal.render_pnl(token, table, demo_mode)
-with tab_mkt:
-    terminal.render_markets(token, table, ideas)
-with tab_co:
-    terminal.render_company(token, table, secret("ANTHROPIC_API_KEY"))
-with tab_earn:
-    earnings_page.render(token, table, ideas)
-with tab_news:
-    news_page.render(table, ideas)
-with tab_flows:
-    flows_page.render(token, table)
-with tab_scr:
-    screener_page.render(table, ideas)
-with tab_jr:
-    journal_page.render(token, table, ideas, demo_mode)
-with tab_tax:
-    tax_page.render(token, table, demo_mode)
+def page_title(title: str, subtitle: str = "") -> None:
+    """Large page title, with a quiet note when the page shows sample data."""
+    st.title(title)
+    note = "Sample data. Log in with Upstox (in the side menu) to see your account." if demo_mode else ""
+    line = " · ".join(x for x in (subtitle, note) if x)
+    if line:
+        st.caption(line)
+    st.markdown("<div class='td-phone-only'>Tap <b>»</b> at the top left for all pages and to log in.</div>",
+                unsafe_allow_html=True)
+    earnings_page.alert_banner(table, ideas)
+
+
+def money(v: float, sign: bool = False) -> str:
+    s = f"₹{abs(v):,.0f}"
+    if sign:
+        return ("+" if v > 0 else "−" if v < 0 else "") + s
+    return ("−" if v < 0 else "") + s
+
 
 # ---------------------------------------------------------------- Portfolio
-with tab_port:
+def page_portfolio() -> None:
+    page_title("Portfolio")
+    terminal.header(token)
     invested, value = table["invested"].sum(), table["current_value"].sum()
     pnl = value - invested
+    pnl_pct = (pnl / invested * 100) if invested else 0
     day = (table["current_value"] * table["day_change_pct"] / (100 + table["day_change_pct"])).sum() if len(table) else 0
+    day_pct = (day / (value - day) * 100) if value - day else 0
     eq = (acct.get("funds") or {}).get("equity", {})
-    c = st.columns(5)
-    c[0].metric("Invested", INR(invested))
-    c[1].metric("Current value", INR(value))
-    c[2].metric("Total P&L", INR(pnl), f"{(pnl / invested * 100) if invested else 0:.2f}%")
-    c[3].metric("Today", INR(day))
-    c[4].metric("Cash available", INR(eq.get("available_margin", 0)))
+    cls = theme.updown
+    st.markdown(
+        f"<div class='td-hero'><div class='lbl'>Current value</div><div class='big'>{money(value)}</div>"
+        f"<div class='row'><span class='{cls(pnl)}'>{money(pnl, True)} ({pnl_pct:+.2f}%)<span class='k'>all time</span></span>"
+        f"<span class='{cls(day)}'>{money(day, True)} ({day_pct:+.2f}%)<span class='k'>today</span></span></div></div>",
+        unsafe_allow_html=True)
+    stats = [("Invested", INR(invested)), ("Cash available", INR(eq.get("available_margin", 0))),
+             ("Stocks held", f"{table['symbol'].nunique() if len(table) else 0}")]
+    st.markdown("<div class='td-stats'>" + "".join(f"<div><div class='lbl'>{k}</div><div class='val'>{v}</div></div>"
+                                                   for k, v in stats) + "</div>", unsafe_allow_html=True)
 
+    st.subheader("Your stocks")
     if table.empty:
         st.info("No open holdings or positions.")
     else:
         show = table.drop(columns=["instrument_key"]).rename(columns={
-            "symbol": "Stock", "type": "Type", "exchange": "Exch", "qty": "Qty", "avg_price": "Avg",
-            "ltp": "LTP", "invested": "Invested", "current_value": "Value", "pnl": "P&L",
-            "pnl_pct": "P&L %", "day_change_pct": "Day %"})
+            "symbol": "Stock", "type": "Type", "exchange": "Exchange", "qty": "Qty", "avg_price": "Avg price",
+            "ltp": "Price now", "invested": "Invested", "current_value": "Value", "pnl": "P&L",
+            "pnl_pct": "P&L %", "day_change_pct": "Today %"})
+        order = ["Stock", "Value", "P&L", "P&L %", "Today %", "Qty", "Avg price", "Price now", "Invested", "Type",
+                 "Exchange"]
+        show = show[[c_ for c_ in order if c_ in show.columns]].sort_values("Value", ascending=False)
         st.dataframe(
-            show.style.format({"Avg": "₹{:,.2f}", "LTP": "₹{:,.2f}", "Invested": "₹{:,.0f}", "Value": "₹{:,.0f}",
-                               "P&L": "₹{:,.0f}", "P&L %": "{:+.2f}%", "Day %": "{:+.2f}%"})
-            .map(lambda v: f"color: {'#16a34a' if v > 0 else '#dc2626' if v < 0 else ''}",
-                 subset=["P&L", "P&L %", "Day %"]),
-            use_container_width=True, hide_index=True)
-        fig = px.bar(table.sort_values("pnl"), x="pnl", y="symbol", orientation="h", color="type",
-                     labels={"pnl": "P&L (₹)", "symbol": ""}, height=60 + 40 * len(table))
+            show.style.format({"Avg price": "₹{:,.2f}", "Price now": "₹{:,.2f}", "Invested": "₹{:,.0f}",
+                               "Value": "₹{:,.0f}", "P&L": money, "P&L %": "{:+.2f}%", "Today %": "{:+.2f}%"})
+            .map(theme.color, subset=["P&L", "P&L %", "Today %"]),
+            use_container_width=True, hide_index=True,
+            column_config={"Stock": st.column_config.TextColumn(pinned=True)})
+        st.caption("Tap a column name to sort. Swipe sideways on a phone to see more columns.")
+        st.subheader("Profit and loss by stock")
+        d = table.sort_values("pnl")
+        fig = px.bar(d, x="pnl", y="symbol", orientation="h",
+                     labels={"pnl": "P&L (₹)", "symbol": ""}, height=80 + 44 * len(table))
+        fig.update_traces(marker_color=[theme.GREEN if v >= 0 else theme.RED for v in d["pnl"]],
+                          marker_cornerradius=6, hovertemplate="%{y}: ₹%{x:,.0f}<extra></extra>")
         st.plotly_chart(fig, use_container_width=True)
 
     closed = closed_today(acct["mtf"], acct["positions"])
@@ -260,9 +269,11 @@ with tab_port:
         st.dataframe(closed, use_container_width=True, hide_index=True)
         st.caption(f"Realised today: {INR(closed['realised'].sum())} (before charges)")
 
+
 # ---------------------------------------------------------------- Charges
-with tab_charges:
-    st.subheader("Charges you've paid this financial year")
+def page_charges() -> None:
+    page_title("Charges", "What you've paid Upstox and the government, and a calculator for your next trade")
+    st.subheader("Paid this financial year")
     fy = financial_year()
     if demo_mode:
         ch = demo.CHARGES
@@ -342,65 +353,137 @@ with tab_charges:
                 except UpstoxError as e:
                     st.error(str(e))
 
+
 # ---------------------------------------------------------------- Sell check
-with tab_sell:
-    st.subheader("Should I sell anything?")
-    st.caption("Rule-based flags to help you decide. They are prompts to look closer, not orders.")
-    s = st.columns(3)
-    stop = s[0].slider("Stop-loss (%)", 2, 30, 8)
-    target = s[1].slider("Profit target (%)", 5, 100, 15)
-    mtf_margin = s[2].slider("MTF margin (%)", 20, 100, 25, 5, key="mtf_m2")
+def page_sell() -> None:
+    page_title("Sell check", "Simple rule-based flags to help you decide. They are prompts to look closer, not orders.")
+    with st.expander("Your rules", expanded=False, icon=":material/tune:"):
+        s = st.columns(3)
+        stop = s[0].slider("Stop-loss (%)", 2, 30, 8, key="sc_stop")
+        target = s[1].slider("Profit target (%)", 5, 100, 15, key="sc_target")
+        mtf_margin = s[2].slider("MTF margin (%)", 20, 100, 25, 5, key="mtf_m2")
     notes = ideas.get("portfolio_notes", {})
     if table.empty:
         st.info("Nothing open to check.")
+        return
+    flagged = []
     for _, r in table.iterrows():
         if demo_mode:
             closes = demo.candles(r["ltp"], 0.08 if r["pnl"] >= 0 else -0.06)
         else:
             closes = load_closes(token, r["instrument_key"]) if r["instrument_key"] else []
-        flag = review(r.to_dict(), closes, stop, target, mtf_margin, notes.get(r["symbol"]))
-        icon = {"SELL?": "🔴", "REVIEW": "🟠", "HOLD": "🟢"}[flag.level]
+        flagged.append((r, closes, review(r.to_dict(), closes, stop, target, mtf_margin, notes.get(r["symbol"]))))
+    rank = {"SELL?": 0, "REVIEW": 1, "HOLD": 2}
+    counts = {k: sum(f.level == k for _, _, f in flagged) for k in rank}
+    theme.bar([("Sell?", str(counts["SELL?"]), "dn" if counts["SELL?"] else ""),
+               ("Review", str(counts["REVIEW"]), ""), ("Hold", str(counts["HOLD"]), "up" if counts["HOLD"] else "")])
+    label = {"SELL?": ("Consider selling", "sell"), "REVIEW": ("Take a look", "review"), "HOLD": ("Hold", "hold")}
+    for r, closes, flag in sorted(flagged, key=lambda x: rank[x[2].level]):
+        text, css = label[flag.level]
         with st.container(border=True):
-            h = st.columns([3, 1])
-            h[0].markdown(f"**{icon} {r['symbol']}** · {r['type']} · {r['qty']} @ ₹{r['avg_price']:,.2f} → "
-                          f"₹{r['ltp']:,.2f} ({r['pnl_pct']:+.2f}%)")
-            h[1].markdown(f"**{flag.level}**")
+            st.markdown(
+                f"<div class='td-card-head'><div><div class='t'>{r['symbol']}<span class='td-pill {css}'>{text}</span></div>"
+                f"<div class='td-src'>{r['type']} · {r['qty']} shares · bought at ₹{r['avg_price']:,.2f}</div></div>"
+                f"<div class='r'><div class='t'>₹{r['ltp']:,.2f}</div>"
+                f"<div class='{theme.updown(r['pnl_pct'])}'>{r['pnl_pct']:+.2f}%</div></div></div>",
+                unsafe_allow_html=True)
             for reason in flag.reasons:
                 st.markdown(f"- {reason}")
             if closes:
-                lf = px.line(y=closes[-60:], height=150, labels={"y": "", "x": ""})
-                lf.update_layout(margin=dict(l=0, r=0, t=0, b=0), xaxis_visible=False)
-                st.plotly_chart(lf, use_container_width=True, key=f"line_{r['symbol']}_{r['type']}")
+                lf = px.line(y=closes[-60:], height=120, labels={"y": "", "x": ""})
+                lf.update_traces(line_color=theme.GREEN if closes[-1] >= closes[-min(60, len(closes))] else theme.RED,
+                                 line_width=2, hovertemplate="₹%{y:,.2f}<extra></extra>")
+                lf.update_layout(margin=dict(l=0, r=0, t=0, b=0), xaxis_visible=False, yaxis_visible=False)
+                st.plotly_chart(lf, use_container_width=True, key=f"line_{r['symbol']}_{r['type']}",
+                                config={"displayModeBar": False})
+
 
 # ---------------------------------------------------------------- Daily ideas
-with tab_ideas:
+def page_ideas() -> None:
+    try:
+        when = dt.date.fromisoformat(ideas.get("date", "")).strftime("%A, %d %B %Y")
+    except ValueError:
+        when = ideas.get("date", "?")
+    page_title("Daily ideas", f"Research for {when}" if ideas else "")
     if not ideas:
         st.info("No research file yet.")
-    else:
-        st.subheader(f"Research for {ideas.get('date', '?')}")
-        st.write(ideas.get("market_summary", ""))
-        st.warning(ideas.get("disclaimer", "Ideas, not advice."))
-        held = set(table["symbol"])
-        for i in ideas.get("buy_ideas", []):
-            up = (i["target"] / i["approx_price"] - 1) * 100 if i.get("target") and i.get("approx_price") else None
-            with st.container(border=True):
-                st.markdown(f"**{i['symbol']}** · {i.get('name', '')}" + ("  ·  _you hold this_" if i["symbol"] in held else ""))
-                cols = st.columns(3)
-                cols[0].metric("Approx price", INR(i.get("approx_price", 0)))
-                cols[1].metric(f"Target ({i.get('target_source', 'analyst')})", INR(i.get("target", 0)))
-                cols[2].metric("Upside", f"{up:.0f}%" if up is not None else "–")
-                st.markdown(f"**Why:** {i.get('thesis', '')}")
-                st.markdown(f"**Risks:** {i.get('risks', '')}")
-                if i.get("sources"):
-                    st.caption(" · ".join(f"[source {n + 1}]({u})" for n, u in enumerate(i["sources"])))
-        if ideas.get("avoid"):
-            st.subheader("Avoid / don't chase")
+        return
+    if ideas.get("market_summary"):
+        st.markdown(f"<div class='td-panel'>{ideas['market_summary']}</div>", unsafe_allow_html=True)
+    st.caption(ideas.get("disclaimer", "Ideas, not advice."))
+    held = set(table["symbol"])
+    if ideas.get("buy_ideas"):
+        st.subheader("Ideas to buy")
+    for i in ideas.get("buy_ideas", []):
+        up = (i["target"] / i["approx_price"] - 1) * 100 if i.get("target") and i.get("approx_price") else None
+        with st.container(border=True):
+            mine = "<span class='td-pill'>You hold this</span>" if i["symbol"] in held else ""
+            st.markdown(f"<div style='font-size:1.15rem;font-weight:600'>{i['symbol']}{mine}</div>"
+                        f"<div class='td-src'>{i.get('name', '')}</div>", unsafe_allow_html=True)
+            cols = st.columns(3)
+            cols[0].metric("Price about", INR(i.get("approx_price", 0)))
+            cols[1].metric(f"Target ({i.get('target_source', 'analyst')})", INR(i.get("target", 0)))
+            cols[2].metric("Upside", f"{up:.0f}%" if up is not None else "–")
+            st.markdown(f"**Why:** {i.get('thesis', '')}")
+            st.markdown(f"**Risks:** {i.get('risks', '')}")
+            if i.get("sources"):
+                st.caption(" · ".join(f"[Source {n + 1}]({u})" for n, u in enumerate(i["sources"])))
+    if ideas.get("avoid"):
+        st.subheader("Avoid for now")
+        with st.container(border=True):
             for a_ in ideas["avoid"]:
                 st.markdown(f"- **{a_['symbol']}**: {a_['reason']}")
-        if ideas.get("watch_today"):
-            st.subheader("Results to watch")
-            st.write(", ".join(ideas["watch_today"]))
+    if ideas.get("watch_today"):
+        st.subheader("Results to watch")
+        st.markdown(" ".join(f"<span class='td-pill' style='margin:0 6px 6px 0'>{s}</span>"
+                             for s in ideas["watch_today"]), unsafe_allow_html=True)
 
-# ---------------------------------------------------------------- Trade
-with tab_trade:
-    trade_page.render(token, table, secret, acct.get("funds"))
+
+# ---------------------------------------------------------------- other pages
+def page(title: str, subtitle: str, fn, *args, strip: bool = False):
+    def run() -> None:
+        page_title(title, subtitle)
+        if strip:
+            terminal.header(token)
+        fn(*args)
+    run.__name__ = "page_" + "".join(ch if ch.isalnum() else "_" for ch in title.lower())
+    return run
+
+
+P = st.Page
+nav = st.navigation({
+    "": [
+        P(page_portfolio, title="Portfolio", icon=":material/account_balance_wallet:", default=True),
+        P(page_sell, title="Sell check", icon=":material/fact_check:", url_path="sell-check"),
+        P(page("Trade", "Orders go to Upstox only after you review and confirm them.", trade_page.render, token,
+               table, secret, acct.get("funds")), title="Trade", icon=":material/currency_rupee:", url_path="trade"),
+    ],
+    "Ideas": [
+        P(page_ideas, title="Daily ideas", icon=":material/lightbulb:", url_path="ideas"),
+        P(page("Earnings", "Who reported, how good the results were, and who reports next",
+               earnings_page.render, token, table, ideas),
+          title="Earnings", icon=":material/campaign:", url_path="earnings"),
+        P(page("News", "Company announcements, big deals and insider trades",
+               news_page.render, table, ideas), title="News", icon=":material/newspaper:", url_path="news"),
+    ],
+    "Markets": [
+        P(page("Markets", "", terminal.render_markets, token, table, ideas, strip=True),
+          title="Markets", icon=":material/show_chart:", url_path="markets"),
+        P(page("Company", "Look up any NSE stock", terminal.render_company, token, table,
+               secret("ANTHROPIC_API_KEY")), title="Company", icon=":material/business:", url_path="company"),
+        P(page("Screener", "Find stocks by growth, value and quality", screener_page.render, table, ideas),
+          title="Screener", icon=":material/filter_alt:", url_path="screener"),
+        P(page("Flows", "What big investors (FIIs and DIIs) are buying and selling, and option data",
+               flows_page.render, token, table), title="Flows", icon=":material/swap_vert:", url_path="flows"),
+    ],
+    "Money": [
+        P(page("Profit & loss", "Realised profit and loss across all your trades", terminal.render_pnl, token,
+               table, demo_mode), title="Profit & loss", icon=":material/monitoring:", url_path="pnl"),
+        P(page("Tax", "Estimated tax on this year's gains", tax_page.render, token, table, demo_mode),
+          title="Tax", icon=":material/receipt_long:", url_path="tax"),
+        P(page_charges, title="Charges", icon=":material/payments:", url_path="charges"),
+        P(page("Journal", "How your trades and the daily ideas have done", journal_page.render, token, table,
+               ideas, demo_mode), title="Journal", icon=":material/menu_book:", url_path="journal"),
+    ],
+}, position="top")
+nav.run()

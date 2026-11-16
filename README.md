@@ -1,6 +1,6 @@
 # Trade Desk
 
-A private, Bloomberg-style terminal for an Upstox account: black and amber, dense tables, a live index strip (Nifty, Sensex, Bank Nifty, VIX, USD/INR, Brent, gold, US markets) across the top. Tabs:
+A private dashboard for an Upstox account, with an Apple-style look: clean system font, soft rounded cards, plain labels, and light and dark appearance that follows your phone or computer setting. A menu across the top groups the pages: **Portfolio**, **Sell check** and **Trade**, then **Ideas** (Daily ideas, Earnings, News), **Markets** (Markets, Company, Screener, Flows) and **Money** (Profit & loss, Tax, Charges, Journal). On a phone, tap » at the top left to open the menu. Portfolio and Markets also show a live index strip (Nifty, Sensex, Bank Nifty, VIX, USD/INR, Brent, gold, US markets). Pages:
 
 - **Portfolio:** delivery holdings, MTF positions and open positions, with live P&L and anything closed today.
 - **P&L:** realised profit and loss for this financial year (switch to calendar year or last FY) across every segment: delivery (long- and short-term), intraday, futures, options, commodity and currency, with charges per segment, net P&L, unrealised P&L on open holdings, month-by-month chart, best/worst stocks and a CSV of every closed trade. Comes from Upstox's P&L report, which updates end of day.

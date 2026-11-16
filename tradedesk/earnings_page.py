@@ -115,7 +115,7 @@ def render_calendar(table: pd.DataFrame, ideas: dict) -> None:
             "Last qtr profit (₹ cr)", "Yr-ago EPS", "EPS est.", "Revenue est. (₹ cr)", "Out?", "Purpose"]
     show = show[[x for x in cols if x in show]]
     st.dataframe(show.style.format({k: v for k, v in num.items() if k in show}, na_rep="–")
-                 .apply(lambda r: ["background-color: #1f1606" if r.get("Yours") else "" for _ in r], axis=1),
+                 .apply(lambda r: ["background-color: rgba(10,132,255,0.12)" if r.get("Yours") else "" for _ in r], axis=1),
                  use_container_width=True, hide_index=True, height=min(38 + 35 * len(show), 640))
     st.download_button("Download CSV", show.to_csv(index=False).encode(), f"results_{start:%Y%m%d}.csv", "text/csv",
                        key="ec_csv")

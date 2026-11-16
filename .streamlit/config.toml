@@ -1,7 +1,46 @@
+# Apple-style look. With no `base`, the app follows the phone's or computer's light/dark setting,
+# and the menu (⋮ > Settings) can switch it.
 [theme]
-base = "dark"
-primaryColor = "#ffa028"
+font = "-apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+baseRadius = "large"
+buttonRadius = "full"
+showWidgetBorder = false
+showSidebarBorder = true
+metricValueFontSize = "1.6rem"
+metricValueFontWeight = 600
+headingFontWeights = [700, 700, 600, 600, 600, 600]
+chartCategoricalColors = ["#0A84FF", "#FF9500", "#30B158", "#AF52DE", "#30B0C7", "#FF3B30", "#FFCC00", "#8E8E93"]
+
+[theme.light]
+primaryColor = "#0071E3"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F5F7"
+textColor = "#1D1D1F"
+borderColor = "#E5E5EA"
+dataframeBorderColor = "#EDEDF0"
+dataframeHeaderBackgroundColor = "#F5F5F7"
+greenColor = "#30B158"
+redColor = "#FF3B30"
+blueColor = "#0071E3"
+orangeColor = "#FF9500"
+
+[theme.light.sidebar]
+backgroundColor = "#F5F5F7"
+secondaryBackgroundColor = "#FFFFFF"
+
+[theme.dark]
+primaryColor = "#0A84FF"
 backgroundColor = "#000000"
-secondaryBackgroundColor = "#0b0d10"
-textColor = "#e6e6e6"
-font = "monospace"
+secondaryBackgroundColor = "#1C1C1E"
+textColor = "#F5F5F7"
+borderColor = "#38383A"
+dataframeBorderColor = "#2C2C2E"
+dataframeHeaderBackgroundColor = "#1C1C1E"
+greenColor = "#30D158"
+redColor = "#FF453A"
+blueColor = "#0A84FF"
+orangeColor = "#FF9F0A"
+
+[theme.dark.sidebar]
+backgroundColor = "#1C1C1E"
+secondaryBackgroundColor = "#2C2C2E"

@@ -193,7 +193,7 @@ def _chain(token: str | None, table: pd.DataFrame) -> None:
                                           "P IV": "{:.1f}", "C LTP": "{:,.2f}", "P LTP": "{:,.2f}",
                                           "Strike": "{:,.0f}"}, na_rep="–")
                  .map(color, subset=["C ΔOI", "P ΔOI"])
-                 .apply(lambda r: ["background-color: #1f1606" if spot and abs(r["Strike"] - spot) <=
+                 .apply(lambda r: ["background-color: rgba(10,132,255,0.12)" if spot and abs(r["Strike"] - spot) <=
                                    (chain["strike"].diff().median() or 1) / 2 else "" for _ in r], axis=1),
                  use_container_width=True, hide_index=True, height=min(38 + 35 * len(show), 600))
     st.caption(f"Source: {where}. PCR = put OI ÷ call OI (above 1 leans bullish, as writers sell puts they expect "
