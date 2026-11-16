@@ -16,7 +16,7 @@ from plotly.subplots import make_subplots
 
 from . import demo, filings, market, pnl
 from .market import SourceError
-from .theme import AMBER, GREEN, MUTED, RED, bar, color, updown
+from .theme import AMBER, BLUE, GREEN, MUTED, RED, bar, color, updown
 from .upstox import Upstox, UpstoxError
 
 INR = "₹{:,.0f}".format
@@ -124,8 +124,8 @@ def keys_for(symbols: list[str], token: str | None) -> dict[str, str]:
 def header(token: str | None) -> None:
     now = market.now_ist()
     status = market.market_status(now)
-    cells = [("IST", f"{now:%d %b %Y %H:%M}", "amb"),
-             ("NSE", status, "up" if status == "OPEN" else "dn" if status == "CLOSED" else "amb")]
+    cells = [("India time", f"{now:%d %b, %I:%M %p}", ""),
+             ("NSE", status.title(), "up" if status == "OPEN" else "dn" if status == "CLOSED" else "")]
     got = {}
     if token:
         q, _ = live_quotes(token, tuple(k for _, k, _ in market.INDICES))
@@ -264,7 +264,7 @@ def render_markets(token: str | None, table: pd.DataFrame, ideas: dict) -> None:
     if len(have) > 3:
         hm = have.assign(size=1.0, label=have["Symbol"] + "<br>" + have["change_pct"].map("{:+.2f}%".format))
         fig = px.treemap(hm, path=[px.Constant("Market"), "Sector", "label"], values="size", color="change_pct",
-                         color_continuous_scale=[[0, RED], [0.5, "#1a1a1a"], [1, GREEN]], color_continuous_midpoint=0,
+                         color_continuous_scale=[[0, RED], [0.5, "#8E8E93"], [1, GREEN]], color_continuous_midpoint=0,
                          range_color=[-3, 3], height=420)
         fig.update_traces(hovertemplate="%{label}<extra></extra>", textfont_family="IBM Plex Mono")
         fig.update_layout(coloraxis_showscale=False, margin=dict(l=0, r=0, t=10, b=0))
@@ -282,7 +282,7 @@ def _price_chart(hist: pd.DataFrame, name: str) -> go.Figure:
     fig = make_subplots(rows=2, cols=1, shared_xaxes=True, row_heights=[0.78, 0.22], vertical_spacing=0.02)
     fig.add_trace(go.Candlestick(x=h.index, open=h["Open"], high=h["High"], low=h["Low"], close=h["Close"], name=name,
                                  increasing_line_color=GREEN, decreasing_line_color=RED), row=1, col=1)
-    for n, c in ((50, AMBER), (200, "#4da3ff")):
+    for n, c in ((50, AMBER), (200, BLUE)):
         if len(h) > n:
             fig.add_trace(go.Scatter(x=h.index, y=h["Close"].rolling(n).mean(), name=f"{n} DMA",
                                      line=dict(width=1, color=c)), row=1, col=1)
