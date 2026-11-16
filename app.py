@@ -16,7 +16,8 @@ import streamlit as st
 from tradedesk import demo, earnings_page, flows_page, journal_page, news_page, screener_page, tax_page, terminal, theme, trade_page
 from tradedesk.charges import PRODUCTS, RATES, RATES_CHECKED_ON, round_trip, mtf_interest
 from tradedesk.portfolio import build_table, closed_today, review
-from tradedesk.upstox import Upstox, UpstoxError, exchange_code, financial_year, login_url, token_expiry
+from tradedesk.upstox import (Upstox, UpstoxError, exchange_code, financial_year, is_auth_failure, login_problem,
+                              login_url, token_expiry)
 
 st.set_page_config(page_title="Trade Desk", page_icon="📈", layout="wide")
 theme.apply()
@@ -69,17 +70,44 @@ def save_token(token: str) -> None:
     token_store().update(token=token, expires=token_expiry())
 
 
-API_KEY, API_SECRET, REDIRECT = secret("UPSTOX_API_KEY"), secret("UPSTOX_API_SECRET"), secret("UPSTOX_REDIRECT_URI")
+@st.cache_resource
+def used_codes() -> set:
+    """Login codes already sent to Upstox. Each code works once, so never send one twice."""
+    return set()
 
-code = st.query_params.get("code")
-if code and API_KEY and API_SECRET:
+
+# .strip(): a stray space or newline pasted into Secrets makes the redirect URL not match Upstox's.
+API_KEY, API_SECRET, REDIRECT = (secret(k).strip() for k in ("UPSTOX_API_KEY", "UPSTOX_API_SECRET", "UPSTOX_REDIRECT_URI"))
+
+
+def handle_login_redirect() -> None:
+    """Upstox sends the browser back with ?code=... Swap it for a token exactly once.
+
+    The code is single-use and lasts a few minutes. Reloading the page, a second Streamlit run,
+    the browser's back button or a bookmarked/old tab would otherwise send the same code again,
+    and Upstox answers "UDAPI100057 Invalid Auth code".
+    """
+    code = st.query_params.get("code")
+    if not code:
+        return
+    st.query_params.clear()  # first, so nothing can pick up the same code again
+    if code in used_codes() or current_token():
+        return  # already used, or already logged in: nothing to do
+    used_codes().add(code)
+    if not (API_KEY and API_SECRET and REDIRECT):
+        st.session_state.login_error = ("Upstox sent you back, but the app's Secrets are missing UPSTOX_API_KEY, "
+                                        "UPSTOX_API_SECRET or UPSTOX_REDIRECT_URI. See the README.", "")
+        return
     try:
         save_token(exchange_code(code, API_KEY, API_SECRET, REDIRECT)["access_token"])
-        st.query_params.clear()
-        st.rerun()
     except UpstoxError as e:
-        st.query_params.clear()
-        st.error(str(e))
+        st.session_state.login_error = (login_problem(str(e)), str(e))
+        return
+    st.session_state.pop("login_error", None)
+    st.rerun()
+
+
+handle_login_redirect()
 
 token = current_token()
 
@@ -92,15 +120,25 @@ with st.sidebar:
             token_store().clear()
             st.rerun()
     else:
+        if st.session_state.get("login_error"):
+            msg, detail = st.session_state.login_error
+            st.error(msg)
+            if detail:
+                with st.expander("Details from Upstox"):
+                    st.code(detail, language=None)
         if API_KEY and REDIRECT:
             st.link_button("Login with Upstox", login_url(API_KEY, REDIRECT), type="primary",
                            use_container_width=True)
         else:
             st.info("Add your Upstox API key to the app secrets to enable login (see README).")
+        if REDIRECT:
+            st.caption(f"Redirect URL this app sends to Upstox: `{REDIRECT}`. It must match the Redirect URL "
+                       "in your Upstox developer app exactly.")
         with st.expander("Or paste an access token"):
             t = st.text_input("Access token", type="password")
             if st.button("Use token") and t:
                 save_token(t.strip())
+                st.session_state.pop("login_error", None)
                 st.rerun()
     demo_mode = not token
     if demo_mode:
@@ -147,10 +185,15 @@ if demo_mode:
     acct = {"holdings": demo.HOLDINGS, "mtf": demo.MTF, "positions": demo.POSITIONS, "funds": demo.FUNDS, "errors": []}
 else:
     acct = load_account(token)
+if any(is_auth_failure(err) for err in acct["errors"]):
+    # Upstox no longer accepts this token (expired at 3:30 AM IST, or logged out elsewhere).
+    token_store().clear()
+    load_account.clear()
+    st.session_state.login_error = ("Your Upstox login has expired. Click **Login with Upstox** in the sidebar "
+                                    "to log in again.", "")
+    st.rerun()
 for err in acct["errors"]:
     st.warning(f"Couldn't load {err}")
-    if "401" in err or "Unauthorized" in err:
-        token_store().clear()
 
 table = build_table(acct["holdings"], acct["mtf"], acct["positions"])
 ideas = load_ideas()
