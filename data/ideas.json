@@ -1,72 +1,85 @@
 {
-  "date": "2026-11-13",
-  "market_summary": "Nifty closed at 25,299 on 12 Nov, up 0.2% and at a six-month high; realty and banks led while IT lagged. Foreign investors bought ₹7,831 cr and domestic funds sold ₹6,331 cr that day. India VIX fell 5.3% to 16.6, so swings should be calmer; note Citi now expects two RBI rate hikes (Dec and Feb).",
+  "date": "2026-11-16",
+  "market_summary": "Nifty fell 0.61% to 25,144 on Fri 13 Nov (some feeds show 25,171) after October CPI inflation jumped to 6.09%, above the RBI's 6% ceiling, and Brent rose to about $95-98 on Gulf supply worries; it still gained 0.6% for the week, led by PSU banks (+7.5%), while IT fell 3.2%. Foreign investors bought a provisional ₹5,737 cr and domestic funds sold ₹2,254 cr on 13 Nov, extending the foreign buying streak to about ten sessions. India VIX eased about 6.5% to 15.5; WPI inflation data is due today, and higher inflation keeps rate-hike risk alive.",
   "buy_ideas": [
     {
       "symbol": "MINDACORP",
       "name": "Minda Corporation",
       "approx_price": 715,
       "target": 900,
-      "target_source": "Emkay",
-      "thesis": "Q2 revenue up 43% and profit up 69% year on year. Revenue beat estimates by 10.7%. Growth from EV parts and digital displays. About 26% upside to target.",
-      "risks": "Auto demand could slow. Mid-cap, so it swings more.",
+      "target_source": "Emkay (Buy)",
+      "thesis": "Q2 revenue up 43% and profit up 69% year on year; revenue beat estimates by 10.7%. Growth from EV parts and digital displays. Emkay's target is about 26% above the price at the time of the call (price implied from that upside, 11 Nov).",
+      "risks": "Auto demand could slow if rates rise. Mid-cap, so it swings more. Price is implied from the 11 Nov upside, so check the live quote.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
-    },
-    {
-      "symbol": "HINDALCO",
-      "name": "Hindalco Industries",
-      "approx_price": 958,
-      "target": 1184,
-      "target_source": "Nuvama (upgraded to Buy)",
-      "thesis": "Q2 profit up 59% to ₹7,533 cr and EBITDA up 42% to ₹13,757 cr. Copper had its best-ever quarter and Novelis recovered. Nuvama raised FY27-28 EBITDA estimates 4-5%; 26% of FY28 aluminium already hedged at $3,168/t.",
-      "risks": "Price is the 6 Nov close and may have moved. Management says India aluminium costs rise about 5% in Q3. Tied to global metal prices.",
-      "sources": ["https://www.tradingview.com/news/moodys:376bf4385d033:0-hindalco-shares-jump-22-in-a-year-should-you-buy-or-sell-after-q2-results-2026-what-brokerages-say-price-targets/"]
     },
     {
       "symbol": "APOLLOHOSP",
       "name": "Apollo Hospitals",
       "approx_price": 8600,
       "target": 10400,
-      "target_source": "Motilal Oswal",
-      "thesis": "Q2 revenue up 21% and profit up 32%, both above estimates. About 21% upside to target.",
-      "risks": "Valuation is already high, and new hospitals take time to fill.",
+      "target_source": "Motilal Oswal (Buy)",
+      "thesis": "Q2 revenue up 20.8% and profit up 32%, both above estimates. Defensive healthcare demand holds up better if inflation and rates rise. About 21% upside to target.",
+      "risks": "Valuation is already high, and new hospitals take time to fill. Price is implied from the 11 Nov upside.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
     },
     {
-      "symbol": "SBIN",
-      "name": "State Bank of India",
-      "approx_price": 1061,
-      "target": 1325,
-      "target_source": "CLSA (Outperform); Goldman Sachs Buy at 1,130",
-      "thesis": "Two brokers reiterated buys after results. Management guides 14-15% loan growth. CLSA target is about 25% above the ₹1,061 price.",
-      "risks": "Loan growth guidance trails system credit growth (18-19%). Rate hikes would squeeze some segments. Goldman's target gives only about 6% upside.",
-      "sources": ["https://businessupturn.com/finance/stock-market/brokerages/stocks-to-watch-on-brokerages-november-12-2026-tata-power-sbi-grse-bharat-electronics-nse/"]
+      "symbol": "LEMONTREE",
+      "name": "Lemon Tree Hotels",
+      "approx_price": 122,
+      "target": 140,
+      "target_source": "Motilal Oswal (Buy); CLSA Outperform at ₹163 earlier in the week",
+      "thesis": "Q2 revenue up 18% and profit up 64%, both well above estimates. Stock is up 5% in a week but Motilal still sees about 15% upside.",
+      "risks": "Hotel stocks are cyclical and sensitive to travel demand. Price is implied from Motilal's stated 15% upside (13 Nov).",
+      "sources": ["https://trendlyne.com/posts/5949220/five-interesting-stocks-today-november-13-2026"]
     },
     {
       "symbol": "WABAG",
       "name": "Va Tech Wabag",
       "approx_price": 2080,
       "target": 2430,
-      "target_source": "Axis Direct",
-      "thesis": "Q2 revenue up 22% and profit up 23%; record ₹20,207 cr order book.",
-      "risks": "Project delays and late customer payments.",
+      "target_source": "Axis Direct (Buy)",
+      "thesis": "Q2 revenue up 22% and profit up 23%; record ₹20,207 cr order book gives multi-year visibility. About 17% upside to target.",
+      "risks": "Project delays and late customer payments. Price is implied from the 11 Nov upside.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "SBIN",
+      "name": "State Bank of India",
+      "approx_price": 1080,
+      "target": 1325,
+      "target_source": "CLSA (Outperform); Goldman Sachs Buy at 1,130",
+      "thesis": "PSU banks led last week (index +7.5%) and SBI rose about 6% to near ₹1,080 after results. Management guides 14-15% loan growth; CLSA's target is about 23% above the current price.",
+      "risks": "Already up 6% in a week, so wait for a dip rather than chase. Goldman's target gives only about 5% upside. Rate hikes would squeeze some loan segments.",
+      "sources": ["https://www.thefinancialeconomy.com/nifty-outlook-next-week/", "https://businessupturn.com/finance/stock-market/brokerages/stocks-to-watch-on-brokerages-november-12-2026-tata-power-sbi-grse-bharat-electronics-nse/"]
+    },
+    {
+      "symbol": "FLUOROCHEM",
+      "name": "Gujarat Fluorochemicals",
+      "approx_price": 4825,
+      "target": 5380,
+      "target_source": "ICICI Securities (Buy)",
+      "thesis": "Q2 revenue up 45.5% and profit up 35.8% year on year. About 11.5% upside to target.",
+      "risks": "Smaller upside than the others; chemicals pricing can swing. Price is implied from the 11 Nov upside.",
       "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
     }
   ],
   "avoid": [
-    {"symbol": "TRITURBINE", "reason": "Results missed: Q2 EBITDA fell 45% and came in 30% below street estimates. UBS still says Buy at ₹840, but wait for execution to recover."},
-    {"symbol": "PAGEIND", "reason": "Fell 12.9% to ₹31,850 on 12 Nov after results. Don't catch the fall until the reason is clear."},
-    {"symbol": "KALYANKJIL", "reason": "Reported profit up 64%, but adjusted for a ₹73.5 cr one-time gain it is up 28%. Brokers raised targets, but don't chase the spike."},
-    {"symbol": "CUPID", "reason": "Huge run this year and on the exchange's ASM surveillance list."},
-    {"symbol": "HINDCOPPER", "reason": "Jumped over 6% on 12 Nov after profit rose about 2.8x; no broker target found yet and copper prices drive it. Wait for a pullback."}
+    {"symbol": "NATCOPHARM", "reason": "Results missed badly: Q2 profit fell 61% to ₹203 cr and revenue fell 29%, as international sales dropped 41%. Stay away until the export business recovers."},
+    {"symbol": "GRASIM", "reason": "Reported a ₹234 cr loss due to a ₹767 cr one-time charge on its Canadian pulp venture; even adjusted profit fell 10%. Standalone profit was inflated by UltraTech dividends. Shares fell about 3% on 13 Nov."},
+    {"symbol": "ASHOKLEY", "reason": "Volumes up 32% but margins shrank about 3 percentage points and profit rose only 9-13%. The auditor could not sign off on the consolidated results because of unreconciled loans at Hinduja Leyland Finance. Wait for clarity."},
+    {"symbol": "EICHERMOT", "reason": "Record revenue (+20%), but profit of ₹1,573 cr missed the ₹1,626 cr poll estimate as material costs rose 24% and margins slipped. No broker targets yet; wait for the reaction."},
+    {"symbol": "DATAPATTNS", "reason": "Results missed: revenue and profit both fell over 55% and missed estimates by 45-69%. Jefferies still says Buy at ₹5,545 on new orders, but the miss is too large to chase."},
+    {"symbol": "IRCTC", "reason": "Results missed: Q2 profit fell 23% to ₹264 cr."}
   ],
-  "watch_today": ["GRASIM", "EICHERMOT", "ABB", "TMPV", "RVNL", "GODREJIND", "NATCOPHARM", "JUBLPHARMA", "INOXWIND", "DEEPAKFERT", "FACT", "BELRISE", "GILLETTE", "ZFCVINDIA"],
+  "watch_today": ["SANDHAR"],
   "portfolio_notes": {
-    "BHARTIARTL": "Dropped from buy ideas: profit up 31% but it slightly missed estimates. ICICI Direct still targets ₹2,400. Fine to hold with a stop.",
-    "FLUOROCHEM": "Dropped from today's list only for space. Revenue up 45% and profit up 36%; ICICI Securities target ₹5,380 still stands.",
-    "KALYANKJIL": "Citi raised its target to ₹880 and BoB Capital upgraded to Buy at ₹786, but adjusted profit growth is only 28%. Hold if owned; don't add on momentum.",
-    "LEMONTREE": "Removed from avoid: CLSA rates it Outperform with a ₹163 target after a record quarter.",
-    "RVNL": "Reports results today (13 Nov). Check the numbers before trading."
+    "HINDALCO": "Dropped from buy ideas today: no fresh news or live price found. Nuvama's ₹1,184 target from 6 Nov still stands; metals fell about 1% on 13 Nov.",
+    "SBIN": "Up about 6% last week to near ₹1,080, so less upside than on 13 Nov. Still a buy on CLSA's target; avoid chasing.",
+    "KALYANKJIL": "Hit a 52-week high of ₹718 after a 24.5% weekly jump. Motilal Oswal says Buy at ₹800 (about 15% upside), but adjusted profit growth is lower than the headline. Hold if owned; don't add after this spike.",
+    "LEMONTREE": "Added to buy ideas: profit up 64% and Motilal Oswal targets ₹140.",
+    "RVNL": "Q2 profit rose 8.3% to ₹250 cr. No estimates found to judge a beat or miss, so it's a hold, not a fresh buy.",
+    "TRITURBINE": "Removed from avoid only because no fresh news was found today; the Q2 miss from 13 Nov still stands.",
+    "PAGEIND": "Removed from avoid only because no fresh news was found today; still let the post-results fall settle before buying."
   },
-  "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate; check the live quote before trading."
+  "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate (some are implied from the upside a broker stated); check the live quote before trading."
 }
