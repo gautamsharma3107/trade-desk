@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-17",
+  "market_summary": "Nifty rose 0.58% to 25,291 and Sensex 0.63% to 82,103 on Mon 16 Nov, led by FMCG (+1.9%) and private banks, while pharma, metals, auto and realty fell 1.2-1.7% and breadth was weak (about 1,400 stocks up, 2,800 down). Foreign investors bought a provisional ₹4,865 cr and domestic funds sold ₹3,519 cr, taking November foreign buying to about ₹79,300 cr; India VIX rose 1.3% to 15.70. Today is Nifty weekly expiry with the index looking stretched, and the main results season ended on 14 Nov, so few notable results are due.",
+  "buy_ideas": [
+    {
+      "symbol": "DEEPAKFERT",
+      "name": "Deepak Fertilisers and Petrochemicals",
+      "approx_price": 1362,
+      "target": 1845,
+      "target_source": "TradingView average of 2 analysts (range ₹1,790-1,900); Trendlyne consensus ₹1,897. No fresh broker note after Q2 yet.",
+      "thesis": "Q2 profit up 85% to ₹394 cr on revenue up 11% to ₹3,334 cr; EBITDA up 62% to ₹750 cr and margin up about 7 percentage points to 22.5%. Shares jumped about 8% to ₹1,362 on 16 Nov but remain well below the August high of ₹1,681. The analyst average implies about 35% upside.",
+      "risks": "Already up 8% in one day, so a pullback is possible. The targets come from only two analysts and predate these results; the only recent named note (Keynote, June) was Neutral at ₹1,534. Net debt is ₹4,743 cr, and chemical and gas prices swing.",
+      "sources": ["https://upstox.com/news/market-news/stocks/deepak-fertilizers-shares-surge-over-8-as-q2-profit-grows-85-yo-y-to-394-crore-revenue-jumps-11/article-203500/", "https://www.tradingview.com/symbols/NSE-DEEPAKFERT/forecast/", "https://trendlyne.com/research-reports/stock/317/DEEPAKFERT/deepak-fertilisers-petrochemicals-corporation-ltd/"]
+    },
+    {
+      "symbol": "ABB",
+      "name": "ABB India",
+      "approx_price": 6900,
+      "target": 8200,
+      "target_source": "Motilal Oswal (upgraded to Buy from Neutral)",
+      "thesis": "September-quarter revenue up 19% to ₹3,738 cr and profit up 8-11% to about ₹440 cr, in line with estimates. Record order inflow of ₹4,733 cr (+56%) lifts the backlog 36% to ₹12,927 cr. Motilal expects profit to grow about 31% a year through CY28. The stock slipped about 2% on 16 Nov, so the target is now about 19% above the price.",
+      "risks": "Expensive at about 60 times 2028 earnings. Profit growth this quarter was modest, and the price is implied from the ₹7,045 close on 13 Nov minus the 2% fall, so check the live quote.",
+      "sources": ["https://www.tradingview.com/news/moodys:ba7b78804d282:0-abb-india-shares-36-up-in-2026-time-to-buy-rating-upgrade-boost-and-target-price-hike-by-motilal-oswal-details-here/", "https://www.tradingview.com/news/moneycontrol:a00707564094b:0-taking-stock-markets-bounce-back-nifty-closes-near-25-300-sensex-jumps-510-pts/"]
+    },
+    {
+      "symbol": "APOLLOHOSP",
+      "name": "Apollo Hospitals",
+      "approx_price": 8771,
+      "target": 10400,
+      "target_source": "Motilal Oswal (Buy)",
+      "thesis": "Q2 revenue up 20.8% and profit up 32%, both above estimates. Hospital stocks led on 16 Nov (Apollo +2.9% to ₹8,771, Max +6.6%, Fortis +5.1%) as investors moved to defensives. About 19% upside to target.",
+      "risks": "Valuation is high and new hospitals take time to fill. The rally in hospital stocks could cool after a strong day.",
+      "sources": ["https://hdfcsky.com/news/market-close-report-today-november-16-2026-nifty-sensex-shine-as-global-ai-jitters-redirect-trade-towards-india", "https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    },
+    {
+      "symbol": "MINDACORP",
+      "name": "Minda Corporation",
+      "approx_price": 715,
+      "target": 900,
+      "target_source": "Emkay (Buy)",
+      "thesis": "Q2 revenue up 43% and profit up 69% year on year; revenue beat estimates by 10.7%. Growth from EV parts and digital displays. About 26% upside to target.",
+      "risks": "No fresh price today; the price is implied from the 11 Nov upside. Auto stocks fell 1.3% on 16 Nov and small caps 1.1%, so it may have slipped. Mid-cap, so it swings more.",
+      "sources": ["https://trendlyne.com/posts/5943811/five-stocks-to-buy-from-analysts-this-week-november-11-2026"]
+    }
+  ],
+  "avoid": [
+    {"symbol": "TMPV", "reason": "Results missed: Q2 loss of about ₹5,531 cr after ₹6,738 cr of one-off charges, and JLR cut its FY27 margin guidance to 2-3% from 4%. Shares fell 8.7% to ₹262 on 16 Nov. Motilal Oswal says Sell at ₹240; Nomura Neutral at ₹287."},
+    {"symbol": "KAYNES", "reason": "Results missed: Q2 profit fell about 62% to ₹45 cr and the stock dropped about 13% on 16 Nov. Wait for it to settle."},
+    {"symbol": "INOXWIND", "reason": "Results missed: Q2 profit fell 43% to ₹68.5 cr even though revenue rose 21%; shares fell over 9%."},
+    {"symbol": "JUBLPHARMA", "reason": "Results missed: Q2 profit fell 74% to ₹31 cr despite revenue up 21%."},
+    {"symbol": "ZAGGLE", "reason": "Profit fell 30% to ₹24.5 cr while revenue rose 34%, so margins shrank; shares fell 7%."},
+    {"symbol": "NATCOPHARM", "reason": "Results missed badly last week: Q2 profit fell 61% and revenue fell 29%. Still avoid until exports recover."},
+    {"symbol": "ASHOKLEY", "reason": "Profit rose only 11-13% on a 35%+ revenue jump as margins shrank, and the auditor could not sign off on consolidated results due to unreconciled loans at Hinduja Leyland Finance. Wait for clarity."}
+  ],
+  "watch_today": [],
+  "portfolio_notes": {
+    "EICHERMOT": "Moved off the avoid list: shares rose over 3% on 16 Nov and Elara raised its Buy target to ₹9,489, but Motilal Oswal stays Neutral at ₹7,420, below the price. Profit still missed the poll estimate, so hold, don't chase.",
+    "HINDALCO": "Fell 2.2% to ₹923 on 16 Nov as metals sold off; Novelis agreed to sell its China units for about $265 million. Hold; no fresh broker view.",
+    "KALYANKJIL": "Up 1.6% to ₹708 on 16 Nov after last week's spike. Still don't add after the run-up.",
+    "SBIN": "Dropped from buy ideas only because no fresh price or news was found today; CLSA's ₹1,325 target still stands and PSU banks rose 0.5% on 16 Nov.",
+    "LEMONTREE": "Dropped from buy ideas only because no fresh news was found today; Motilal's ₹140 target still stands. Small caps fell 1.1% on 16 Nov.",
+    "WABAG": "Dropped from buy ideas only because no fresh news was found today; Axis Direct's ₹2,430 target still stands.",
+    "FLUOROCHEM": "Dropped from buy ideas: smallest upside of last week's list and no fresh news today.",
+    "ITC": "Up 3.5% to ₹295 on 16 Nov as FMCG led, but Q2 profit fell 18%; most broker targets (₹300-350, early Nov) now give limited upside. Not a buy on earnings."
+  },
+  "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate (some are implied from a stated move or upside); check the live quote before trading."
+}

@@ -146,7 +146,7 @@ The Earnings, News and Screener tabs flag "your stocks": your holdings (HELD), t
 
 `data/ideas.json` has `date`, `market_summary`, `buy_ideas[]` (symbol, name, approx_price, target, target_source, thesis, risks, sources), `avoid[]`, `watch_today[]`, `portfolio_notes{SYMBOL: note}` and `disclaimer`. When the file is pushed, Streamlit Cloud picks up the change on its own.
 
-After updating it, run `python tools/archive_ideas.py` and commit `data/ideas_history/<date>.json` too: the Journal tab uses that history to check how each idea did. Optionally, append the day's FII/DII figures to `data/fii_dii.csv` (columns `Date, Who, Buy, Sell, Net`) to keep a longer flows history than the app can on its own.
+Each time a new `data/ideas.json` lands on `main`, the **Archive daily ideas** GitHub Action runs `tools/archive_ideas.py` and commits a dated copy to `data/ideas_history/`; the Journal tab uses that history to check how each idea did. You can also run the script by hand. Optionally, append the day's FII/DII figures to `data/fii_dii.csv` (columns `Date, Who, Buy, Sell, Net`) to keep a longer flows history than the app can on its own.
 
 ## Tests
 
