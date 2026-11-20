@@ -1,30 +1,31 @@
 {
-  "date": "2026-11-19",
-  "market_summary": "Nifty fell 0.63% to 25,228 and Sensex 0.61% to 82,032 on Wed 18 Nov as traders booked profits after a 12-session rally; metals fell about 2.5%, consumer durables 3% (jewellers hit by gold at a 14-month low) and IT 1.2%, while SBI, Cipla and PSU banks rose. Breadth was weak (1,448 up, 2,800 down on BSE) and midcaps fell 1.2%. Foreign investors bought ₹5,867 cr while domestic funds sold ₹3,160 cr, and India VIX closed at 15.56 (+0.26%); results season is almost over, so moves now come from broker notes.",
+  "date": "2026-11-20",
+  "market_summary": "Nifty rebounded 1.14% to 25,514 (about a nine-month closing high) and Sensex 1.21% to 83,022 on Thu 19 Nov after a gap-down start; autos jumped 4.4% (Maruti +7.3%, M&M and Eicher +4.6%) and consumer durables 3.6% as copper and aluminium fell, while IT lost 1.1% after Fed minutes pointed to more US rate hikes. Foreign investors bought ₹7,411 cr (over ₹1 lakh cr so far in November) and domestic funds sold ₹1,357 cr; India VIX rose 2.1% to 15.90. Results season is essentially over (only small caps report today), so moves now come from broker notes, commodities and the RBI policy on 4 Dec.",
   "buy_ideas": [
+    {
+      "symbol": "EICHERMOT",
+      "name": "Eicher Motors",
+      "approx_price": 8056,
+      "target": 9100,
+      "target_source": "Emkay (Buy), via Trendlyne 17 Nov",
+      "thesis": "Q2 FY27 revenue rose 20% and profit about 15%. Stock closed ₹8,056 (+4.6%) on 19 Nov as autos rallied 4.4% on cheaper copper and aluminium, which eases the margin worry. Emkay's ₹9,100 target is about 13% above the close.",
+      "risks": "EBITDA margin fell 80 bps to 23.7%, and the stock has already jumped in one day; Motilal Oswal is only Neutral at ₹7,420. Metal prices can bounce back.",
+      "sources": [
+        "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026",
+        "https://www.marketcalls.in/futures-and-options/post-market-report-19-november-2026.html"
+      ]
+    },
     {
       "symbol": "LAURUSLABS",
       "name": "Laurus Labs",
       "approx_price": 2338,
       "target": 2550,
       "target_source": "ICICI Direct (Buy), via Trendlyne 17 Nov",
-      "thesis": "Q2 FY27 revenue rose about 33% to ₹2,206 cr, led by CDMO up about 86% to ₹875 cr. EBITDA was ₹750 cr with a 34% margin, up 962 bps, and profit was ₹437 cr. The strongest earnings quality on today's list.",
-      "risks": "Target is only about 9% above the price, so the upside is modest after a big run. CDMO orders are lumpy, and the Laurus Bio unit fell about 38%. Price is the broker's reference price; check the live quote.",
-      "sources": [
-        "https://trendlyne.com/research-reports/all/"
-      ]
-    },
-    {
-      "symbol": "ABB",
-      "name": "ABB India",
-      "approx_price": 6923,
-      "target": 8275,
-      "target_source": "ICICI Direct (Buy) ₹8,275; Motilal Oswal (Buy, upgraded) ₹8,200",
-      "thesis": "September-quarter revenue up 12% and profit up 8%, with a record order book up 36% to about ₹12,900 cr. Two brokers now say Buy, with targets about 18-20% above the price.",
-      "risks": "Margin fell 70 bps and profit growth was modest. Valued at about 60 times 2028 earnings. Capital-goods stocks fell with the market on 18 Nov.",
+      "thesis": "Q2 FY27 revenue up about 33% to ₹2,206 cr, led by CDMO up about 86%; EBITDA ₹750 cr at a 34% margin (up 962 bps) and profit ₹437 cr. Still the cleanest earnings beat on the list; pharma rose 0.6% on 19 Nov.",
+      "risks": "Upside to target only about 9%. CDMO orders are lumpy. No fresh price found today; ₹2,338 is the broker's reference price, so check the live quote.",
       "sources": [
         "https://trendlyne.com/research-reports/all/",
-        "https://www.tradingview.com/news/moodys:ba7b78804d282:0-abb-india-shares-36-up-in-2026-time-to-buy-rating-upgrade-boost-and-target-price-hike-by-motilal-oswal-details-here/"
+        "https://www.marketcalls.in/futures-and-options/post-market-report-19-november-2026.html"
       ]
     },
     {
@@ -33,14 +34,39 @@
       "approx_price": 30420,
       "target": 37909,
       "target_source": "IDBI Capital (Buy), via Trendlyne 17 Nov",
-      "thesis": "Q2 FY27 revenue up 64% and profit up 21%; new orders up 86%, taking the order book to ₹33,300 cr. IDBI Capital's target is about 25% above the price.",
-      "risks": "No fresh news today; the price is implied from the 17 Nov note, so check the live quote. Very expensive stock, and profit grew much slower than revenue.",
+      "thesis": "Q2 FY27 revenue up 64% and profit up 21%; new orders up 86%, taking the order book to ₹33,300 cr. IDBI sees revenue up 57% in FY27 and margins rising to 16.7% by FY28; target about 25% above the reference price.",
+      "risks": "Price is implied from the 17 Nov note (no fresh quote found), so check it. Very expensive stock, and profit grew much slower than revenue.",
       "sources": [
         "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026"
+      ]
+    },
+    {
+      "symbol": "ABB",
+      "name": "ABB India",
+      "approx_price": 6923,
+      "target": 8275,
+      "target_source": "ICICI Direct (Buy) ₹8,275; Motilal Oswal (Buy, upgraded) ₹8,200",
+      "thesis": "September-quarter revenue up 12% and profit up 8%, with a record order book up 36% to about ₹12,900 cr. Two brokers say Buy, targets about 18-20% above the price.",
+      "risks": "Margin fell 70 bps and profit growth was modest; valued at about 60 times 2028 earnings. No fresh price found today; ₹6,923 is from the earlier broker notes.",
+      "sources": [
+        "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026",
+        "https://trendlyne.com/research-reports/all/"
       ]
     }
   ],
   "avoid": [
+    {
+      "symbol": "ALKEM",
+      "reason": "USFDA warning letter for its Daman plant, which brings in about 9% of revenue. US approvals from that site can stall; wait for the remediation plan."
+    },
+    {
+      "symbol": "POLICYBZR",
+      "reason": "Fell about 6% to ₹970 on 19 Nov after co-founder Alok Bansal said he is leaving his executive role. Management news, not earnings; wait for it to settle."
+    },
+    {
+      "symbol": "VOLTAS",
+      "reason": "Jumped about 9% on 19 Nov because copper hit a seven-month low, not on results. Don't chase a one-day commodity spike."
+    },
     {
       "symbol": "CUMMINSIND",
       "reason": "Results missed: Q2 EBITDA fell 27% and profit 19% on only 4% revenue growth, and gross margin fell 4.4 points on metal costs. IDBI still says Buy at ₹5,271, but wait for margins to recover."
@@ -55,11 +81,7 @@
     },
     {
       "symbol": "TMPV",
-      "reason": "Results missed: Q2 loss of about ₹5,531 cr after one-off charges and JLR cut its margin guidance to 2-3%. Fell another 2.6% on 18 Nov, among the top Nifty losers."
-    },
-    {
-      "symbol": "FIRSTCRY",
-      "reason": "Jumped about 13% on 17 Nov on JM Financial's 'worst is over' note, but EBITDA fell and JM cut its target to ₹245. Don't chase the spike."
+      "reason": "Results missed: Q2 loss of about ₹5,531 cr after one-off charges and JLR cut its margin guidance to 2-3%. Bounced 3.7% on 19 Nov with the auto rally, but that is a sector move, not a fix."
     },
     {
       "symbol": "KAYNES",
@@ -79,25 +101,32 @@
     },
     {
       "symbol": "ASHOKLEY",
-      "reason": "Auditor could not sign off on consolidated results over unreconciled loans at Hinduja Leyland Finance. Brokers are split (BOB Hold ₹190, Axis Buy ₹200) and BOB expects cost inflation to hit margins. Wait for clarity."
+      "reason": "Auditor could not sign off on consolidated results over unreconciled loans at Hinduja Leyland Finance. Brokers are split (Joindre Buy ₹192, BOB Hold ₹190, ICICI Direct Hold ₹170 vs ₹162) and margins fell 2 points. Wait for clarity."
     }
   ],
   "watch_today": [
-    "MUTHOOTMF"
+    "VALECHAENG",
+    "GVPTECH",
+    "ELITECON",
+    "STARBEAM",
+    "TIHIL",
+    "PULSRIN"
   ],
   "portfolio_notes": {
-    "NATCOPHARM": "Moved off the avoid list: Q2 profit rose 42% from the previous quarter to ₹173 cr and ICICI Direct says Buy at ₹1,000 (about 22% above ₹823). Profit is still well below last year, so only small positions.",
-    "KPRMILL": "Dropped from buy ideas only because no fresh news or price was found today; ICICI Direct's ₹1,400 target still stands.",
-    "WEWORK": "Dropped from buy ideas only because no fresh news or price was found today; ICICI Securities' ₹933 target still stands.",
-    "EICHERMOT": "Auto stocks fell over 1% on 18 Nov. Emkay's ₹9,100 Buy and Motilal's ₹7,420 Neutral still stand. Hold; don't chase.",
-    "APOLLOHOSP": "Rose 1.25% on 18 Nov, a top Nifty gainer. Motilal's ₹10,400 target still stands.",
-    "SBIN": "Rose 2.4% on 18 Nov, the top Nifty gainer, as PSU banks held up. CLSA's ₹1,325 target still stands.",
-    "HINDALCO": "Fell about 3% on 18 Nov as metals dropped 2.5% on weaker global prices and a stronger dollar. Hold; no fresh broker view.",
-    "KALYANKJIL": "Fell about 3% on 18 Nov as gold hit a 14-month low; Titan fell 5.3%. Don't add while gold is weak.",
-    "ITC": "Rose 1.1% on 18 Nov. Anand Rathi has a Buy at ₹325 (from ₹275, 4 Nov), but Q2 profit fell 18%, so it is not an earnings buy.",
+    "EICHERMOT": "Moved into buy ideas: up 4.6% to ₹8,056 on 19 Nov with the auto rally. Emkay ₹9,100 Buy still stands.",
+    "SBIN": "PSU banks rose 2.3% on 19 Nov and Bank Nifty closed above 63,000 for the first time. CLSA's ₹1,325 target still stands.",
+    "APOLLOHOSP": "Fell 1.0% to ₹8,730 on 19 Nov, among the top Nifty losers. Motilal's ₹10,400 target still stands; no new news.",
+    "ITC": "Plans staggered cigarette price hikes in 2027. Anand Rathi's ₹325 Buy stands, but Q2 profit fell 18%, so it is not an earnings buy.",
+    "KALYANKJIL": "Q2 was strong (revenue +31%, profit +64%, about ₹73 cr of that a one-off land gain); UBS ₹950 and Jefferies ₹900 say Buy. Consumer durables rose 3.6% on 19 Nov, but it is still tied to gold prices; small positions only.",
+    "HINDALCO": "Metals rose only 0.6% on 19 Nov while copper and aluminium prices fell, which is bad for aluminium makers. Hold; no fresh broker view.",
+    "NATCOPHARM": "No fresh news; ICICI Direct's ₹1,000 Buy still stands. Profit is still well below last year, so only small positions.",
+    "KPRMILL": "No fresh news or price today; ICICI Direct's ₹1,400 target still stands.",
+    "WEWORK": "No fresh news or price today; ICICI Securities' ₹933 target still stands.",
     "DEEPAKFERT": "No fresh news today; the analyst average of about ₹1,845 still stands.",
-    "MINDACORP": "No fresh news today; Emkay's ₹900 target still stands.",
-    "TMPV": "Still on avoid: results missed and it fell another 2.6% on 18 Nov."
+    "MINDACORP": "No fresh news today; Emkay's ₹900 target still stands. Auto parts should benefit from cheaper metals.",
+    "TMPV": "Still on avoid: results missed. The 3.7% bounce on 19 Nov was the sector rally.",
+    "FIRSTCRY": "Taken off the avoid list only because there is no fresh news; JM Financial's ₹245 target still stands.",
+    "MUTHOOTMF": "Q2 was already out on 5 Nov: profit more than tripled to ₹111 cr and gross NPA fell to 3.38%. Yesterday's board meeting showed nothing new; no broker target found."
   },
   "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate (some are broker reference prices or implied from a stated upside); check the live quote before trading."
 }
