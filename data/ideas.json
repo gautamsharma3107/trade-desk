@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-24",
-  "market_summary": "Markets are shut today (Tue 24 Nov, Guru Nanak Jayanti) and reopen Wed 25 Nov. On Mon 23 Nov the Nifty fell 1.75% to 25,349.65 and the Sensex 1,484 points (-1.77%) to 82,435.99 after opening higher: metals sank 4.2% (Tata Steel -8.5%, APL Apollo -21.8% on their tubes deal), banks fell over 2%, while IT rose 1.9% (TCS +3.3%) after the Nasdaq's 5% drop on Friday, US-Iran tension and early monthly expiry hit sentiment. Foreign investors still bought ₹5,673 cr (provisional) and domestic funds sold ₹2,760 cr; India VIX was about 18 intraday, up from 17.32. Results season is over; Siemens Energy India reports on 25 Nov. Prices below are from before Monday's fall, so check live quotes.",
+  "date": "2026-11-25",
+  "market_summary": "Markets reopen today (Wed 25 Nov) after Tuesday's Guru Nanak Jayanti holiday. On Mon 23 Nov the Nifty fell 1.75% to 25,349.65 and the Sensex 1.77% to 82,435.99; Bank Nifty lost 3.2%, metals 3.7% and IT gained 1.7%. GIFT Nifty was about 200 points higher early today, pointing to a gap-up despite weak Asia (Kospi about -5%, Nikkei about -3%) and a 1.5% Nasdaq fall; Brent is near $91. FIIs bought ₹5,673 cr and DIIs sold ₹2,760 cr on 23 Nov (likely provisional); India VIX rose about 3% to near 17.9. Results season is over and no results were confirmed for today; RBI policy is on 4 Dec.",
   "buy_ideas": [
     {
       "symbol": "APOLLOHOSP",
@@ -66,6 +66,18 @@
         "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026",
         "https://trendlyne.com/research-reports/all/"
       ]
+    },
+    {
+      "symbol": "PTCIL",
+      "name": "PTC Industries",
+      "approx_price": 24431,
+      "target": 29000,
+      "target_source": "ICICI Securities (Buy, reiterated), via Trendlyne 24 Nov",
+      "thesis": "Q2 FY27 revenue rose 72.7% and net profit 83.5% year on year, helped by aerospace contract wins from Safran and Airbus. ICICI Securities projects 70% revenue and 91% profit growth a year through FY29; its ₹29,000 target is 18.7% above the price.",
+      "risks": "Price is implied from the 18.7% upside (Trendlyne gave no quote), so check the live price. Very expensive, small-float stock that can swing hard; the growth depends on aerospace orders ramping up on time.",
+      "sources": [
+        "https://trendlyne.com/posts/5964031/five-stocks-to-buy-from-analysts-this-week-november-24-2026"
+      ]
     }
   ],
   "avoid": [
@@ -91,7 +103,7 @@
     },
     {
       "symbol": "CUMMINSIND",
-      "reason": "Results missed: Q2 EBITDA fell 27% and profit 19% on only 4% revenue growth, and gross margin fell 4.4 points on metal costs. IDBI still says Buy at ₹5,271, but wait for margins to recover."
+      "reason": "Results missed: Q2 revenue up only 4.1% and profit down 18.5% on raw-material costs; IDBI cut FY27-28 profit estimates by about 17%. IDBI still says Buy at ₹5,271 (30% upside, implying about ₹4,050) after a 21% fall in three months, but wait for margins to recover."
     },
     {
       "symbol": "RELAXO",
@@ -128,14 +140,18 @@
     {
       "symbol": "VOLTAS",
       "reason": "Spiked about 9% on 19 Nov on cheaper copper, then announced a compressor JV with Atomberg. Commodity and deal news, not results; don't chase."
+    },
+    {
+      "symbol": "ACE",
+      "reason": "Q2 profit up 82% is flattered by a one-time gain from selling a subsidiary stake to KATO Works; underlying revenue grew 20.5%. ICICI Direct's ₹1,515 Buy stands, but don't treat the profit jump as an earnings beat."
     }
   ],
   "watch_today": [],
   "portfolio_notes": {
     "EICHERMOT": "In buy ideas. Autos fell only 0.3% on 23 Nov; Emkay's ₹9,100 Buy stands.",
-    "SBIN": "Banks fell over 2% on 23 Nov after a record open; SBI was down about 2.5% intraday. No company news; CLSA's ₹1,325 target still stands.",
-    "APOLLOHOSP": "In buy ideas. No fresh news on 23 Nov; Macquarie's ₹10,500 Outperform stands. The market fall may give the dip to wait for.",
-    "ITC": "Plans staggered cigarette price hikes in 2027. Anand Rathi's ₹325 Buy stands, but Q2 profit fell 18%, so it is not an earnings buy.",
+    "SBIN": "Fell 2.8% to ₹1,132.65 on 23 Nov as banks dropped about 3%. No company news; CLSA's ₹1,325 target still stands.",
+    "APOLLOHOSP": "In buy ideas. No fresh news; Macquarie's ₹10,500 Outperform stands. If today's expected gap-up fades, the 23 Nov dip is the entry to wait for.",
+    "ITC": "Rose 0.6% to ₹301 on 23 Nov. Anand Rathi's ₹325 Buy stands, but Q2 profit fell 18%, so it is not an earnings buy.",
     "KALYANKJIL": "Q2 was strong (revenue +31%, profit +64%, about ₹73 cr of that a one-off land gain); UBS ₹950 and Jefferies ₹900 say Buy. Consumer durables rose 3.6% on 19 Nov, but it is still tied to gold prices; small positions only.",
     "HINDALCO": "Fell 3% to about ₹901 on 23 Nov as metals dropped 4.2% (now down about 6% in two weeks). Hold; no fresh broker view found. Consider trimming if metals keep falling.",
     "NATCOPHARM": "No fresh news; ICICI Direct's ₹1,000 Buy still stands. Profit is still well below last year, so only small positions.",
@@ -146,9 +162,11 @@
     "TMPV": "Still on avoid: results missed. The 3.7% bounce on 19 Nov was the sector rally.",
     "FIRSTCRY": "Taken off the avoid list only because there is no fresh news; JM Financial's ₹245 target still stands.",
     "MUTHOOTMF": "No new news; Q2 (profit more than tripled to ₹111 cr) still the latest.",
-    "CUMMINSIND": "Still on avoid after the Q2 miss. A broker list shows Nomura at Neutral with ₹5,112; no confirmed price.",
+    "CUMMINSIND": "Still on avoid after the Q2 miss (profit -18.5%); IDBI's ₹5,271 Buy implies a price near ₹4,050.",
     "POLICYBZR": "Jumped 7.6% to about ₹1,100 on 23 Nov; still on avoid after the co-founder exit news.",
-    "TATASTEEL": "New on avoid: fell 8.5% on the APL Apollo tubes deal."
+    "TATASTEEL": "On avoid: fell 8.4% to ₹163 on 23 Nov on the APL Apollo tubes deal.",
+    "PTCIL": "New buy idea: Q2 revenue +73%, profit +84%; ICICI Securities ₹29,000.",
+    "ACE": "Added to avoid: Q2 profit jump came mostly from a one-time stake sale gain."
   },
   "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate (some are broker reference prices or implied from a stated upside); check the live quote before trading."
 }
