@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-26",
-  "market_summary": "Markets rebounded on Wed 25 Nov after Monday's fall: the Nifty rose 1.85% to 25,819.25 and the Sensex 1.82% to 83,938, led by FMCG (+3.8%, HUL +6%), financials (+2.2%) and banks (about +1.8-2%), while metals fell 2.1% as Tata Steel kept sliding on the APL Apollo deal; midcaps were flat and smallcaps slightly lower. FIIs bought a provisional ₹4,479 cr (11th straight buying day) and DIIs also bought ₹4,019 cr; India VIX fell about 7% to near 16.4. GIFT Nifty was near 26,020 early today, pointing to another gap-up, but Brent is back near $95 after Houthi strikes on Saudi Arabia and US markets are shut for Thanksgiving. Results season is over and no notable results are due today; RBI policy is on 4 Dec.",
+  "date": "2026-11-27",
+  "market_summary": "Markets rose for a second day on Thu 26 Nov but gave up most early gains: the Nifty closed up 0.25% at 25,884.50 and the Sensex up 0.46% at 84,328.59, led by IT (+3.66%, HCL Tech +6.4%, TCS +4.9%, Infosys +4.7%) and realty (+3.3%), while FMCG (-0.9%), autos (-0.7%) and banks (Nifty Bank -0.3%) fell. FIIs bought a provisional ₹5,843 cr, their 18th straight buying session, and India VIX eased about 4.7% to 16.84; Brent stayed near $90-95 and the US has proposed tariffs of up to 25% on Indian goods (17% with a trade deal). Results season is over and no notable results are due today; Mahanadi Coalfields lists today and RBI policy is on 4 Dec.",
   "buy_ideas": [
     {
       "symbol": "APOLLOHOSP",
@@ -9,12 +9,26 @@
       "target": 10500,
       "target_source": "Macquarie (double upgrade to Outperform from Underperform, target raised from ₹6,230), via INDmoney 20 Nov",
       "thesis": "Q2 FY27 revenue rose 23% to ₹7,615 cr, EBITDA 29% to ₹1,191 cr and profit 32% to ₹630 cr; margin widened to 15.6% from 14.9%. Inpatient volumes +14%, occupancy up to 73%, pharmacy (HealthCo) EBITDA +75%. Stock jumped 5.3% to an all-time high of about ₹9,200 on 20 Nov; Macquarie's ₹10,500 target is about 14% higher, and Motilal had ₹10,400.",
-      "risks": "Bought after a 5% one-day jump to a record high, so wait for a dip rather than chasing. Hospital stocks sold off earlier this month on fears of drug-price regulation (Supreme Court query on pharmacy markups); that risk has not gone away. The price shown predates the 23 Nov fall (Nifty -1.75%) and the 25 Nov rebound (+1.85%), so check the live quote.",
+      "risks": "Bought after a 5% one-day jump to a record high, so wait for a dip rather than chasing. Hospital stocks sold off earlier this month on fears of drug-price regulation (Supreme Court query on pharmacy markups); that risk has not gone away. Prices move daily (Nifty -1.75% on 23 Nov, +1.85% on 25 Nov, +0.25% on 26 Nov), so check the live quote.",
       "sources": [
         "https://www.indmoney.com/blog/stocks/why-apollo-hospitals-share-is-rising",
         "https://www.5paisa.com/blog/post-market-update-sensex-jumps-900-nifty-tops-25800-november-20-2026",
         "https://www.kotakneo.com/news/sectors/hospital-stocks-recover-after-regulatory-sell-off/",
         "https://www.5paisa.com/blog/sensex-nifty-market-close-25-nov-2026"
+      ]
+    },
+    {
+      "symbol": "BSE",
+      "name": "BSE Ltd",
+      "approx_price": 3990,
+      "target": 4450,
+      "target_source": "HDFC Securities (upgraded to Buy from Add, target raised from ₹4,180), 26 Nov; ICICI Securities Buy ₹4,210, Motilal Oswal Buy ₹4,000",
+      "thesis": "Q2 FY27 net profit rose about 45% to ₹809 cr (H1 profit +53%, H1 revenue +49%). HDFC Securities upgraded on 26 Nov citing options market-share gains (premium share 33.5% and notional 48.7% in October vs 32% and 46.8% in Q2), October premium turnover up 53% month on month, and a lower settlement-fund requirement; it raised EPS estimates and values BSE at about 44x FY27 earnings. Stock rose 5.7% to ₹3,990.40, a four-month high; the ₹4,450 target is about 11.5% higher.",
+      "risks": "Bought after a 5.7% one-day jump, so wait for a dip rather than chasing. Upside to target is now only about 11%, and Motilal (₹4,000) and JPMorgan (₹3,960) targets are near the current price. Earnings depend on options volumes, which SEBI rules can cut quickly. The Q2 profit figures come from a broker blog, not the filing itself.",
+      "sources": [
+        "https://www.business-standard.com/markets/news/bse-shares-gain-3-hit-4-month-high-on-hdfc-securities-upgrade-to-buy-126112600196_1.html",
+        "https://univest.in/blogs/bse-share-price-hdfc-securities-upgrade-buy-target-4450-valuation-levels-26-november-2026",
+        "https://insights.dsij.in/dsijarticledetail/closing-bell-nifty-50-sensex-extend-gains-for-second-session-it-index-surges-366-realty-gains-327-60652"
       ]
     },
     {
@@ -24,7 +38,7 @@
       "target": 9100,
       "target_source": "Emkay (Buy), via Trendlyne 17 Nov",
       "thesis": "Q2 FY27 revenue rose 20% and profit about 15%. Stock closed ₹8,056 (+4.6%) on 19 Nov as autos rallied 4.4% on cheaper copper and aluminium, which eases the margin worry. Emkay's ₹9,100 target is about 13% above the close.",
-      "risks": "EBITDA margin fell 80 bps to 23.7%, and the stock has already jumped in one day; Motilal Oswal is only Neutral at ₹7,420. Metal prices can bounce back. No fresh price found for 20 Nov; ₹8,056 is the 19 Nov close (autos rose about 0.5% on Friday). The price shown predates the 23 Nov fall (Nifty -1.75%) and the 25 Nov rebound (+1.85%), so check the live quote.",
+      "risks": "EBITDA margin fell 80 bps to 23.7%, and the stock has already jumped in one day; Motilal Oswal is only Neutral at ₹7,420. Metal prices can bounce back. No fresh price found for 20 Nov; ₹8,056 is the 19 Nov close (autos rose about 0.5% on Friday). Prices move daily (Nifty -1.75% on 23 Nov, +1.85% on 25 Nov, +0.25% on 26 Nov), so check the live quote. Autos fell 0.7% on 26 Nov.",
       "sources": [
         "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026",
         "https://www.marketcalls.in/futures-and-options/post-market-report-19-november-2026.html",
@@ -38,7 +52,7 @@
       "target": 2550,
       "target_source": "ICICI Direct (Buy), via Trendlyne 17 Nov",
       "thesis": "Q2 FY27 revenue up about 33% to ₹2,206 cr, led by CDMO up about 86%; EBITDA ₹750 cr at a 34% margin (up 962 bps) and profit ₹437 cr. Still the cleanest earnings beat on the list; pharma rose 0.6% on 19 Nov.",
-      "risks": "Upside to target only about 9%. CDMO orders are lumpy. No fresh price found; ₹2,338 is the broker's reference price, so check the live quote. The price shown predates the 23 Nov fall (Nifty -1.75%) and the 25 Nov rebound (+1.85%), so check the live quote.",
+      "risks": "Upside to target only about 9%. CDMO orders are lumpy. No fresh price found; ₹2,338 is the broker's reference price, so check the live quote. Prices move daily (Nifty -1.75% on 23 Nov, +1.85% on 25 Nov, +0.25% on 26 Nov), so check the live quote.",
       "sources": [
         "https://trendlyne.com/research-reports/all/",
         "https://www.marketcalls.in/futures-and-options/post-market-report-19-november-2026.html",
@@ -52,7 +66,7 @@
       "target": 37909,
       "target_source": "IDBI Capital (Buy), via Trendlyne 17 Nov",
       "thesis": "Q2 FY27 revenue up 64% and profit up 21%; new orders up 86%, taking the order book to ₹33,300 cr. IDBI sees revenue up 57% in FY27 and margins rising to 16.7% by FY28; target about 25% above the reference price.",
-      "risks": "Price is implied from the 17 Nov note (no fresh quote found), so check it. Very expensive stock, and profit grew much slower than revenue. The price shown predates the 23 Nov fall (Nifty -1.75%) and the 25 Nov rebound (+1.85%), so check the live quote.",
+      "risks": "Price is implied from the 17 Nov note (no fresh quote found), so check it. Very expensive stock, and profit grew much slower than revenue. Prices move daily (Nifty -1.75% on 23 Nov, +1.85% on 25 Nov, +0.25% on 26 Nov), so check the live quote.",
       "sources": [
         "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026"
       ]
@@ -64,7 +78,7 @@
       "target": 8275,
       "target_source": "ICICI Direct (Buy) ₹8,275; Motilal Oswal (Buy, upgraded) ₹8,200",
       "thesis": "September-quarter revenue up 12% and profit up 8%, with a record order book up 36% to about ₹12,900 cr. Two brokers say Buy, targets about 18-20% above the price.",
-      "risks": "Margin fell 70 bps and profit growth was modest; valued at about 60 times 2028 earnings. No fresh price found; ₹6,923 is from the earlier broker notes. The price shown predates the 23 Nov fall (Nifty -1.75%) and the 25 Nov rebound (+1.85%), so check the live quote.",
+      "risks": "Margin fell 70 bps and profit growth was modest; valued at about 60 times 2028 earnings. No fresh price found; ₹6,923 is from the earlier broker notes. Prices move daily (Nifty -1.75% on 23 Nov, +1.85% on 25 Nov, +0.25% on 26 Nov), so check the live quote.",
       "sources": [
         "https://trendlyne.com/posts/5957106/five-stocks-to-buy-from-analysts-this-week-november-17-2026",
         "https://trendlyne.com/research-reports/all/"
@@ -77,7 +91,7 @@
       "target": 29000,
       "target_source": "ICICI Securities (Buy, reiterated), via Trendlyne 24 Nov",
       "thesis": "Q2 FY27 revenue rose 72.7% and net profit 83.5% year on year, helped by aerospace contract wins from Safran and Airbus. ICICI Securities projects 70% revenue and 91% profit growth a year through FY29; its ₹29,000 target is 18.7% above the price.",
-      "risks": "Price is implied from the 18.7% upside (Trendlyne gave no quote), so check the live price. Very expensive, small-float stock that can swing hard; the growth depends on aerospace orders ramping up on time. Smallcaps lagged the 25 Nov rebound (Smallcap 100 about -0.5%).",
+      "risks": "Price is implied from the 18.7% upside (Trendlyne gave no quote), so check the live price. Very expensive, small-float stock that can swing hard; the growth depends on aerospace orders ramping up on time. Smallcaps lagged the 25 Nov rebound but rose 0.7% on 26 Nov.",
       "sources": [
         "https://trendlyne.com/posts/5964031/five-stocks-to-buy-from-analysts-this-week-november-24-2026"
       ]
@@ -90,7 +104,7 @@
     },
     {
       "symbol": "TATASTEEL",
-      "reason": "Fell another 2.3% to ₹159.30 on 25 Nov, about 10.5% down in two sessions, on worries over the APL Apollo deal's valuation and debt funding (consolidated gross debt already ₹1.02 trn). Not an earnings move; wait for clarity."
+      "reason": "Bounced 2.5% on 26 Nov after falling about 10.5% in the previous two sessions on worries over the APL Apollo deal's valuation and debt funding (consolidated gross debt already ₹1.02 trn). A one-day bounce is not clarity; not an earnings move."
     },
     {
       "symbol": "INDUSINDBK",
@@ -151,12 +165,12 @@
   ],
   "watch_today": [],
   "portfolio_notes": {
-    "EICHERMOT": "In buy ideas. Autos rose about 1.2% on 25 Nov; Emkay's ₹9,100 Buy stands.",
-    "SBIN": "Banks bounced about 1.8-2% on 25 Nov after the 23 Nov drop (PSU Bank index only +0.4%). No company news; CLSA's ₹1,325 target still stands.",
-    "APOLLOHOSP": "In buy ideas. No fresh company news; pharma/healthcare rose about 2.4% on 25 Nov. Macquarie's ₹10,500 Outperform stands; still better bought on a dip than chased.",
-    "ITC": "FMCG jumped 3.8% on 25 Nov (HUL +6%). Anand Rathi's ₹325 Buy stands, but Q2 profit fell 18%, so it is not an earnings buy.",
-    "KALYANKJIL": "Q2 was strong (revenue +31%, profit +64%, about ₹73 cr of that a one-off land gain); UBS ₹950 and Jefferies ₹900 say Buy. Consumer durables rose 3.6% on 19 Nov, but it is still tied to gold prices; small positions only.",
-    "HINDALCO": "Fell another 1.2% to ₹889.90 on 25 Nov as metals dropped 2.1%; down about 7% in two weeks. Hold with no fresh broker view; consider trimming if metals keep falling.",
+    "EICHERMOT": "In buy ideas. Autos fell 0.7% on 26 Nov after rising 1.2% the day before; no company news. Emkay's ₹9,100 Buy stands.",
+    "SBIN": "PSU banks fell 0.7% on 26 Nov (Nifty Bank -0.3%). No company news; CLSA's ₹1,325 target still stands.",
+    "APOLLOHOSP": "In buy ideas. No fresh company news; pharma rose about 0.5% on 26 Nov. Macquarie's ₹10,500 Outperform stands; still better bought on a dip than chased.",
+    "ITC": "FMCG fell 0.9% on 26 Nov after jumping 3.8% the day before. Anand Rathi's ₹325 Buy stands, but Q2 profit fell 18%, so it is not an earnings buy.",
+    "KALYANKJIL": "Q2 was strong (revenue +31%, profit +64%, about ₹73 cr of that a one-off land gain); UBS ₹950 and Jefferies ₹900 say Buy. Consumer durables fell about 1.4% on 26 Nov while MCX gold rose 1%; small positions only.",
+    "HINDALCO": "Rose about 3.1% on 26 Nov as metals bounced 1.2%, after falling about 7% in two weeks. Hold; no fresh broker view.",
     "NATCOPHARM": "No fresh news; ICICI Direct's ₹1,000 Buy still stands. Profit is still well below last year, so only small positions.",
     "KPRMILL": "No fresh news or price; ICICI Direct's ₹1,400 target still stands.",
     "WEWORK": "No fresh news or price; ICICI Securities' ₹933 target still stands.",
@@ -167,8 +181,9 @@
     "MUTHOOTMF": "No new news; Q2 (profit more than tripled to ₹111 cr) still the latest.",
     "CUMMINSIND": "Still on avoid after the Q2 miss (profit -18.5%); IDBI's ₹5,271 Buy implies a price near ₹4,050.",
     "POLICYBZR": "Jumped 7.6% to about ₹1,100 on 23 Nov; still on avoid after the co-founder exit news.",
-    "TATASTEEL": "On avoid: fell to ₹159.30 on 25 Nov, about 10.5% down in two sessions on the APL Apollo deal.",
-    "PTCIL": "In buy ideas: Q2 revenue +73%, profit +84%; ICICI Securities ₹29,000. No fresh news."
+    "TATASTEEL": "On avoid: bounced 2.5% on 26 Nov after a 10.5% two-day fall on the APL Apollo deal.",
+    "PTCIL": "In buy ideas: Q2 revenue +73%, profit +84%; ICICI Securities ₹29,000. No fresh news; smallcaps rose 0.7% on 26 Nov.",
+    "BSE": "New in buy ideas: HDFC Securities upgraded to Buy (₹4,450) on 26 Nov; stock +5.7% to ₹3,990.40. Better bought on a dip."
   },
   "disclaimer": "Researched ideas from public results and broker targets, not investment advice and not guaranteed. Prices are approximate (some are broker reference prices or implied from a stated upside); check the live quote before trading."
 }
